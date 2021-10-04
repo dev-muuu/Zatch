@@ -1,5 +1,6 @@
 package com.example.zatch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,9 +21,15 @@ public class FirstLocationActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.goSetLocationButton:
-                    Log.e("moveLocationSet","moveLocationSet");
+                    Log.e("FirstLocationActivity","move Location set activity");
+                    moveActivity();
                     break;
             }
         }
     };
+
+    private void moveActivity(){
+        Intent intent = new Intent(this, SetLocationActivity.class);
+        startActivity(intent);
+    }
 }

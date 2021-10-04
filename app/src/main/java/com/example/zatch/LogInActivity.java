@@ -15,6 +15,8 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
+        findViewById(R.id.findPasswordButton).setOnClickListener(onClickListener);
+        findViewById(R.id.signupButton).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -22,8 +24,14 @@ public class LogInActivity extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.loginButton:
-                    Log.e("tryLogin","tryLogin");
+                    Log.e("LogInActivity","tryLogin");
                     moveActivity();
+                    break;
+                case R.id.findPasswordButton:
+                    Log.e("LogInActivity","go find password");
+                    break;
+                case R.id.signupButton:
+                    Log.e("LogInActivity","go signup activity");
                     break;
             }
         }
