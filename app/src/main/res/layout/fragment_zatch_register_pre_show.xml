@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Top -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l10"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/t12"
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:lineSpacingExtra="4sp"
+            android:text="이렇게 재치를 \n업로드해도 괜찮을까요?"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Body -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/l10">
+
+        <!-- 사진 -->
+        <TextView
+            android:id="@+id/t11"
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="9dp"
+            android:gravity="top"
+            android:lineSpacingExtra="3sp"
+            android:text="사진"
+            android:translationY="-1.6sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <HorizontalScrollView
+            android:id="@+id/imageScrollStack"
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/t11">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="36dp" />
+
+        </HorizontalScrollView>
+
+        <!-- Button -->
+        <TextView
+            android:id="@+id/wantCategoryText"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/text_background_yellow"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingTop="0dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="0dp"
+            android:text="피부/미용"
+            android:textColor="@color/zatch_deepyellow"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageScrollStack" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="23dp"
+            android:background="@drawable/horizontal_switch_light"
+            app:layout_constraintEnd_toStartOf="@+id/myCategoryText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/wantCategoryText"
+            app:layout_constraintTop_toBottomOf="@id/imageScrollStack" />
+
+        <!-- Button -->
+        <TextView
+            android:id="@+id/myCategoryText"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/text_background_purple_40"
+            android:gravity="center"
+            android:paddingLeft="8dp"
+            android:paddingTop="0dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="0dp"
+            android:text="피부/미용"
+            android:textColor="@color/zatch_purple"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/l12"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintStart_toStartOf="@+id/l12"
+            app:layout_constraintTop_toBottomOf="@id/imageScrollStack" />
+
+        <TextView
+            android:id="@+id/firstProductNameText"
+            android:layout_width="113dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center|center_horizontal"
+            android:lineSpacingExtra="1sp"
+            android:text="맥도날드 해피밀 마이멜로디 장난감"
+            android:textColor="@color/black_85"
+            android:textSize="12sp"
+            android:translationY="-0.6sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/wantCategoryText" />
+
+        <!-- 헤드셋 -->
+        <TextView
+            android:id="@+id/myProductNameText"
+            android:layout_width="113dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="1sp"
+            android:text="헤드셋"
+            android:textColor="@color/black_85"
+            android:textSize="12sp"
+            android:translationY="-0.6sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imageView5"
+            app:layout_constraintTop_toBottomOf="@id/myCategoryText" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            app:layout_constraintEnd_toStartOf="@id/imageView5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/firstProductNameText">
+            <!-- 2순위 -->
+            <TextView
+                android:id="@+id/t14"
+                android:layout_width="39dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_horizontal|center_vertical"
+                android:lineSpacingExtra="6sp"
+                android:text="2순위"
+                android:textColor="@color/zatch_deepyellow"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 생활용품 -->
+            <TextView
+                android:id="@+id/secondWantCategoryText"
+                android:layout_width="39dp"
+                android:layout_height="13dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_horizontal|center_vertical"
+                android:lineSpacingExtra="1sp"
+                android:text="생활용품"
+                android:textColor="@color/black_35"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/t14" />
+
+            <TextView
+                android:id="@+id/secondProductNameText"
+                android:layout_width="93dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="8dp"
+                android:fontFamily="@font/pretendard_medium"
+                android:gravity="top"
+                android:lineSpacingExtra="1sp"
+                android:text="신상 햄스터 말랑이"
+                android:textColor="@color/black_85"
+                android:textSize="12sp"
+                android:translationY="-0.6sp"
+                app:layout_constraintLeft_toRightOf="@id/t14" />
+
+            <!-- 3순위 -->
+            <TextView
+                android:id="@+id/t15"
+                android:layout_width="39dp"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="11dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:lineSpacingExtra="6sp"
+                android:text="3순위"
+                android:textColor="@color/zatch_deepyellow"
+                android:textSize="12sp"
+                app:layout_constraintTop_toBottomOf="@id/secondWantCategoryText" />
+
+            <!-- 생활용품 -->
+            <TextView
+                android:id="@+id/thirdWantCategoryText"
+                android:layout_width="39dp"
+                android:layout_height="13dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="center_horizontal|center_vertical"
+                android:lineSpacingExtra="1sp"
+                android:text="생활용품"
+                android:textColor="@color/black_35"
+                android:textSize="10sp"
+                app:layout_constraintTop_toBottomOf="@id/t15" />
+
+            <TextView
+                android:id="@+id/thirdProductNameText"
+                android:layout_width="93dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:gravity="top"
+                android:lineSpacingExtra="1sp"
+                android:text="신상 햄스터 고양이 강아지 모양 말랑이"
+                android:textColor="@color/black_85"
+                android:textSize="12dp"
+                android:translationY="-0.6sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/t15"
+                app:layout_constraintLeft_toLeftOf="@id/secondProductNameText"
+                app:layout_constraintLeft_toRightOf="@id/t15"
+                app:layout_constraintTop_toBottomOf="@id/secondProductNameText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/imageView5"
+            app:layout_constraintTop_toBottomOf="@id/myProductNameText">
+            <!-- 유통기한 -->
+            <TextView
+                android:id="@+id/t16"
+                android:layout_width="47dp"
+                android:layout_height="20dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="6sp"
+                android:text="유통기한"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <!-- 2021/01/28 -->
+            <TextView
+                android:id="@+id/endDateText"
+                android:layout_width="67dp"
+                android:layout_height="16dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="1sp"
+                android:text="2021/01/28"
+                android:textColor="@color/black_85"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/t16"
+                app:layout_constraintLeft_toRightOf="@id/t16" />
+
+            <!-- 구매 일자 -->
+            <TextView
+                android:id="@+id/t17"
+                android:layout_width="47dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="false"
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="6sp"
+                android:text="구매 일자"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/t16" />
+
+            <!-- 2020/12/31 -->
+            <TextView
+                android:id="@+id/buyDateText"
+                android:layout_width="67dp"
+                android:layout_height="16dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="1sp"
+                android:text="2020/12/31"
+                android:textColor="@color/black_85"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/t17"
+                app:layout_constraintLeft_toLeftOf="@id/endDateText"
+                app:layout_constraintLeft_toRightOf="@id/t17"
+                app:layout_constraintTop_toBottomOf="@id/endDateText" />
+
+            <!-- 수량 -->
+            <TextView
+                android:id="@+id/t18"
+                android:layout_width="39dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="6sp"
+                android:text="수량"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/t17"
+                app:lineHeight="20dp" />
+
+            <!-- 2개 -->
+            <TextView
+                android:id="@+id/countText"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="1sp"
+                android:text="2개"
+                android:textColor="@color/black_85"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/t18"
+                app:layout_constraintLeft_toLeftOf="@id/endDateText"
+                app:layout_constraintLeft_toRightOf="@id/t18"
+                app:layout_constraintTop_toBottomOf="@id/buyDateText" />
+
+            <!-- 개봉 상태 -->
+            <TextView
+                android:id="@+id/t19"
+                android:layout_width="47dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="3dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="6sp"
+                android:text="개봉 상태"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/t18"
+                app:lineHeight="20dp" />
+
+            <!-- 개봉 -->
+            <TextView
+                android:id="@+id/openText"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="1sp"
+                android:text="개봉"
+                android:textColor="@color/black_85"
+                android:textSize="12sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/t19"
+                app:layout_constraintLeft_toLeftOf="@id/endDateText"
+                app:layout_constraintLeft_toRightOf="@id/t19"
+                app:layout_constraintTop_toBottomOf="@id/countText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!-- 추가 설명 -->
+        <TextView
+            android:id="@+id/t20"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="16dp"
+            android:gravity="top"
+            android:lineSpacingExtra="3sp"
+            android:text="추가 설명"
+            android:translationY="-1.6sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/l12" />
+
+        <EditText
+            android:id="@+id/inputMoreInfoText"
+            android:layout_width="match_parent"
+            android:layout_height="101dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/drawble_add_explain"
+            android:gravity="top"
+            android:hint="추가 설명이 필요하다면 여기에 적어주세요"
+            android:inputType="textMultiLine"
+            android:paddingLeft="23dp"
+            android:paddingTop="17dp"
+            android:paddingRight="23dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/t20" />
+
+        <android.widget.Button
+            android:id="@+id/zatchRegisterButton"
+            android:layout_width="212dp"
+            android:layout_height="36dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="41dp"
+            android:layout_marginBottom="38dp"
+            android:background="@drawable/purple_button"
+            android:fontFamily="@font/pretendard_bold"
+            android:text="재치 등록"
+            android:textColor="#FFFFFF"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inputMoreInfoText" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

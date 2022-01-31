@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_search"
+    app:startDestination="@id/searchFirstFragment">
+
+    <fragment
+        android:id="@+id/searchFirstFragment"
+        android:name="com.example.zatch.search.SearchFirstFragment"
+        android:label="SearchFirstFragment"
+        tools:layout="@layout/fragment_search_first">
+        <action
+            android:id="@+id/action_searchFirstFragment_to_searchSecondFragment"
+            app:destination="@id/searchSecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchListUpFragment"
+        android:name="com.example.zatch.search.SearchListUpFragment"
+        tools:layout="@layout/fragment_search_result"
+        android:label="SearchListUpFragment" />
+    <fragment
+        android:id="@+id/searchSecondFragment"
+        android:name="com.example.zatch.search.SearchSecondFragment"
+        tools:layout="@layout/fragment_search_second"
+        android:label="SearchSecondFragment" >
+        <action
+            android:id="@+id/action_searchSecondFragment_to_searchListUpFragment"
+            app:destination="@id/searchListUpFragment" />
+    </fragment>
+</navigation>

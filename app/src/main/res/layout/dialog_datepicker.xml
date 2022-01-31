@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintCircleRadius="8dp">
+    <!-- 재치등록/날짜선택 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/dialog_date_picker_inset">
+
+        <!-- 구매일자 -->
+        <TextView
+            android:id="@+id/datePickerTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="3sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/datePickerTitleText">
+
+            <!-- 날짜 선택 -->
+            <NumberPicker
+                android:id="@+id/numberPickerYear"
+                android:layout_width="60dp"
+                android:layout_height="88dp"
+                android:datePickerMode="spinner"
+                android:descendantFocusability="blocksDescendants"
+                android:dividerPadding="8dp"
+                android:showDividers="none"
+                android:theme="@style/NumberPicker">
+
+            </NumberPicker>
+            <!-- 날짜 선택 -->
+            <NumberPicker
+                android:id="@+id/numberPickerMonth"
+                android:layout_width="36dp"
+                android:layout_height="88dp"
+                android:layout_marginLeft="36dp"
+                android:datePickerMode="spinner"
+                android:descendantFocusability="blocksDescendants"
+                android:dividerPadding="8dp"
+                android:showDividers="none"
+                android:theme="@style/NumberPicker"
+                app:layout_constraintLeft_toRightOf="@id/numberPickerYear">
+
+            </NumberPicker>
+            <!-- 날짜 선택 -->
+            <NumberPicker
+                android:id="@+id/numberPickerDate"
+                android:layout_width="40dp"
+                android:layout_height="88dp"
+                android:layout_marginLeft="36dp"
+                android:datePickerMode="spinner"
+                android:descendantFocusability="blocksDescendants"
+                android:dividerPadding="8dp"
+                android:showDividers="none"
+                android:theme="@style/NumberPicker"
+                app:layout_constraintLeft_toRightOf="@id/numberPickerMonth">
+
+            </NumberPicker>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Button/Fill/Purple-small -->
+        <android.widget.Button
+            android:id="@+id/datePickerSaveButton"
+            android:layout_width="55dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/purple_button"
+            android:text="확인"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/l" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

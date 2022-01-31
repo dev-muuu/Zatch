@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <layer-list>
+            <item
+                android:width="500dp"
+                android:height="8dp">
+                <vector
+                    android:width="360dp"
+                    android:height="8dp"
+                    android:viewportHeight="8"
+                    android:viewportWidth="360"
+                    >
+                    <group>
+
+                        <clip-path
+                            android:pathData="M0 0H360V8H0V0Z"
+                            />
+
+                        <path
+                            android:pathData="M0 0V8H360V0"
+                            android:fillColor="#F2F2F2"
+                            />
+
+                    </group>
+
+                </vector>
+            </item>
+            <item
+                android:width = "500dp"
+                android:height="1dp"
+                android:gravity="top">
+
+                <vector
+                    android:width="361dp"
+                    android:height="1dp"
+                    android:viewportWidth="361"
+                    android:viewportHeight="1"
+                    >
+
+                    <group>
+
+                        <clip-path
+                            android:pathData="M0.5 0.5H360.5H0.5Z"
+                            />
+
+                    </group>
+
+                    <path
+                        android:pathData="M0.5 0.5H360.5H0.5Z"
+                        android:strokeWidth="1"
+                        android:strokeColor="#E5E5E5"
+                        />
+
+                </vector>
+            </item>
+        </layer-list>
+    </item>
+</selector>

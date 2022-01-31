@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name ="category_list">
+        <item>카테고리 선택</item>
+        <item>음식</item>
+        <item>생활용품</item>
+        <item>피부/미용</item>
+        <item>의류</item>
+        <item>반려동물</item>
+        <item>스포츠</item>
+        <item>아동</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name ="product_count_list">
+        <item>수량</item>
+        <item>개</item>
+        <item>g</item>
+        <item>ml</item>
+    </string-array>
+</resources>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Top -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/l8"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="56dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/pretendard_bold"
+            android:gravity="top"
+            android:lineSpacingExtra="4sp"
+            android:text="교환하고 싶은 \n상품이 있나요?"
+            android:textSize="20sp"
+            android:translationY="-2sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ScrollView
+        android:id="@+id/gradeScroll"
+        android:layout_width="match_parent"
+        android:layout_height="305dp"
+        app:layout_constraintTop_toBottomOf="@id/l8">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/l9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- 1순위 -->
+            <TextView
+                android:id="@+id/t8"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="9dp"
+                android:gravity="top"
+                android:lineSpacingExtra="3sp"
+                android:text="1순위"
+                android:translationY="-1.6sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 재치등록 -->
+            <Spinner
+                android:id="@+id/firstWantSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/drawble_spinner_category"
+                android:spinnerMode="dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/t8" />
+
+            <!-- 재치등록 -->
+
+            <EditText
+                android:id="@+id/firstWantInput"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/drawble_plain_text"
+                android:hint="상품 이름을 입력해주세요"
+                android:inputType="textPersonName"
+                android:maxLength="30"
+                android:paddingLeft="16dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/firstWantSpinner" />
+
+            <!-- 2순위 -->
+            <TextView
+                android:id="@+id/t9"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="24dp"
+                android:gravity="top"
+                android:lineSpacingExtra="3sp"
+                android:text="2순위"
+                android:translationY="-1.6sp"
+                app:layout_constraintLeft_toLeftOf="@id/t8"
+                app:layout_constraintTop_toBottomOf="@id/firstWantInput" />
+
+            <!-- 재치등록 -->
+            <Spinner
+                android:id="@+id/secondWantSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/drawble_spinner_category"
+                android:spinnerMode="dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/t9" />
+
+            <EditText
+                android:id="@+id/secondWantInput"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/drawble_plain_text"
+                android:hint="상품 이름을 입력해주세요"
+                android:inputType="textPersonName"
+                android:maxLength="30"
+                android:paddingLeft="16dp"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/secondWantSpinner" />
+
+            <!-- 3순위 -->
+            <TextView
+                android:id="@+id/t10"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="24dp"
+                android:gravity="top"
+                android:lineSpacingExtra="3sp"
+                android:text="3순위"
+                android:translationY="-1.6sp"
+                app:layout_constraintLeft_toLeftOf="@id/t8"
+                app:layout_constraintTop_toBottomOf="@id/secondWantInput" />
+
+            <Spinner
+                android:id="@+id/thirdWantSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/drawble_spinner_category"
+                android:spinnerMode="dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/t10" />
+
+            <EditText
+                android:id="@+id/thirdWantInput"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/drawble_plain_text"
+                android:hint="상품 이름을 입력해주세요"
+                android:inputType="textPersonName"
+                android:maxLength="30"
+                android:paddingLeft="16dp"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/thirdWantSpinner" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="42dp"
+        android:text="다른 것도 괜찮아요!"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@id/radiogroup"
+        app:layout_constraintTop_toBottomOf="@id/gradeScroll" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"
+        android:text="이것만 가능해요!"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@id/textView6"
+        app:layout_constraintLeft_toRightOf="@id/radiogroup"
+        app:layout_constraintTop_toBottomOf="@id/textView6" />
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gradeScroll">
+
+        <!--            &lt;!&ndash; 체크문항/체크됨 &ndash;&gt;-->
+        <!--            <RelativeLayout-->
+        <!--                android:layout_width="140dp"-->
+        <!--                android:layout_height="24dp"-->
+        <!--                android:layout_alignParentLeft="true"-->
+        <!--                android:layout_marginLeft="24dp"-->
+        <!--                android:layout_alignParentTop="true"-->
+        <!--                android:layout_marginTop="342dp">-->
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/selector_checkbox"
+            android:button="@null" />
+
+
+        <!--            </RelativeLayout>-->
+
+        <!--            &lt;!&ndash; 체크문항/체크됨 &ndash;&gt;-->
+        <!--            <RelativeLayout-->
+        <!--                android:layout_width="128dp"-->
+        <!--                android:layout_height="24dp"-->
+        <!--                android:layout_alignParentLeft="true"-->
+        <!--                android:layout_alignParentTop="true"-->
+        <!--                android:layout_marginLeft="24dp"-->
+        <!--                android:layout_marginTop="16dp">-->
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/selector_checkbox"
+            android:button="@null" />
+
+        <!--            </RelativeLayout>-->
+
+    </RadioGroup>
+
+    <android.widget.Button
+        android:id="@+id/freeShareButton"
+        android:layout_width="155dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="68dp"
+        android:background="@drawable/white_button"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="나눔"
+        android:textColor="@color/zatch_purple"
+        app:layout_constraintEnd_toStartOf="@+id/moveRegisterStep3Button"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radiogroup" />
+
+    <!-- Button/Fill/Purple/Small -->
+    <android.widget.Button
+        android:id="@+id/moveRegisterStep3Button"
+        android:layout_width="155dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/purple_button"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="다음 단계로"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/freeShareButton"
+        app:layout_constraintTop_toBottomOf="@id/radiogroup" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

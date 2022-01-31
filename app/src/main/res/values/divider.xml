@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="dividerStyle" parent="android:style/Widget.ListView.DropDown">
+        <item name="android:divider">#F2F2F2</item> <!-- divider 색 -->
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+</resources>

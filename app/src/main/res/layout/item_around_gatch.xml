@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/zatchScrollItem"
+    android:layout_width="219dp"
+    android:layout_height="216dp"
+    android:layout_marginEnd="20dp"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="216dp">
+
+        <ImageView
+            android:id="@+id/gatchImage"
+            android:layout_width="match_parent"
+            android:layout_height="124dp"
+            app:srcCompat="@drawable/drawble_image_asset_radius" />
+
+        <TextView
+            android:id="@+id/aroundGatchTitle"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="12dp"
+            android:text="녹차 아이스크림 1kg"
+            android:textColor="@color/black_85"
+            android:textSize="13dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/aroundGatchNowNum"
+            app:layout_constraintTop_toBottomOf="@id/gatchImage" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="인당"
+            android:textColor="@color/black_45"
+            android:textSize="13dp"
+            app:layout_constraintTop_toBottomOf="@id/aroundGatchTitle" />
+
+        <TextView
+            android:id="@+id/aroundGatchPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginLeft="4dp"
+            android:text="2,400"
+            android:textColor="@color/black_85"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/textView18"
+            app:layout_constraintTop_toBottomOf="@id/aroundGatchTitle"
+            app:layout_constraintTop_toTopOf="@id/textView18" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:text="원"
+            android:textColor="@color/black_85"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/aroundGatchPrice"
+            app:layout_constraintTop_toTopOf="@id/aroundGatchPrice" />
+
+        <TextView
+            android:id="@+id/aroundGatchNowNum"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginRight="1dp"
+            android:text="3"
+            android:textColor="@color/zatch_yellow"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toLeftOf="@id/textView23"
+            app:layout_constraintTop_toTopOf="@id/aroundGatchNeedNum" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginRight="1dp"
+            android:text="/"
+            android:textColor="@color/black_85"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintRight_toLeftOf="@id/aroundGatchNeedNum"
+            app:layout_constraintTop_toTopOf="@id/aroundGatchNeedNum" />
+
+        <TextView
+            android:id="@+id/aroundGatchNeedNum"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="40dp"
+            android:text="4"
+            android:textColor="@color/black_85"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gatchImage" />
+
+        <TextView
+            android:id="@+id/aroundGatchendDate"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/selector_enddate_color"
+            android:gravity="center"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:text="2일 남음"
+            android:textColor="@drawable/drawble_enddate_text_color"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/aroundGatchNowNum"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView18"
+            app:layout_goneMarginRight="119dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
