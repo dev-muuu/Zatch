@@ -23,6 +23,7 @@ public class SearchSecondFragment extends Fragment {
     View view;
     EditText wantZatchField;
     CompoundButton nowSelect;
+    String zatchTitle;
 
     @Nullable
     @Override
@@ -32,7 +33,7 @@ public class SearchSecondFragment extends Fragment {
 
         //나의 재치 이전 fragment에서 받아오기 & text에 넣기
         TextView myZatch = view.findViewById(R.id.myZatchTitleField);
-        String zatchTitle = getArguments().getString("myZatch");
+        zatchTitle = getArguments().getString("myZatch");
 
         if(zatchTitle.equals("")) {
             myZatch.setText("???");
@@ -108,7 +109,10 @@ public class SearchSecondFragment extends Fragment {
     };
 
     private void moveNextFragment(){
-        Navigation.findNavController(view).navigate(R.id.action_searchSecondFragment_to_searchListUpFragment);
+        Bundle bundle = new Bundle();
+        bundle.putString("myZatch", zatchTitle);
+        bundle.putString("wantZatch",wantZatchField.getText().toString());
+        Navigation.findNavController(view).navigate(R.id.action_searchSecondFragment_to_searchListUpFragment, bundle);
     }
 
 }

@@ -6,13 +6,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
+import com.example.zatch.bottomsheet.GatchDetailBottomSheet;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class GatchScrollAdapter extends RecyclerView.Adapter<GatchScrollAdapter.ViewHolder> {
 
     private String[] localDataSet;
+    private Fragment fragment;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -21,7 +25,6 @@ public class GatchScrollAdapter extends RecyclerView.Adapter<GatchScrollAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;
         private final TextView textView;
-        private final TextView endDate;
 
         public ViewHolder(View view) {
             super(view);
@@ -29,14 +32,10 @@ public class GatchScrollAdapter extends RecyclerView.Adapter<GatchScrollAdapter.
 
             imageView = view.findViewById(R.id.gatchImage);
             textView = view.findViewById(R.id.aroundGatchNowNum);
-            endDate = view.findViewById(R.id.aroundGatchendDate);
         }
 
         public TextView getTextView() {
             return textView;
-        }
-        public TextView getEndDate() {
-            return endDate;
         }
     }
 
@@ -46,8 +45,9 @@ public class GatchScrollAdapter extends RecyclerView.Adapter<GatchScrollAdapter.
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView.
      */
-    public GatchScrollAdapter(String[] dataSet) {
-        localDataSet = dataSet;
+    public GatchScrollAdapter(String[] dataSet, Fragment fragment) {
+        this.localDataSet = dataSet;
+        this.fragment = fragment;
     }
 
     // Create new views (invoked by the layout manager)
@@ -57,7 +57,21 @@ public class GatchScrollAdapter extends RecyclerView.Adapter<GatchScrollAdapter.
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_around_gatch, viewGroup, false);
 
-        return new GatchScrollAdapter.ViewHolder(view);
+        GatchScrollAdapter.ViewHolder viewHolder = new GatchScrollAdapter.ViewHolder(view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveDetailDialog(localDataSet[viewHolder.getAdapterPosition()]);
+            }
+        });
+
+        return viewHolder;
+    }
+
+    void moveDetailDialog(String data){
+        GatchDetailBottomSheet bottomSheet = new GatchDetailBottomSheet(data);
+        BottomSheetDialogFragment dialog = bottomSheet;
+        dialog.show(fragment.getParentFragmentManager(),null);
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -67,13 +81,6 @@ public class GatchScrollAdapter extends RecyclerView.Adapter<GatchScrollAdapter.
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.getTextView().setText(localDataSet[position]);
-
-        //enddate 색상 결정
-//        viewHolder.getEndDate().setText(localDataSet[position]);
-        if(Integer.parseInt(localDataSet[position]) <= 2 )
-            viewHolder.getEndDate().setPressed(true);
-        else
-            viewHolder.getEndDate().setPressed(false);
 
     }
 

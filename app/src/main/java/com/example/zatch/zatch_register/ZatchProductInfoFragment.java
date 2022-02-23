@@ -83,7 +83,7 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
         categorySpinner = view.findViewById(R.id.productCategorySpinner);
 
         ArrayAdapter<CharSequence> spinnerAdapter
-                = ArrayAdapter.createFromResource(getContext(), R.array.category_list, R.layout.item_spinner_category);
+                = ArrayAdapter.createFromResource(getContext(), R.array.gatch_category, R.layout.item_spinner_category);
 
         categorySpinner.setAdapter(spinnerAdapter);
         categorySpinner.setOnItemSelectedListener(SpinnerListener);
@@ -253,23 +253,13 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
         if (ContextCompat.checkSelfPermission(
                 getContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED) {
-            // You can use the API that requires the permission.
-//            performAction(...);
             return true;
-        } else if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            // In an educational UI, explain to the user why your app requires this
-            // permission for a specific feature to behave as expected. In this UI,
-            // include a "cancel" or "no thanks" button that allows the user to
-            // continue using your app without granting the permission.
-//            showInContextUI(...);
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},GALLERY_ACCESS);
 
-        } else {
-            // You can directly ask for the permission.
-            // The registered ActivityResultCallback gets the result of this request.
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},GALLERY_ACCESS);
-//            requestPermissionLauncher.launch(
-//                    Manifest.permission.READ_EXTERNAL_STORAGE);
+        } else {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},GALLERY_ACCESS);
         }
         return false;
     }
@@ -294,7 +284,6 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         if (resultCode == RESULT_OK && data != null ) {
-            System.out.println("oook");
             switch(requestCode) {
                 case REQUEST_IMAGE_CAPTURE:
 

@@ -1,15 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ZatchPurpleButton" parent="@android:style/Widget.Button">
-        <item name="android:background">@drawable/purple_button</item>
+    <style name="ZatchPurpleButton_16" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_purple</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">52dp</item>
         <item name="android:fontFamily">@font/zatch_font</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">18dp</item>
         <item name="android:textStyle">bold</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginBottom">39dp</item>
+    </style>
+
+    <style name="ZatchPurpleButton_74" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_purple</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:fontFamily">@font/zatch_font</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="layout_constraintLeft_toLeftOf">parent</item>
+        <item name="layout_constraintRight_toRightOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
         <item name="android:layout_marginLeft">74dp</item>
         <item name="android:layout_marginRight">74dp</item>
+        <item name="android:layout_marginBottom">54dp</item>
     </style>
+
+
+    <style name="backArrowButton_20" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/arrow_left</item>
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
+    <style name="backArrowButton_16" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/arrow_left</item>
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
+    <style name="mainRecyclerViewMargin" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">226dp</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+    </style>
+
+    <style name="flexLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">12dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="searchTextField" parent="@android:style/Widget.EditText">
+        <item name="drawableRightCompat">@drawable/size_search_24</item>
+        <item name="drawableBottomCompat">@drawable/vector_136</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:layout_marginBottom">28dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black_85</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:ems">10</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
+    <style name="registerSpinnerCategory" parent="@android:style/Widget.Spinner">
+        <item name="android:background">@drawable/drawble_spinner_category_stroke</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">37dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">7dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:spinnerMode">dialog</item>
+    </style>
+
+    <style name="registerProductTitleField" parent="@android:style/Widget.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/drawble_plain_text</item>
+        <item name="android:layout_height">37dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:hint">"상품 이름을 입력해주세요"</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="android:maxLength">30</item>
+        <item name="android:textColor">@color/black_85</item>
+        <item name="fontFamily">@font/zatch_font</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:paddingLeft">16dp</item>
+    </style>
+
+    <style name="SearchCategoryCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@drawable/selector_text_black_to_purple</item>
+        <item name="android:button">@null</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/pretendard_medium</item>
+        <item name="android:background">@drawable/selector_none_to_purple_40</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
+
+    <style name="SearchSilverTextField" parent="@android:style/Widget.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:textColor">@color/black_85</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:background">@drawable/silver_text_background_8</item>
+        <item name="android:drawableLeft">@drawable/size_search_20</item>
+        <item name="android:drawableTint">@color/black_20</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:textColorHint">@color/black_20</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+        <item name="android:imeOptions">actionDone</item>
+    </style>
+
+    <style name="gatchDetailLayoutMargin" >
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
+
+
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,15 +12,8 @@
 
         <TextView
             android:id="@+id/textView25"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="16dp"
-            android:text="무엇을 찾고 \n있나요?"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            style="@style/TopTextView"
+            android:text="무엇을 찾고 \n있나요?"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,108 +44,48 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/myZatchTitleField"
             app:srcCompat="@drawable/exchange_turn" />
-
         <EditText
             android:id="@+id/wantZatchField"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="28dp"
-            android:background="@null"
-            android:drawableBottom="@drawable/vector_136"
-            android:ems="10"
-            android:fontFamily="@font/pretendard_bold"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:textColor="@color/black_85"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            style="@style/searchTextField"
             app:layout_constraintTop_toBottomOf="@id/imageView8" />
 
-        <ImageView
-            android:id="@+id/imageView10"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/wantZatchField"
-            app:layout_constraintRight_toRightOf="@id/wantZatchField"
-            app:layout_constraintTop_toTopOf="@id/wantZatchField"
-            app:srcCompat="@drawable/search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        style="@style/searchSubTitleText"
         android:text="지금 인기있는 재치"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/s2" />
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/nowPopularFlexLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        style="@style/flexLayoutStyle"
         app:dividerDrawable="@drawable/drawble_divider_flex_layout"
         app:flexWrap="wrap"
         app:justifyContent="flex_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView24"
         app:showDivider="middle" />
 
     <TextView
         android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/searchSubTitleText"
         android:layout_marginTop="28dp"
         android:text="내가 찾는 재치"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/textView24"
         app:layout_constraintTop_toBottomOf="@id/nowPopularFlexLayout" />
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/wantFindZatchFlexLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        style="@style/flexLayoutStyle"
         app:dividerDrawable="@drawable/drawble_divider_flex_layout"
         app:flexWrap="wrap"
         app:justifyContent="flex_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView20"
         app:showDivider="middle" />
 
     <android.widget.Button
         android:id="@+id/moveSearchListUpButton"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="74dp"
-        android:layout_marginRight="74dp"
-        android:layout_marginBottom="54dp"
-        android:background="@drawable/purple_button"
+        style="@style/ZatchPurpleButton_74"
         android:text="유연한 탐색"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView20"
+        app:layout_constraintTop_toBottomOf="@id/wantFindZatchFlexLayout"
         app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

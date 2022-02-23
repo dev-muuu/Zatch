@@ -11,19 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="56dp">
 
-        <ImageView
+        <android.widget.Button
             android:id="@+id/preFragmentButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView9"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView9"
-            app:srcCompat="@drawable/arrow_left" />
+            style="@style/backArrowButton_16"
+            app:srcCompat="@drawable/arrow_left"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="32dp" />
 
         <TextView
             android:id="@+id/textView9"
@@ -32,7 +25,6 @@
             android:layout_marginLeft="4dp"
             android:fontFamily="@font/pretendard_bold"
             android:gravity="top"
-            android:lineSpacingExtra="1sp"
             android:text="재치 등록하기"
             android:textColor="#000000"
             android:textSize="16dp"

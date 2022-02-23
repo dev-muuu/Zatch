@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="37dp"
     android:layout_marginLeft="5dp"
-    android:drawableBottom="@drawable/vector_126"
     android:fontFamily="@font/pretendard_medium"
     android:gravity="center_vertical"
     android:paddingLeft="16dp"
     android:paddingRight="30dp" />
+    <!--    android:drawableBottom="@drawable/vector_126"-->
 
 
 

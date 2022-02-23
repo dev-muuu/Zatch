@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/s1"
@@ -13,17 +12,8 @@
 
         <TextView
             android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="40dp"
-            android:text="내가 교환할 재치를 \n입력해주세요."
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            style="@style/TopTextView"
+            android:text="내가 교환할 재치를 \n입력해주세요."/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -35,80 +25,33 @@
 
         <EditText
             android:id="@+id/exchangeZatchNameField"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="28dp"
-            android:background="@null"
-            android:drawableBottom="@drawable/vector_136"
-            android:ems="10"
-            android:gravity="center"
-            android:inputType="textPersonName"
-            android:textColor="@color/black_85"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/zatchSearchButton"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <android.widget.Button
-            android:id="@+id/zatchSearchButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/search"
-            app:layout_constraintBottom_toBottomOf="@id/exchangeZatchNameField"
-            app:layout_constraintRight_toRightOf="@id/exchangeZatchNameField" />
+            style="@style/searchTextField"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        style="@style/searchSubTitleText"
         android:text="나의 재치"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/s2" />
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/myZatchFlexContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        style="@style/flexLayoutStyle"
         app:dividerDrawable="@drawable/drawble_divider_flex_layout"
         app:flexWrap="wrap"
-        app:justifyContent="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:justifyContent="flex_start"
         app:layout_constraintTop_toBottomOf="@id/textView19"
-        app:showDivider="beginning|middle|end">
-
+        app:showDivider="middle">
 
     </com.google.android.flexbox.FlexboxLayout>
 
     <android.widget.Button
         android:id="@+id/moveSecondSearchButton"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:layout_marginLeft="74dp"
-        android:layout_marginRight="74dp"
+        style="@style/ZatchPurpleButton_74"
         android:layout_marginBottom="14dp"
-        android:background="@drawable/purple_button"
         android:text="다음으로"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/skipFirstStepButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/skipFirstStepButton" />
 
     <TextView
         android:id="@+id/skipFirstStepButton"

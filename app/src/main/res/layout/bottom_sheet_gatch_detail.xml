@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/c1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--    <androidx.core.widget.NestedScrollView-->
+        <!--        android:id="@+id/nested"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent">-->
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/c"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/r4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView54"
+                    style="@style/bottomSheetTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="재치 마라샹" />
+
+                <android.widget.Button
+                    android:id="@+id/button2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/cancel" />
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/c1"
+                style="@style/gatchDetailLayoutMargin"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="28dp"
+                app:layout_constraintTop_toBottomOf="@id/r4">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/c2"
+                style="@style/gatchDetailLayoutMargin"
+                android:layout_marginTop="28dp"
+                app:layout_constraintTop_toBottomOf="@id/c1">
+
+                <TextView
+                    android:id="@+id/textView57"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/text_background_yellow"
+                    android:text="음식"
+                    android:textColor="@color/zatch_deepyellow"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/textView58"
+                    style="@style/GatchTimer"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="0dp"
+                    android:text="00:58"
+                    android:textSize="12dp"
+                    app:layout_constraintLeft_toRightOf="@id/textView57"
+                    app:layout_constraintTop_toTopOf="@id/textView57" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/c3"
+                style="@style/gatchDetailLayoutMargin"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/c2"
+                tools:layout_editor_absoluteX="20dp">
+
+                <RelativeLayout
+                    android:id="@+id/r1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView59"
+                        style="@style/gatchDetailSubTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="카테고리" />
+
+                    <TextView
+                        android:id="@+id/textView60"
+                        style="@style/gatchDetailContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/textView59"
+                        android:text="음식 | 조리" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/r2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/r1">
+
+                    <TextView
+                        android:id="@+id/textView61"
+                        style="@style/gatchDetailSubTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="인원" />
+
+                    <TextView
+                        android:id="@+id/textView62"
+                        style="@style/gatchDetailContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/textView61"
+                        android:text="5명" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/r3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/r2">
+
+                    <TextView
+                        android:id="@+id/textView63"
+                        style="@style/gatchDetailSubTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="금액" />
+
+                    <TextView
+                        android:id="@+id/textView64"
+                        style="@style/gatchDetailContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/textView63"
+                        android:text="20000"
+                        android:textColor="@color/black_20" />
+
+                    <TextView
+                        android:id="@+id/textView55"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_toRightOf="@id/textView64"
+                        android:text="→" />
+
+                    <TextView
+                        android:id="@+id/textView56"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_toRightOf="@id/textView55"
+                        android:text="4000" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/r4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/r3">
+
+                    <TextView
+                        android:id="@+id/textView65"
+                        style="@style/gatchDetailSubTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="빈 자리는" />
+
+                    <TextView
+                        android:id="@+id/textView66"
+                        style="@style/gatchDetailContent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/textView65"
+                        android:text="모인 인원들과 1/n 할게요" />
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <RelativeLayout
+                android:id="@+id/c4"
+                style="@style/gatchDetailLayoutMargin"
+                android:layout_marginTop="28dp"
+                app:layout_constraintTop_toBottomOf="@id/c3"
+                tools:layout_editor_absoluteX="20dp">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@color/black_20" />
+
+                <TextView
+                    android:id="@+id/textView67"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/imageView3"
+                    android:text="행복한 호랑이"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/textView68"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="false"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/textView67"
+                    android:text="·"
+                    android:textColor="@color/black_20" />
+
+                <TextView
+                    android:id="@+id/textView69"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="3dp"
+                    android:layout_toRightOf="@id/textView68"
+                    android:text="중계동"
+                    android:textColor="@color/black_20"
+                    android:textSize="13dp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/gatchDetailMultilineText"
+                style="@style/gatchDetailLayoutMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@null"
+                android:ems="10"
+                android:fontFamily="@font/pretendard_regular"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                android:text="재치 마랴샹궈 가치하실 분 구해요! 맵기 1단계입니다! 개인 그릇은 가지고 와주세요."
+                android:textColor="@color/black_85"
+                android:textSize="14dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/button"
+                app:layout_constraintTop_toBottomOf="@id/c4"
+                tools:layout_editor_absoluteX="20dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/r"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/c"
+            app:layout_constraintVertical_bias="1.0">
+
+            <android.widget.Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="74dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginRight="74dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/button_yellow"
+                android:text="가치 신청하기"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <!--    </androidx.core.widget.NestedScrollView>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

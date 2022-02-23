@@ -15,16 +15,8 @@
 
         <TextView
             android:id="@+id/t12"
-            android:layout_width="wrap_content"
-            android:layout_height="56dp"
-            android:layout_marginLeft="28dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/pretendard_bold"
-            android:lineSpacingExtra="4sp"
-            android:text="이렇게 재치를 \n업로드해도 괜찮을까요?"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            style="@style/TopTextView"
+            android:text="이렇게 재치를 \n업로드해도 괜찮을까요?"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Body -->
@@ -36,7 +28,7 @@
         <!-- 사진 -->
         <TextView
             android:id="@+id/t11"
-            android:layout_width="25dp"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginLeft="36dp"
             android:layout_marginTop="9dp"
@@ -415,21 +407,13 @@
 
         <android.widget.Button
             android:id="@+id/zatchRegisterButton"
-            android:layout_width="212dp"
-            android:layout_height="36dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
+            style="@style/ZatchPurpleButton_74"
             android:layout_marginTop="41dp"
             android:layout_marginBottom="38dp"
-            android:background="@drawable/purple_button"
-            android:fontFamily="@font/pretendard_bold"
             android:text="재치 등록"
-            android:textColor="#FFFFFF"
-            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inputMoreInfoText" />
+            app:layout_constraintTop_toBottomOf="@id/inputMoreInfoText"
+            tools:layout_editor_absoluteX="74dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

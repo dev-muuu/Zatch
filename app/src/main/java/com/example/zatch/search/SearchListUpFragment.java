@@ -19,17 +19,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
+import com.example.zatch.bottomsheet.CategoryBottomSheet;
+import com.example.zatch.bottomsheet.TownAreaBottomSheet;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 
 public class SearchListUpFragment extends Fragment
         implements MyZatchBottomSheet.MyZatchBottomSheetListener, WantZatchBottomSheet.WantZatchBottomSheetListener
-        , CategoryBottomSheet.CategoryBottomSheetListener {
+        , CategoryBottomSheet.CategoryBottomSheetListener, TownAreaBottomSheet.TownAreaBottomSheetListener {
 
     View view;
     String[] dataset3;
-    TextView my, want;
+    TextView my, want, townFilter;
     EditText myChange, wantChange;
     ImageButton category1,category2;
     InputMethodManager inputMethodManager;
@@ -43,7 +45,6 @@ public class SearchListUpFragment extends Fragment
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
                 //search change cancel
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
                 //view change
@@ -74,12 +75,18 @@ public class SearchListUpFragment extends Fragment
 
         my = view.findViewById(R.id.myRegisterField);
         want = view.findViewById(R.id.wantField);
+        my.setText(getArguments().getString("myZatch"));
+        want.setText(getArguments().getString("wantZatch"));
+
         myChange = view.findViewById(R.id.myZatchChangeSearch);
         myChange.setOnEditorActionListener(onEditorAction);
         wantChange = view.findViewById(R.id.wantZatchChangeSearch);
         wantChange.setOnEditorActionListener(onEditorAction);
         category1 = view.findViewById(R.id.categoryCheckButton1);
         category2 = view.findViewById(R.id.categoryCheckButton2);
+
+        townFilter = view.findViewById(R.id.searchTownFilterButton);
+        view.findViewById(R.id.searchTownFilterButton).setOnClickListener(onClickListener);
 
         //keyboard show_hide
         inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -137,6 +144,9 @@ public class SearchListUpFragment extends Fragment
                 case R.id.categoryCheckButton2:
                     bringBottomSheet("category2");
                     break;
+                case R.id.searchTownFilterButton:
+                    bringBottomSheet("town");
+                    break;
             }
         }
     };
@@ -187,18 +197,22 @@ public class SearchListUpFragment extends Fragment
             MyZatchBottomSheet myZatch = new MyZatchBottomSheet(dataset3, my.getText().toString());
             myZatch.setDialogListener(this);
             bottomSheet = myZatch;
-            bottomSheet.show(getParentFragmentManager(), null);
         }else if(which.equals("want")){
             WantZatchBottomSheet wantZatch = new WantZatchBottomSheet(dataset3, want.getText().toString());
             wantZatch.setDialogListener(this);
             bottomSheet = wantZatch;
-            bottomSheet.show(getParentFragmentManager(), null);
-        }else{
-            CategoryBottomSheet category = new CategoryBottomSheet(which);
+        }else if(which.equals("town")){
+            String[] townData = new String[]{"경기도","용인시","수지구","상현동"};
+            TownAreaBottomSheet townFilter = new TownAreaBottomSheet(townData, want.getText().toString());
+            townFilter.setDialogListener(this);
+            bottomSheet = townFilter;
+        }
+        else{
+            CategoryBottomSheet category = new CategoryBottomSheet(getResources().getStringArray(R.array.zatch_category),which);
             category.setDialogListener(this);
             bottomSheet = category;
-            bottomSheet.show(getParentFragmentManager(), null);
         }
+        bottomSheet.show(getParentFragmentManager(), null);
     }
 
     //myzatch bottom sheet call back method
@@ -210,6 +224,11 @@ public class SearchListUpFragment extends Fragment
     @Override
     public void WantZatchBottomFinish(String title) {
         want.setText(title);
+    }
+
+    @Override
+    public void TownAreaBottomSheetFinish() {
+
     }
 
     @Override

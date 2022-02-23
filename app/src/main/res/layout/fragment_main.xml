@@ -7,56 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/mainTopBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="56dp">
-
-        <Spinner
-            android:id="@+id/myLocationSpinner"
-            android:layout_width="81dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <android.widget.Button
-            android:id="@+id/searchButton"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/search"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintRight_toLeftOf="@id/bellButton"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <android.widget.Button
-            android:id="@+id/bellButton"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/bell"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="56dp"
-        app:layout_constraintTop_toBottomOf="@id/mainTopBarLayout"
-        tools:layout_editor_absoluteX="0dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -67,7 +23,9 @@
                 android:id="@+id/searchInfoLayout"
                 android:layout_width="match_parent"
                 android:layout_height="153dp"
-                android:background="#DCDBDB">
+                android:background="#DCDBDB"
+                tools:layout_editor_absoluteX="132dp"
+                tools:layout_editor_absoluteY="0dp">
 
                 <TextView
                     android:id="@+id/textView"
@@ -102,7 +60,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginRight="106dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@drawable/white_button_nostroke"
+                    android:background="@drawable/button_white_nostroke"
                     android:text="유연한 탐색"
                     android:textColor="@color/black_45"
                     android:textSize="13dp"
@@ -114,75 +72,69 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="24dp"
-                android:text="내 주변 재치"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/searchInfoLayout" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/k1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="내 주변에서는 이런 재치들이 거래되고 있어요!"
-                android:textColor="@color/black_45"
-                android:textSize="13dp"
-                app:layout_constraintLeft_toLeftOf="@id/textView11"
-                app:layout_constraintTop_toBottomOf="@id/textView11" />
+                app:layout_constraintTop_toBottomOf="@id/searchInfoLayout">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/aroundZatchRecyclerView"
-                android:layout_width="wrap_content"
-                android:layout_height="226dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="12dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView12" />
+                <TextView
+                    android:id="@+id/textView11"
+                    style="@style/mainFragSubTitleText"
+                    android:text="내 주변 재치" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="내 주변에서는 이런 재치들이 거래되고 있어요!"
+                    android:textColor="@color/black_45"
+                    android:textSize="13dp"
+                    app:layout_constraintLeft_toLeftOf="@id/textView11"
+                    app:layout_constraintTop_toBottomOf="@id/textView11" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/aroundZatchRecyclerView"
+                    style="@style/mainRecyclerViewMargin"
+                    app:layout_constraintTop_toBottomOf="@id/textView12" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
                 android:src="@drawable/drawble_main_page_sector_divider"
-                app:layout_constraintTop_toBottomOf="@id/aroundZatchRecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/k1"
                 tools:layout_editor_absoluteX="-54dp" />
 
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/k2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="지금 인기있는 재치"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@id/textView11"
-                app:layout_constraintTop_toBottomOf="@id/imageView7" />
+                app:layout_constraintTop_toBottomOf="@id/zatchRegisterBanner">
 
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="여기 문구 생각해 주실 분? 창작의 한계입니다"
-                android:textColor="@color/black_45"
-                android:textSize="13dp"
-                app:layout_constraintLeft_toLeftOf="@id/textView11"
-                app:layout_constraintTop_toBottomOf="@id/textView13" />
+                <TextView
+                    android:id="@+id/textView13"
+                    style="@style/mainFragSubTitleText"
+                    android:text="지금 인기있는 재치"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/popularZatchRecyclerView"
-                android:layout_width="wrap_content"
-                android:layout_height="226dp"
-                android:layout_marginTop="12dp"
-                app:layout_constraintLeft_toLeftOf="@id/aroundZatchRecyclerView"
-                app:layout_constraintTop_toBottomOf="@id/textView14" />
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="여기 문구 생각해 주실 분? 창작의 한계입니다"
+                    android:textColor="@color/black_45"
+                    android:textSize="13dp"
+                    app:layout_constraintLeft_toLeftOf="@id/textView13"
+                    app:layout_constraintTop_toBottomOf="@id/textView13" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/popularZatchRecyclerView"
+                    style="@style/mainRecyclerViewMargin"
+                    app:layout_constraintTop_toBottomOf="@id/textView14" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/zatchRegisterBanner"
@@ -190,7 +142,7 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="32dp"
                 android:background="@color/purple_40"
-                app:layout_constraintTop_toBottomOf="@id/popularZatchRecyclerView">
+                app:layout_constraintTop_toBottomOf="@id/k3">
 
                 <TextView
                     android:id="@+id/textView15"
@@ -208,25 +160,36 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/k3"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:text="지금, 가치해요!"
-                android:textColor="@color/black_85"
-                android:textSize="16dp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="@id/textView11"
-                app:layout_constraintTop_toBottomOf="@id/zatchRegisterBanner" />
+                app:layout_constraintTop_toBottomOf="@id/imageView7">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/gatchRecyclerView"
-                android:layout_width="wrap_content"
-                android:layout_height="216dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintLeft_toLeftOf="@id/aroundZatchRecyclerView"
-                app:layout_constraintTop_toBottomOf="@id/textView16" />
+                <TextView
+                    android:id="@+id/textView16"
+                    android:text="지금, 가치해요!"
+                    style="@style/mainFragSubTitleText"/>
+
+                <TextView
+                    android:id="@+id/moreGatchMoveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="27dp"
+                    android:text="가치 더보기"
+                    android:textColor="@color/zatch_yellow"
+                    android:textSize="13dp"
+                    android:textStyle="bold"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/gatchRecyclerView"
+                    style="@style/mainRecyclerViewMargin"
+                    android:layout_height="216dp"
+                    app:layout_constraintTop_toBottomOf="@id/textView16" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

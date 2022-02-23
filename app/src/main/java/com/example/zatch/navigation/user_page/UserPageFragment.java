@@ -1,5 +1,6 @@
 package com.example.zatch.navigation.user_page;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,23 +14,24 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.zatch.R;
+import com.example.zatch.location.SetLocationActivity;
 
 public class UserPageFragment extends Fragment {
 
-    private UserPageViewModel userPageViewModel;
+    View view;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        userPageViewModel =
-                new ViewModelProvider(this).get(UserPageViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_user_page, container, false);
-        final TextView textView = root.findViewById(R.id.text_userpage);
-        userPageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+
+        view = inflater.inflate(R.layout.fragment_user_page, container, false);
+        view.findViewById(R.id.newLocationButton).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SetLocationActivity.class);
+                startActivity(intent);
             }
         });
-        return root;
+
+        return view;
     }
 }

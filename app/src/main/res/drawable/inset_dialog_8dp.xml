@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <inset
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/drawble_dialog_message"
+    android:drawable="@drawable/background_white_radi_8"
     android:insetRight="8dp"
     android:insetLeft="8dp"
     >

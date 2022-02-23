@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/product_img"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/imgbox"
+        />
+
+    <TextView
+        android:id="@+id/gatch_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/product_img"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        android:text="재치 마라샹궈"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/black_85"
+        android:textSize="15sp" />
+    <TextView
+        android:id="@+id/gatch_item_town"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/gatch_item"
+        app:layout_constraintTop_toTopOf="@id/gatch_item"
+        app:layout_constraintBottom_toBottomOf="@id/gatch_item"
+        android:layout_marginLeft="9dp"
+        android:text="불광동"
+        android:fontFamily="@font/pretendard_medium"
+        android:textColor="@color/black_85"
+        android:textSize="12sp"/>
+    <TextView
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tag_gray"
+        app:layout_constraintLeft_toRightOf="@id/gatch_item_town"
+        app:layout_constraintTop_toTopOf="@id/gatch_item"
+        app:layout_constraintBottom_toBottomOf="@id/gatch_item"
+        android:layout_marginLeft="9dp"
+        android:text="tag"
+        android:fontFamily="@font/pretendard_medium"
+        android:textColor="@color/black_65"
+        android:textSize="12sp"
+        android:textAlignment="center"
+        android:paddingVertical="2dp"
+        android:paddingHorizontal="4dp"/>
+
+    <TextView
+        android:id="@+id/gatch_current1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/gatch_item"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="4dp"
+        android:text="3"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/black_85"
+        android:textSize="16dp"/>
+    <TextView
+        android:id="@+id/gatch_current2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/gatch_current1"
+        app:layout_constraintLeft_toRightOf="@id/gatch_current1"
+        app:layout_constraintBottom_toBottomOf="@id/gatch_current1"
+        android:text="/"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/black_85"
+        android:textSize="16dp"/>
+    <TextView
+        android:id="@+id/gatch_current3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/gatch_current1"
+        app:layout_constraintLeft_toRightOf="@id/gatch_current2"
+        app:layout_constraintBottom_toBottomOf="@id/gatch_current1"
+        android:text="4"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/black_85"
+        android:textSize="16dp"/>
+
+    <TextView
+        android:id="@+id/price_per_person_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/gatch_current1"
+        app:layout_constraintLeft_toRightOf="@id/gatch_current3"
+        app:layout_constraintBottom_toBottomOf="@id/gatch_current1"
+        android:layout_marginLeft="12dp"
+        android:text="인당"
+        android:fontFamily="@font/pretendard_medium"
+        android:textColor="@color/black_45"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/price_per_person_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/gatch_current1"
+        app:layout_constraintLeft_toRightOf="@id/price_per_person_1"
+        app:layout_constraintBottom_toBottomOf="@id/gatch_current1"
+        android:layout_marginLeft="12dp"
+        android:text="n원"
+        android:fontFamily="@font/pretendard_bold"
+        android:textColor="@color/black_85"
+        android:textSize="14dp"/>
+
+    <ImageButton
+        android:id="@+id/chat_btn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/icon_chat2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="4dp" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/gatch_item"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        android:text="상품 이름"-->
+<!--        android:textSize="22dp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/item_tag1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/gatch_item"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/gatch_item"-->
+<!--        android:layout_marginLeft="24dp"-->
+<!--        android:text="tag"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/gatch_current"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        android:text="1/4"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textSize="32dp"/>-->
+
+<!--    <LinearLayout-->
+<!--        android:id="@+id/profile_icon"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/gatch_current"-->
+<!--        app:layout_constraintTop_toTopOf="@id/gatch_current"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/gatch_price_per_person"-->
+<!--        android:layout_marginLeft="24dp">-->
+<!--        <ImageView-->
+<!--            android:id="@+id/img1"-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:background="@drawable/imgbox"/>-->
+<!--        <ImageView-->
+<!--            android:id="@+id/img2"-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:background="@drawable/imgbox"/>-->
+<!--        <ImageView-->
+<!--            android:id="@+id/img3"-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:background="@drawable/imgbox"/>-->
+<!--    </LinearLayout>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/gatch_price_per_person"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/profile_icon"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/gatch_current"-->
+<!--        android:layout_marginLeft="24dp"-->
+<!--        android:text="인 당n원"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/gatch_heart"-->
+<!--        android:layout_width="32dp"-->
+<!--        android:layout_height="32dp"-->
+<!--        android:background="@drawable/imgbox"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        />-->
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

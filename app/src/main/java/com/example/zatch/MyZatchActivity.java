@@ -19,19 +19,19 @@ public class MyZatchActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        findViewById(R.id.moveRegisterFloatingButton).setOnClickListener(onClickListener);
+//        findViewById(R.id.moveRegisterFloatingButton).setOnClickListener(onClickListener);
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.moveRegisterFloatingButton:
-                    moveRegisterActivity();
-                    break;
-            }
-        }
-    };
+//    View.OnClickListener onClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            switch (v.getId()){
+//                case R.id.moveRegisterFloatingButton:
+//                    moveRegisterActivity();
+//                    break;
+//            }
+//        }
+//    };
 
     void moveRegisterActivity(){
         Intent intent = new Intent(this, ZatchRegisterActivity.class);

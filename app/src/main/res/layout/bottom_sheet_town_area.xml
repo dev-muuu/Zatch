@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView52"
+        style="@style/bottomSheetTitleText"
+        android:text="동네 범위 설정" />
+
+    <ImageView
+        android:id="@+id/townSelectImage"
+        android:layout_width="match_parent"
+        android:layout_height="252dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="94dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@id/townSeekBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView52"
+        app:srcCompat="@drawable/town_set_image_1" />
+
+    <SeekBar
+        android:id="@+id/townSeekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="41dp"
+        android:max="2"
+        android:progressDrawable="@drawable/drawble_seekbar"
+        android:splitTrack="false"
+        android:thumb="@drawable/drawble_seekbar_thumb"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/townSelectImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

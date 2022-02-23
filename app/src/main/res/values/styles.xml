@@ -64,6 +64,6 @@
     <style name="ModalShape" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">28dp</item>
-    </style>
+    </style>>
 
 </resources>

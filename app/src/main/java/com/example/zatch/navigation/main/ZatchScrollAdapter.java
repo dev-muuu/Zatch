@@ -1,5 +1,7 @@
 package com.example.zatch.navigation.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +11,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
+import com.example.zatch.navigation.my_zatch.my_zatch_detail;
 
 public class ZatchScrollAdapter extends RecyclerView.Adapter<ZatchScrollAdapter.ViewHolder> {
 
     private String[] localDataSet;
+    private Context mContext;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -41,8 +45,9 @@ public class ZatchScrollAdapter extends RecyclerView.Adapter<ZatchScrollAdapter.
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView.
      */
-    public ZatchScrollAdapter(String[] dataSet) {
+    public ZatchScrollAdapter(Context context, String[] dataSet) {
         localDataSet = dataSet;
+        this.mContext = context;
     }
 
     // Create new views (invoked by the layout manager)
@@ -51,6 +56,16 @@ public class ZatchScrollAdapter extends RecyclerView.Adapter<ZatchScrollAdapter.
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_around_favorite_zatch, viewGroup, false);
+
+        ViewHolder viewHolder = new ViewHolder(view);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, my_zatch_detail.class);
+                mContext.startActivity(intent);
+            }
+        });
 
         return new ViewHolder(view);
     }

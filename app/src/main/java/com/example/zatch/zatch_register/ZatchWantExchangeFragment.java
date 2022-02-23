@@ -32,7 +32,7 @@ public class ZatchWantExchangeFragment extends Fragment {
         thirdSpinner = view.findViewById(R.id.thirdWantSpinner);
 
         ArrayAdapter<CharSequence> spinnerAdapter
-                = ArrayAdapter.createFromResource(getContext(), R.array.category_list, R.layout.item_spinner_category);
+                = ArrayAdapter.createFromResource(getContext(), R.array.gatch_category, R.layout.item_spinner_category);
 
         firstSpinner.setAdapter(spinnerAdapter);
         firstSpinner.setOnItemSelectedListener(SpinnerListener);

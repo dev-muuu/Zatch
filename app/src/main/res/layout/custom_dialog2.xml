@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/custom_dialog_round"
+    android:layout_width="304dp"
+    android:layout_height="115dp">
+
+    <TextView
+        android:id="@+id/dialog_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="가치 등록을 완료하시겠습니까?"
+        android:fontFamily="@font/pretendard_medium"
+        android:textSize="13sp"
+        android:textColor="#262626"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:id="@+id/dialog_cancel_btn"
+        android:layout_width="55dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="26dp"
+        android:background="@color/transparent"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="취소"
+        android:textColor="@color/zatch_purple"
+        android:textSize="14sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@id/dialog_ok_btn"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_text" />
+    <TextView
+        android:id="@+id/dialog_ok_btn"
+        android:layout_width="55dp"
+        android:layout_height="25dp"
+        android:text="완료"
+        android:textColor="@color/white"
+        android:fontFamily="@font/pretendard_bold"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:background="@drawable/tag_purple2"
+        app:layout_constraintTop_toTopOf="@id/dialog_cancel_btn"
+        app:layout_constraintStart_toEndOf="@id/dialog_cancel_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

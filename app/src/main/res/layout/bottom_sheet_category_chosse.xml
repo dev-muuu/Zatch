@@ -7,27 +7,20 @@
 
     <TextView
         android:id="@+id/textView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="카테고리"
-        android:textSize="16dp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        style="@style/bottomSheetTitleText"
+        android:text="카테고리"/>
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/categoryFlex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="63dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="47dp"
-        app:dividerDrawable="@drawable/drawble_divider_flex_layout_bottom_sheet"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="12dp"
+        app:dividerDrawable="@drawable/drawble_divider_flex_layout_bottom_category"
         app:flexWrap="wrap"
-        app:justifyContent="space_around"
+        app:justifyContent="flex_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

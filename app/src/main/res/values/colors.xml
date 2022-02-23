@@ -14,11 +14,16 @@
     <color name="zatch_yellow_40">#FFF2E1</color>
     <color name="zatch_deepyellow">#FFAB42</color>
     <color name="black_85">#262626</color>
+    <color name="black_65">#595959</color>
     <color name="black_45">#8C8C8C</color>
     <color name="black_35">#A6A6A6</color>
     <color name="black_20">#CCCCCC</color>
     <color name="black_10">#E5E5E5</color>
     <color name="black_5">#F2F2F2</color>
 
-
+<!--y color    -->
+    <color name="zatch_darkerGray">#C4C4C4</color>
+    <color name="zatch_brighterGray">#EDEDED</color>
+    <color name="transparent">#00000000</color>
+    <color name="zatch_gray">#F6F6F6</color>
 </resources>

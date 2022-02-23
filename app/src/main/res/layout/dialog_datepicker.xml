@@ -86,7 +86,7 @@
             android:layout_height="28dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/purple_button"
+            android:background="@drawable/button_purple"
             android:text="확인"
             android:textColor="#FFFFFF"
             android:textStyle="bold"

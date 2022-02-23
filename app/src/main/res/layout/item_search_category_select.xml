@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="80dp"
-    android:layout_height="wrap_content">
+    android:layout_height="96dp">
 
     <ImageView
         android:id="@+id/categoryItemImage"
@@ -16,11 +16,11 @@
     <TextView
         android:id="@+id/categoryItemText"
         android:layout_width="80dp"
-        android:layout_height="17dp"
+        android:layout_height="20dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:maxWidth="80dp"
         android:text="가구/인테리어"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/categoryItemImage" />
+        app:layout_constraintTop_toBottomOf="@id/categoryItemImage"
+        app:lineHeight="16.8dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

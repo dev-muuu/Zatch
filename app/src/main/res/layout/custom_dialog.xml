@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/custom_dialog_round"
+    android:layout_width="304dp"
+    android:layout_height="115dp">
+
+    <TextView
+        android:id="@+id/dialog_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="상품 이름을 입력해 주세요."
+        android:fontFamily="@font/pretendard_medium"
+        android:textSize="13sp"
+        android:textColor="#262626"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:id="@+id/dialog_ok_btn"
+        android:layout_width="55dp"
+        android:layout_height="25dp"
+        android:text="완료"
+        android:textColor="@color/white"
+        android:fontFamily="@font/pretendard_bold"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:background="@drawable/tag_purple2"
+        app:layout_constraintTop_toBottomOf="@id/dialog_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="26dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

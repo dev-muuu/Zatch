@@ -13,11 +13,9 @@
         android:layout_height="32dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="208dp"
-        android:layout_marginBottom="528dp"
         android:fontFamily="@font/rixyeoljeongdo_pro_regular"
         android:text="나의 위치는..."
         android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,23 +34,9 @@
 
     <EditText
         android:id="@+id/inputLocationText"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="16dp"
+        style="@style/SearchSilverTextField"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/silver_text_background_8"
-        android:drawableLeft="@drawable/icon_search_silver"
-        android:drawablePadding="8dp"
-        android:ems="10"
-        android:fontFamily="@font/pretendard_medium"
         android:hint="이름(동,면,읍)으로 검색"
-        android:inputType="textNoSuggestions"
-        android:paddingLeft="21dp"
-        android:textColorHint="@color/black_20"
-        android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

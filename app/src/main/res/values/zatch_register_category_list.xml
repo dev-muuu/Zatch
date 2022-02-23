@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name ="category_list">
-        <item>카테고리 선택</item>
+    <string-array name ="gatch_category">
+        <item>음식|조리</item>
+        <item>음식|비조리</item>
+        <item>생활용품</item>
+        <item>가구/인테리어</item>
+        <item>디지털기기</item>
+        <item>잡화</item>
+        <item>의류</item>
+        <item>피부/미용</item>
+        <item>도서/문구류</item>
+        <item>문화생활</item>
+        <item>게임취미</item>
+        <item>스포츠/레저</item>
+        <item>반려동물</item>
+        <item>식물/원예</item>
+        <item>차량용품</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name ="zatch_category">
         <item>음식</item>
         <item>생활용품</item>
-        <item>피부/미용</item>
+        <item>가구/인테리어</item>
+        <item>디지털기기</item>
+        <item>잡화</item>
         <item>의류</item>
+        <item>피부/미용</item>
+        <item>도서/문구류</item>
+        <item>문화생활</item>
+        <item>게임취미</item>
+        <item>스포츠/레저</item>
         <item>반려동물</item>
-        <item>스포츠</item>
-        <item>아동</item>
+        <item>식물/원예</item>
+        <item>차량용품</item>
         <item>기타</item>
     </string-array>
 
@@ -17,5 +42,12 @@
         <item>개</item>
         <item>g</item>
         <item>ml</item>
+    </string-array>
+
+    <string-array name ="gatch_search_category">
+        <item>최신순</item>
+        <item>인기순</item>
+        <item>잔여인원</item>
+        <item>마감임박</item>
     </string-array>
 </resources>
