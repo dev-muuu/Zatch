@@ -155,5 +155,54 @@
         <item name="android:layout_marginRight">20dp</item>
     </style>
 
+    <style name="makeMeetingLayoutMargin" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">28dp</item>
+    </style>
+
+    <style name="makeMeetingTextField" parent="@android:style/Widget.EditText">
+        <item name="drawableRightCompat">@drawable/size_search_20</item>
+        <item name="drawableBottomCompat">@drawable/vector_136_silver</item>
+        <item name="drawableTint">@color/black_10</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">32dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black_85</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:ems">10</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
+    <style name="chattingProfileImage">
+        <item name="android:layout_width">52dp</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="android:layout_marginStart">24dp</item>
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:layout_marginBottom">14dp</item>
+    </style>
+
+    <style name="chattingRecyclerDividerVectorStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/black_5</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+    </style>
+
 
 </resources>

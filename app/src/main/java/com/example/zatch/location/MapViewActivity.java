@@ -7,11 +7,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -188,8 +186,8 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
 
     void sentDialog(String message){
         builder = new AlertDialog.Builder(MapViewActivity.this);
-        view = LayoutInflater.from(getBaseContext()).inflate(R.layout.dialog_location_message,null);
-        TextView messageView = view.findViewById(R.id.locationMessageText);
+        view = LayoutInflater.from(getBaseContext()).inflate(R.layout.dialog_message,null);
+        TextView messageView = view.findViewById(R.id.dialogInfoMessageText);
         messageView.setText(message);
         if(message.equals("현 위치와 입력하신 동네가 다릅니다.")) {
             TextView button = view.findViewById(R.id.dialogOKButton);

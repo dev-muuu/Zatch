@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/chatImageGatch"
+        style="@style/chattingProfileImage"
+        android:background="@drawable/profile_yellow"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/chatCrownImageAdmin"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        app:layout_constraintStart_toStartOf="@id/chatImageGatch"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintTop_toTopOf="@id/chatImageGatch"
+        android:layout_marginTop="34dp"
+        app:layout_constraintEnd_toEndOf="@id/chatImageGatch"
+        android:background="@drawable/crown_button"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/chatNameGatch"
+        style="@style/chattingListPersonNameText"
+        app:layout_constraintStart_toEndOf="@id/chatImageGatch"
+        android:text="한민지" />
+
+    <TextView
+        android:id="@+id/chatMessageGatch"
+        style="@style/chattingListMessagePreviewText"
+        android:text="문의드립니다.아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아"
+        app:layout_constraintEnd_toStartOf="@id/chatTimeGatch"
+        app:layout_constraintStart_toEndOf="@id/chatImageGatch"
+        app:layout_constraintTop_toBottomOf="@id/chatNameGatch" />
+
+    <TextView
+        android:id="@+id/chatTimeGatch"
+        style="@style/chattingListTimeText"
+        android:text="오후 7:13"
+        app:layout_constraintBaseline_toBaselineOf="@id/chatNameGatch"
+        tools:layout_editor_absoluteX="299dp" />
+
+    <View
+        android:id="@+id/imageView26"
+        style="@style/chattingRecyclerDividerVectorStyle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

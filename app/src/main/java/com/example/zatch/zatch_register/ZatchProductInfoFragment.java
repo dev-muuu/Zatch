@@ -267,7 +267,7 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
     void clickImageAddButton(String type){
         if(type.equals("gallery")) {
             Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.setAction(Intent.ACTION_PICK);
             intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
             startActivityForResult(intent, GALLERY_ACCESS);
         }else{
@@ -286,7 +286,6 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
         if (resultCode == RESULT_OK && data != null ) {
             switch(requestCode) {
                 case REQUEST_IMAGE_CAPTURE:
-
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -360,7 +359,7 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
         if(messageNumber != -1){
 //            builder = new AlertDialog.Builder(getContext(),R.style.CustomAlertDialog);
             builder = new AlertDialog.Builder(getContext());
-            View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_message,null);
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_message_center,null);
             TextView informText = view.findViewById(R.id.dialogMessageText);
             informText.setText(messageText[messageNumber]);
             builder.setView(view);

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp">
+
+    <ImageView
+        android:id="@+id/otherProfileImage"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/profile_purple" />
+
+    <TextView
+        android:id="@+id/otherChat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:maxWidth="221dp"
+        android:background="@drawable/drawable_chat_left"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="안녕하세요! 혹시 물품 거래 아직 가능한가요?"
+        app:layout_constraintLeft_toRightOf="@id/otherProfileImage" />
+
+    <TextView
+        android:id="@+id/otherChatTime"
+        style="@style/chattingMessageTimeText"
+        app:layout_constraintLeft_toRightOf="@id/otherChat" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -123,7 +123,7 @@
             app:layout_constraintTop_toBottomOf="@id/textView72">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/t1"
+                android:id="@+id/zatchChatTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -152,7 +152,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/t2"
+                android:id="@+id/gatchChatTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="28dp"
@@ -162,7 +162,7 @@
                 android:textSize="32dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/t1"
+                app:layout_constraintLeft_toRightOf="@id/zatchChatTab"
                 app:layout_constraintRight_toLeftOf="@id/t3"
                 app:layout_constraintTop_toTopOf="parent">
 

@@ -303,12 +303,12 @@
                     android:drawableBottom="@drawable/vector_126"
                     android:gravity="center"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toLeftOf="@id/t2"
+                    app:layout_constraintRight_toLeftOf="@id/gatchChatTab"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- 월 -->
                 <TextView
-                    android:id="@+id/t2"
+                    android:id="@+id/gatchChatTab"
                     android:layout_width="13dp"
                     android:layout_height="20dp"
                     android:layout_marginRight="13dp"

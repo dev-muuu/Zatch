@@ -20,11 +20,19 @@
         <item name="android:checkboxStyle">@style/customCheckboxFontStyle</item>
 <!--        <item name="android:datePickerStyle">@style/NumberPicker</item>-->
         <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
+        <item name="materialCalendarTheme">@style/makeMeetingDatePicker</item>
     </style>
-
 
     <style name="BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/ModalBottomSheetDialog</item>
+    </style>
+
+    <style name="makeMeetingDatePicker" parent="@style/ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/zatch_purple</item>
+        <item name="colorOnPrimary">@color/zatch_purple</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
+        <!-- Customize text field of the text input mode. -->
+<!--        <item name="textInputStyle">@style/Widget.App.TextInputLayout</item>-->
     </style>
 
 </resources>

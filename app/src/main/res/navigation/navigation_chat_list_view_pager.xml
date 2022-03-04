@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_chat_list_view_pager"
+    app:startDestination="@id/zatchChatListFragment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <fragment
+        android:id="@+id/zatchChatListFragment"
+        android:name="com.example.zatch.navigation.chat.ZatchChatListFragment"
+        android:label="ZatchChatListFragment"
+        tools:layout="@layout/fragment_zatch_chat_list">
+        <action
+            android:id="@+id/action_zatchChatListFragment_to_gatchChatListFragment"
+            app:destination="@id/gatchChatListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gatchChatListFragment"
+        android:name="com.example.zatch.navigation.chat.GatchChatListFragment"
+        android:label="GatchChatListFragment"
+        tools:layout="@layout/fragment_gatch_chat_list">
+        <action
+            android:id="@+id/action_gatchChatListFragment_to_zatchChatListFragment"
+            app:destination="@id/zatchChatListFragment" />
+    </fragment>
+</navigation>

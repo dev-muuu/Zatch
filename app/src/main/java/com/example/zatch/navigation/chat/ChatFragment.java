@@ -1,44 +1,93 @@
 package com.example.zatch.navigation.chat;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 
+enum Chat{
+    Zatch,
+    Gatch
+}
+
 public class ChatFragment extends Fragment{
 
-    View view;
+    private View view,textLine;
+    private CheckBox zatchTab, gatchTab;
+    private ConstraintLayout.LayoutParams params;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_chat, container, false);
 
-        //임시 data
-        String[] data = new String[10];
+        zatchTab = view.findViewById(R.id.zatchChatTab);
+        gatchTab = view.findViewById(R.id.gatchChatTab);
+        textLine = view.findViewById(R.id.textBottomLine);
+        params = (ConstraintLayout.LayoutParams) textLine.getLayoutParams();
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler);
-        ZatchChatAdapter adapter = new ZatchChatAdapter(data);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        zatchTab.setOnClickListener(onClickListener);
+        gatchTab.setOnClickListener(onClickListener);
 
-        ItemTouchHelper helper = new ItemTouchHelper(new ChatItemDecoration(adapter, getContext()));
-        helper.attachToRecyclerView(recyclerView);
+        //초기화
+        zatchTab.setChecked(true);
+        gatchTab.setChecked(false);
 
         return view;
     }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.zatchChatTab:
+                    navigateChatList(Chat.Zatch);
+                    break;
+                case R.id.gatchChatTab:
+                    navigateChatList(Chat.Gatch);
+                    break;
+            }
+        }
+    };
+
+    Fragment getChildFragment(){
+        Fragment fragment = getChildFragmentManager().findFragmentById(R.id.chatListViewPagerFragment);
+        fragment = fragment.getChildFragmentManager().findFragmentById(R.id.chatListViewPagerFragment);
+        return fragment;
+    }
+
+    void navigateChatList(Chat wantList){
+
+        if(wantList.equals(Chat.Zatch)){
+            if(gatchTab.isChecked()) {
+                params.endToEnd = zatchTab.getId();
+                params.startToStart = zatchTab.getId();
+                textLine.setBackgroundResource(R.color.zatch_purple);
+                gatchTab.toggle();
+                textLine.setLayoutParams(params);
+                ((GatchChatListFragment) getChildFragment()).navigateZatchChat();
+            }else
+                zatchTab.toggle();
+        }else if(wantList.equals(Chat.Gatch)){
+            if(zatchTab.isChecked()) {
+                params.endToEnd = gatchTab.getId();
+                params.startToStart = gatchTab.getId();
+                textLine.setBackgroundResource(R.color.zatch_yellow);
+                zatchTab.toggle();
+                textLine.setLayoutParams(params);
+                ((ZatchChatListFragment) getChildFragment()).navigateGatchChat();
+            }else
+                gatchTab.toggle();
+        }
+    }
+
 
 }

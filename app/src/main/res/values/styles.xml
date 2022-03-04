@@ -5,11 +5,10 @@
     </style>
     <style name="NumberPicker" parent="PickerTheme">
         <item name="fontFamily">@font/pretendard_bold</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:color">@color/black_85</item>
+        <item name="android:textColor">@color/black_10</item>
+<!--        <item name="android:color">@color/black_85</item>-->
         <item name="android:textColorPrimary">@color/black_85</item>
         <item name="editTextColor">@color/black_85</item>
-<!--        <item name="android:textColorSecondary">@color/black_10</item>-->
         <item name="colorControlNormal">#00000000</item>
         <item name="android:textSize">18dp</item>
     </style>
@@ -65,5 +64,9 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">28dp</item>
     </style>>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">8dp</item>
+    </style>
 
 </resources>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp">
+
+    <TextView
+        android:id="@+id/myChatTime"
+        style="@style/chattingMessageTimeText"
+        android:text="1414"
+        app:layout_constraintRight_toLeftOf="@id/myChat" />
+
+    <TextView
+        android:id="@+id/myChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:maxWidth="230dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/white"
+        android:background="@drawable/drawable_chat_zatch_right"
+        android:fontFamily="@font/pretendard_regular"
+        android:text="안녕하세요! 혹시 물품 거래 아직 가능한가요?"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

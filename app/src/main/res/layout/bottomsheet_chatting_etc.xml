@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/blockButton"
+        style="@style/chattingRoomEtcFuncText"
+        android:text="차단하기"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/declarationButton"
+        style="@style/chattingRoomEtcFuncText"
+        android:text="신고하기"
+        app:layout_constraintTop_toBottomOf="@id/blockButton" />
+
+    <TextView
+        android:id="@+id/exitButton"
+        style="@style/chattingRoomEtcFuncText"
+        android:layout_marginBottom="36dp"
+        android:text="채팅방 나가기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/declarationButton"
+        tools:layout_editor_absoluteX="168dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
