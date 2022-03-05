@@ -5,10 +5,10 @@ import android.net.Uri;
 import java.text.SimpleDateFormat;
 
 public class ChatItemData {
+
     private String userName;
     private String content;
     private long time;
-//    private String timeText;
     private Uri userImage;
     private int viewType;
     private final SimpleDateFormat format = new SimpleDateFormat("HH:mm");
@@ -25,17 +25,13 @@ public class ChatItemData {
         return userName;
     }
 
-
     public String getContent() {
         return content;
     }
 
-
     public String getTimeText() {
-        System.out.println(format);
         return format.format(this.time);
     }
-
 
     public Uri getUserImage() {
         return userImage;

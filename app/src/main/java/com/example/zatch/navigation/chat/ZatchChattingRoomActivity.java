@@ -195,7 +195,8 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
 
     void sendMessage(){
         //chatting room에 message send & 입력창 초기화
-        adapter.addItem(new ChatItemData("숑",chattingMessage.getText().toString(),System.currentTimeMillis(),null, ChatType.RIGHT_MESSAGE));
+        adapter.addItem(new ChatItemData("숑",chattingMessage.getText().toString(),
+                System.currentTimeMillis(),null, ChatType.RIGHT_MESSAGE));
         chattingMessage.setText("");
         chattingRecycler.scrollToPosition(chattingData.size()-1);
     }

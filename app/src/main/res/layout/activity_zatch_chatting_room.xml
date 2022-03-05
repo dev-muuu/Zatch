@@ -129,7 +129,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="16dp"
                 android:layout_toRightOf="@id/imageView22"
-                android:text="코스튬 아무거나"
+                android:text="수녀님 코스튬"
                 android:textSize="12dp" />
         </RelativeLayout>
 

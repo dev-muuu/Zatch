@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 
-public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdapter.ViewHolder> implements SwipeStateListener{
+public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdapter.ViewHolder>{
 
     private String[] localDataSet;
     private Context context;
@@ -20,18 +23,27 @@ public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdap
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-//        private final TextView textView;
+        private final ConstraintLayout swipeView;
+        private final FrameLayout etcFrame;
+        private final TextView exitButton;
 
         public ViewHolder(View view) {
             super(view);
-            // Define click listener for the ViewHolder's View
 
-//            textView = (TextView) view.findViewById(R.id.textView);
+            swipeView = (ConstraintLayout) view.findViewById(R.id.zatchChattingSwipeFrame);
+            etcFrame = (FrameLayout) view.findViewById(R.id.etcFrame);
+            exitButton = (TextView) view.findViewById(R.id.chattingExitButton);
         }
 
-//        public TextView getTextView() {
-//            return textView;
-//        }
+        public ConstraintLayout getSwipeView(){
+            return this.swipeView;
+        }
+        public FrameLayout getEtcFrame(){
+            return this.etcFrame;
+        }
+        public TextView getExitButton(){
+            return this.exitButton;
+        }
     }
 
     /**
@@ -81,18 +93,4 @@ public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdap
         return localDataSet.length;
     }
 
-    @Override
-    public void onItemSwipe(int position) {
-
-    }
-
-    @Override
-    public void onLeftClick(int position, RecyclerView.ViewHolder viewHolder) {
-
-    }
-
-    @Override
-    public void onRightClick(int position, RecyclerView.ViewHolder viewHolder) {
-
-    }
 }

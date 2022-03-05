@@ -1,40 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="80dp">
+    <FrameLayout
+        android:id="@+id/etcFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/chatImageZatch"
-        style="@style/chattingProfileImage"
-        android:background="@drawable/profile_purple"
-        tools:ignore="MissingConstraints" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/chatNameZatch"
-        style="@style/chattingListPersonNameText"
-        app:layout_constraintStart_toEndOf="@id/chatImageZatch"
-        android:text="한민지" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chatItemMoreInfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/chatMessageZatch"
-        style="@style/chattingListMessagePreviewText"
-        android:text="문의드립니다.아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아"
-        app:layout_constraintEnd_toStartOf="@id/chatTimeZatch"
-        app:layout_constraintStart_toEndOf="@id/chatImageZatch"
-        app:layout_constraintTop_toBottomOf="@id/chatNameZatch" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/chattingExitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="#EA270D"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp"
+                android:text="나가기"/>
+       </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+<!--    채팅 item-->
 
-    <TextView
-        android:id="@+id/chatTimeZatch"
-        app:layout_constraintBaseline_toBaselineOf="@id/chatNameZatch"
-        style="@style/chattingListTimeText"
-        android:text="오후 7:13" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/zatchChattingSwipeFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-    <View
-        android:id="@+id/imageView26"
-        style="@style/chattingRecyclerDividerVectorStyle" />
+            <ImageView
+                android:id="@+id/chatImageZatch"
+                style="@style/chattingProfileImage"
+                android:background="@drawable/profile_purple"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/chatNameZatch"
+                style="@style/chattingListPersonNameText"
+                android:text="한민지"
+                app:layout_constraintStart_toEndOf="@id/chatImageZatch" />
+
+            <TextView
+                android:id="@+id/chatMessageZatch"
+                style="@style/chattingListMessagePreviewText"
+                android:text="문의드립니다.아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아아"
+                app:layout_constraintEnd_toStartOf="@id/chatTimeZatch"
+                app:layout_constraintStart_toEndOf="@id/chatImageZatch"
+                app:layout_constraintTop_toBottomOf="@id/chatNameZatch" />
+
+            <TextView
+                android:id="@+id/chatTimeZatch"
+                style="@style/chattingListTimeText"
+                android:text="오후 7:13"
+                app:layout_constraintBaseline_toBaselineOf="@id/chatNameZatch" />
+
+            <View
+                android:id="@+id/imageView26"
+                style="@style/chattingRecyclerDividerVectorStyle" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

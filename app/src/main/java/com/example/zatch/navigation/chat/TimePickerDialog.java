@@ -15,9 +15,9 @@ import com.example.zatch.R;
 
 public class TimePickerDialog extends DialogFragment {
 
-    private NumberPicker ampmPicker, hourPicker, minutePicker;
+    private NumberPicker hourPicker, minutePicker;
     private TimePickerDialogListener listener;
-    private String[] ampmList, hourList, minuteList;
+    private String[] hourList, minuteList;
 
 //    public static TimePickerDialog newInstance(int title)
     public static TimePickerDialog newInstance() {
@@ -51,28 +51,21 @@ public class TimePickerDialog extends DialogFragment {
         dialog.show();
 
         //view ui set
-        ampmPicker = view.findViewById(R.id.timePickerAMPM);
         hourPicker = view.findViewById(R.id.timePickerHour);
         minutePicker = view.findViewById(R.id.timePickerMinute);
 
-        ampmList = new String[]{"오전","오후"};
-
-        ampmPicker.setDisplayedValues(ampmList);
         hourPicker.setDisplayedValues(makeHourStringData());
         minutePicker.setDisplayedValues(makeMinuteStringData());
 
-        ampmPicker.setMinValue(0);
-        ampmPicker.setMaxValue(ampmList.length - 1);
         hourPicker.setMinValue(0);
         hourPicker.setMaxValue(hourList.length-1);
         minutePicker.setMinValue(0);
         minutePicker.setMaxValue(minuteList.length-1);
 
         view.findViewById(R.id.timeFixButton).setOnClickListener(v -> {
-            String[] result = new String[3];
-            result[0] = ampmList[ampmPicker.getValue()];
-            result[1] = hourList[hourPicker.getValue()];
-            result[2] = minuteList[minutePicker.getValue()];
+            String[] result = new String[2];
+            result[0] = hourList[hourPicker.getValue()];
+            result[1] = minuteList[minutePicker.getValue()];
             listener.finishDialog(result);
             dialog.dismiss();
         });
@@ -81,9 +74,12 @@ public class TimePickerDialog extends DialogFragment {
     }
 
     private String[] makeHourStringData(){
-        hourList = new String[12];
-        for(int i = 1; i <= 12; i++)
-            hourList[i-1] = String.valueOf(i);
+        hourList = new String[24];
+        for(int i = 0; i < 24; i++)
+            if(i < 10)
+                hourList[i] = "0" + String.valueOf(i);
+            else
+                hourList[i] = String.valueOf(i);
 
         return hourList;
     }

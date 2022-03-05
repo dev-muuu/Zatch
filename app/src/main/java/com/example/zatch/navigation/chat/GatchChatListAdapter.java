@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 
-public class GatchChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SwipeStateListener {
+public class GatchChatListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private GatchJoinState[] localDataSet;
     private Context context;
@@ -101,23 +101,6 @@ public class GatchChatListAdapter extends RecyclerView.Adapter<RecyclerView.View
         public TextView getTime() {
             return time;
         }
-
-    }
-
-
-    //swipe gesture
-    @Override
-    public void onItemSwipe(int position) {
-
-    }
-
-    @Override
-    public void onLeftClick(int position, RecyclerView.ViewHolder viewHolder) {
-
-    }
-
-    @Override
-    public void onRightClick(int position, RecyclerView.ViewHolder viewHolder) {
 
     }
 }

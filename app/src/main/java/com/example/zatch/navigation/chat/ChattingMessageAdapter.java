@@ -54,7 +54,6 @@ public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
 

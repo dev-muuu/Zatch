@@ -35,7 +35,7 @@ public class ZatchChatListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        ItemTouchHelper helper = new ItemTouchHelper(new ChatItemDecoration(adapter, getContext()));
+        ItemTouchHelper helper = new ItemTouchHelper(new ChatItemSwipe());
         helper.attachToRecyclerView(recyclerView);
 
         return view;

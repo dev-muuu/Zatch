@@ -2,6 +2,7 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintCircleRadius="8dp">
@@ -14,21 +15,22 @@
         <TextView
             android:id="@+id/textView108"
             style="@style/pickerTitleTextStyle"
-            android:text="약속시간"/>
+            android:text="약속시간" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/pickerLayout"
             android:layout_width="wrap_content"
             android:layout_height="88dp"
             android:layout_marginTop="12dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/timeFixButton"
+            app:layout_constraintStart_toStartOf="@+id/timeFixButton"
             app:layout_constraintTop_toBottomOf="@id/textView108">
 
             <!-- 날짜 선택 -->
+            <!-- 날짜 선택 -->
             <NumberPicker
-                android:id="@+id/timePickerAMPM"
-                android:layout_width="40dp"
+                android:id="@+id/timePickerHour"
+                android:layout_width="36dp"
                 android:layout_height="match_parent"
                 android:datePickerMode="spinner"
                 android:descendantFocusability="blocksDescendants"
@@ -38,31 +40,17 @@
 
             </NumberPicker>
             <!-- 날짜 선택 -->
-            <NumberPicker
-                android:id="@+id/timePickerHour"
-                android:layout_width="36dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="36dp"
-                android:datePickerMode="spinner"
-                android:descendantFocusability="blocksDescendants"
-                android:dividerPadding="8dp"
-                android:showDividers="none"
-                android:theme="@style/NumberPicker"
-                app:layout_constraintLeft_toRightOf="@id/timePickerAMPM">
-
-            </NumberPicker>
-            <!-- 날짜 선택 -->
             <TextView
                 android:id="@+id/textView110"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_marginLeft="18dp"
+                android:text=":"
                 android:textSize="18dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/timePickerHour"
-                android:layout_marginLeft="18dp"
-                android:text=":" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <NumberPicker
                 android:id="@+id/timePickerMinute"
@@ -83,6 +71,7 @@
         <TextView
             android:id="@+id/timeFixButton"
             style="@style/pickerButtonStyle"
-            app:layout_constraintTop_toBottomOf="@id/pickerLayout"/>
+            app:layout_constraintTop_toBottomOf="@id/pickerLayout"
+            tools:layout_editor_absoluteX="189dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

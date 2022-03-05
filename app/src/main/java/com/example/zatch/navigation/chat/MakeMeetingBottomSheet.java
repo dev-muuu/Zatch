@@ -103,8 +103,8 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
 
     @Override
     public void finishDialog(String[] pickerResult) {
-        meetingHour.setText(pickerResult[1]);
-        meetingMinute.setText(pickerResult[2]);
+        meetingHour.setText(pickerResult[0]);
+        meetingMinute.setText(pickerResult[1]);
 
     }
 
