@@ -18,11 +18,13 @@
                 android:id="@+id/chatItemMoreInfoLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <TextView
                 android:id="@+id/chattingExitButton"
-                android:layout_width="wrap_content"
+                android:layout_width="72dp"
                 android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -31,8 +33,6 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:paddingLeft="18dp"
-                android:paddingRight="18dp"
                 android:text="나가기"/>
        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>

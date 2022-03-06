@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
+import com.example.zatch.ReturnPx;
 
 public class ZatchChatListFragment extends Fragment {
 
@@ -35,7 +36,7 @@ public class ZatchChatListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        ItemTouchHelper helper = new ItemTouchHelper(new ChatItemSwipe());
+        ItemTouchHelper helper = new ItemTouchHelper(new SwipeHelperCallback(getActivity()));
         helper.attachToRecyclerView(recyclerView);
 
         return view;

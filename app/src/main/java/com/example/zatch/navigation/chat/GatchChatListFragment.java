@@ -41,8 +41,8 @@ public class GatchChatListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        ItemTouchHelper helper = new ItemTouchHelper(new ChatItemSwipe());
-        helper.attachToRecyclerView(recyclerView);
+//        ItemTouchHelper helper = new ItemTouchHelper(new SwipeHelperCallback(getActivity()));
+//        helper.attachToRecyclerView(recyclerView);
 
         return view;
     }
