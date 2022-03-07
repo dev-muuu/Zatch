@@ -75,6 +75,7 @@ public class SwipeHelperCallback extends ItemTouchHelper.Callback{
         if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
             if(dX < 0) {  //오른쪽 swipe
                 ((ZatchChatListAdapter.ViewHolder) viewHolder).getExitButton().setVisibility(View.VISIBLE);
+                ((ZatchChatListAdapter.ViewHolder) viewHolder).getInfoView().setVisibility(View.INVISIBLE);
 
                 View view = ((ZatchChatListAdapter.ViewHolder) viewHolder).itemView;
                 boolean isClamp = getTag(viewHolder);
@@ -85,6 +86,7 @@ public class SwipeHelperCallback extends ItemTouchHelper.Callback{
             else {   //왼쪽 swipe
                 if (viewHolder instanceof ZatchChatListAdapter.ViewHolder) {
                     ((ZatchChatListAdapter.ViewHolder) viewHolder).getExitButton().setVisibility(View.INVISIBLE);
+                    ((ZatchChatListAdapter.ViewHolder) viewHolder).getInfoView().setVisibility(View.VISIBLE);
                     getDefaultUIUtil().onDraw(c, recyclerView, getView(viewHolder),dX,dY,actionState,isCurrentlyActive);
                 }
             }
@@ -93,8 +95,7 @@ public class SwipeHelperCallback extends ItemTouchHelper.Callback{
 
     private float calculateDxSize(View view, float dX, boolean isClamp, boolean isCurrnetlyActive){
 
-        float max = (float)-view.getWidth() / 2;
-
+        float min = (float)-view.getWidth()/2;
         float x;
         if(isClamp){
             if(isCurrnetlyActive)
@@ -104,7 +105,7 @@ public class SwipeHelperCallback extends ItemTouchHelper.Callback{
         }else
             x = dX;
 
-        return Math.min(Math.max(max, x), 0f);
+        return Math.min(Math.max(min, x), 0f);
     }
 
     private void setTag(RecyclerView.ViewHolder viewHolder, boolean isClamped){

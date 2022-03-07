@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
+import com.example.zatch.ServiceType;
 import com.example.zatch.navigation.chat.data.ChatItemData;
 import com.example.zatch.navigation.chat.data.ChatType;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -90,7 +91,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
         //chatting recycler
         chattingData = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
-        adapter = new ChattingMessageAdapter(Chat.Zatch,chattingData,getBaseContext());
+        adapter = new ChattingMessageAdapter(ServiceType.Zatch,chattingData,getBaseContext());
         chattingRecycler.setLayoutManager(layoutManager);
         chattingRecycler.setAdapter(adapter);
 

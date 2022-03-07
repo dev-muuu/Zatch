@@ -17,6 +17,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.BaseRequestOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.zatch.R;
+import com.example.zatch.ServiceType;
 import com.example.zatch.navigation.chat.data.ChatItemData;
 import com.example.zatch.navigation.chat.data.ChatType;
 
@@ -26,9 +27,9 @@ public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     private ArrayList<ChatItemData> chatItem;
     private Context context;
-    private Chat type;
+    private ServiceType type;
 
-    public ChattingMessageAdapter(Chat type, ArrayList<ChatItemData> dataSet, Context context) {
+    public ChattingMessageAdapter(ServiceType type, ArrayList<ChatItemData> dataSet, Context context) {
         this.type = type;
         this.chatItem = dataSet;
         this.context = context;
@@ -98,7 +99,7 @@ public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         public void setItem(ChatItemData data) {
-            if(type.equals(Chat.Gatch))
+            if(type.equals(ServiceType.Gatch))
                 message.setBackground(context.getDrawable(R.drawable.drawable_chat_gatch_right));
             this.message.setText(data.getContent());
             this.time.setText(data.getTimeText());

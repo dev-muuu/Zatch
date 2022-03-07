@@ -9,17 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 
-enum GatchJoinState {
-    Admin, //아직 수락/거부 여부 선택 안함
-    member,
-    AdminAccept //admin이 수락 상태
-}
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GatchChatListFragment extends Fragment {
 
@@ -33,10 +30,10 @@ public class GatchChatListFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_gatch_chat_list,container,false);
         //임시 data
-        GatchJoinState[] data = new GatchJoinState[]{GatchJoinState.Admin,GatchJoinState.member,GatchJoinState.AdminAccept};
+        ArrayList<GatchJoinState> data = new ArrayList<>(Arrays.asList(GatchJoinState.Admin,GatchJoinState.member,GatchJoinState.AdminAccept));
 
         RecyclerView recyclerView = view.findViewById(R.id.gatchChatListRecycler);
-        GatchChatListAdapter adapter = new GatchChatListAdapter(getContext(),data);
+        GatchChatListAdapter adapter = new GatchChatListAdapter(getActivity(),data);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

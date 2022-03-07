@@ -23,23 +23,23 @@ public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdap
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final ConstraintLayout swipeView;
-        private final FrameLayout etcFrame;
+
+        private final ConstraintLayout swipeView, infoView;
         private final TextView exitButton;
 
         public ViewHolder(View view) {
             super(view);
 
             swipeView = (ConstraintLayout) view.findViewById(R.id.zatchChattingSwipeFrame);
-            etcFrame = (FrameLayout) view.findViewById(R.id.etcFrame);
+            infoView = (ConstraintLayout) view.findViewById(R.id.chatItemMoreInfoLayout);
             exitButton = (TextView) view.findViewById(R.id.chattingExitButton);
         }
 
         public ConstraintLayout getSwipeView(){
             return this.swipeView;
         }
-        public FrameLayout getEtcFrame(){
-            return this.etcFrame;
+        public ConstraintLayout getInfoView(){
+            return this.infoView;
         }
         public TextView getExitButton(){
             return this.exitButton;

@@ -12,11 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.zatch.R;
-
-enum Chat{
-    Zatch,
-    Gatch
-}
+import com.example.zatch.ServiceType;
 
 public class ChatFragment extends Fragment{
 
@@ -49,10 +45,10 @@ public class ChatFragment extends Fragment{
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.zatchChatTab:
-                    navigateChatList(Chat.Zatch);
+                    navigateChatList(ServiceType.Zatch);
                     break;
                 case R.id.gatchChatTab:
-                    navigateChatList(Chat.Gatch);
+                    navigateChatList(ServiceType.Gatch);
                     break;
             }
         }
@@ -64,9 +60,9 @@ public class ChatFragment extends Fragment{
         return fragment;
     }
 
-    void navigateChatList(Chat wantList){
+    void navigateChatList(ServiceType wantList){
 
-        if(wantList.equals(Chat.Zatch)){
+        if(wantList.equals(ServiceType.Zatch)){
             if(gatchTab.isChecked()) {
                 params.endToEnd = zatchTab.getId();
                 params.startToStart = zatchTab.getId();
@@ -76,7 +72,7 @@ public class ChatFragment extends Fragment{
                 ((GatchChatListFragment) getChildFragment()).navigateZatchChat();
             }else
                 zatchTab.toggle();
-        }else if(wantList.equals(Chat.Gatch)){
+        }else if(wantList.equals(ServiceType.Gatch)){
             if(zatchTab.isChecked()) {
                 params.endToEnd = gatchTab.getId();
                 params.startToStart = gatchTab.getId();

@@ -1,10 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="80dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/gatchSummaryLayout"
+            android:background="@drawable/color_gradation_yellow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/r1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toStartOf="@id/imageView25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textView100"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="넷플릭스" />
+
+                <ImageView
+                    android:id="@+id/imageView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@id/textView100"
+                    app:srcCompat="@drawable/drawable_ellipse_15" />
+
+                <TextView
+                    android:id="@+id/textView109"
+                    android:textSize="12dp"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="@color/white"
+                    android:layout_toRightOf="@id/imageView27"
+                    android:text="카카오뱅크 3333-0000-0000" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/r2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/r1">
+
+                <TextView
+                    android:id="@+id/textView111"
+                    style="@style/chattingBackInfoText"
+                    android:layout_marginLeft="0dp"
+                    android:text="3795원" />
+
+                <TextView
+                    android:id="@+id/textView112"
+                    android:layout_toRightOf="@id/textView111"
+                    style="@style/chattingBackInfoText"
+                    android:text="4명" />
+
+                <TextView
+                    android:id="@+id/textView113"
+                    android:layout_toRightOf="@id/textView112"
+                    style="@style/chattingBackInfoText"
+                    android:text="입금완료" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/imageView25"
+                style="@style/chattingSummaryImage"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/gatchChatItemExit"
+            style="@style/chatItemExitButton"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gatchSwipeView"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/chatImageGatch"
@@ -43,12 +140,36 @@
         android:id="@+id/chatTimeGatch"
         style="@style/chattingListTimeText"
         android:text="오후 7:13"
-        app:layout_constraintBaseline_toBaselineOf="@id/chatNameGatch"
-        tools:layout_editor_absoluteX="299dp" />
+        app:layout_constraintBaseline_toBaselineOf="@id/chatNameGatch"/>
 
     <View
         android:id="@+id/imageView26"
         style="@style/chattingRecyclerDividerVectorStyle" />
 
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/gatchAcceptLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textView80"
+                style="@style/gatchRefuseAcceptButtonText"
+                android:background="@drawable/drawable_timer_black"
+                android:text="거절" />
+
+            <TextView
+                android:id="@+id/textView107"
+                style="@style/gatchRefuseAcceptButtonText"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/textView80"
+                android:background="@drawable/drawble_timer_red"
+                android:text="수락"/>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -204,5 +204,13 @@
         <item name="layout_constraintBottom_toBottomOf">parent</item>
     </style>
 
+    <style name="chattingSummaryImage">
+        <item name="android:layout_width">52dp</item>
+        <item name="android:layout_height">52dp</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="android:layout_marginEnd">28dp</item>
+    </style>
 
 </resources>
