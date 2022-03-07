@@ -15,7 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.zatch.PNDialogMessage;
+import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.R;
+import com.example.zatch.ServiceType;
 
 public class ZatchRegisterPreShowFragment extends Fragment {
 
@@ -44,26 +47,16 @@ public class ZatchRegisterPreShowFragment extends Fragment {
     };
 
     void registerPopUp(){
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_negative_positive,null);
-        builder.setView(view);
-        Button positive = view.findViewById(R.id.dialogPositiveButton);
-        positive.setText("등록 완료");
-        Button negative = view.findViewById(R.id.dialogNegativeButton);
-        TextView message = view.findViewById(R.id.dialogAskMessage);
-        message.setText("재치 등록을 완료하시겠습니까?");
-        AlertDialog messageDialog = builder.create();
-        messageDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        positive.setOnClickListener(v -> {
-            messageDialog.dismiss();
+        PositiveNegativeDialog dialogClass = new PositiveNegativeDialog(getContext(), ServiceType.Zatch, PNDialogMessage.Register);
+        AlertDialog dialog = dialogClass.createDialog();
+        dialogClass.setMessageText("재치 " + dialogClass.getMessageText());
+        dialogClass.getNegative().setOnClickListener(v->{
+            dialog.dismiss();
+        });
+        dialogClass.getPositive().setOnClickListener(v->{
+            dialog.dismiss();
             Toast.makeText(getContext(),"등록 완료되었습니다.",Toast.LENGTH_SHORT).show();
         });
-
-        negative.setOnClickListener(v -> messageDialog.dismiss());
-
-        messageDialog.show();
-
+        dialog.show();
     }
 }

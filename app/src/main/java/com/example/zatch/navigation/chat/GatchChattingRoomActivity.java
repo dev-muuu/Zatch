@@ -1,15 +1,11 @@
 package com.example.zatch.navigation.chat;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import android.app.AlertDialog;
@@ -18,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.PNDialogMessage;
+import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
 import com.example.zatch.navigation.chat.data.ChatItemData;
@@ -28,8 +25,6 @@ public class GatchChattingRoomActivity extends AppCompatActivity {
 
     private ChattingMessageAdapter adapter;
     private EditText chattingMessage;
-    private AlertDialog.Builder builder;
-    private AlertDialog dialog;
     private Button sendButton;
 
     @Override
@@ -102,22 +97,14 @@ public class GatchChattingRoomActivity extends AppCompatActivity {
 
     void showNegativePositiveDialog(PNDialogMessage type){
 
-        builder = new AlertDialog.Builder(GatchChattingRoomActivity.this);
-        View view = LayoutInflater.from(GatchChattingRoomActivity.this).inflate(R.layout.dialog_negative_positive_yellow,null);
-        builder.setView(view);
-        TextView message = view.findViewById(R.id.dialogAskMessage);
-        message.setText(type.getMessage());
-        TextView positive = view.findViewById(R.id.dialogPositiveButton);
-        TextView negative = view.findViewById(R.id.dialogNegativeButton);
-        positive.setText(type.getPositive());
-        dialog = builder.create();
-        positive.setOnClickListener(v -> {
+        PositiveNegativeDialog dialogClass = new PositiveNegativeDialog(GatchChattingRoomActivity.this, ServiceType.Gatch, type);
+        AlertDialog dialog = dialogClass.createDialog();
+        dialogClass.getNegative().setOnClickListener(v->{
             dialog.dismiss();
         });
-        negative.setOnClickListener(v -> {
+        dialogClass.getPositive().setOnClickListener(v->{
             dialog.dismiss();
         });
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
 

@@ -1,5 +1,6 @@
 package com.example.zatch.navigation.chat;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,9 +13,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
+import com.example.zatch.PNDialogMessage;
+import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.R;
+import com.example.zatch.ServiceType;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
@@ -126,24 +129,17 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
 
     void makeReservationInfoDialog(){
 
-        builder = new AlertDialog.Builder(getContext());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_negative_positive,null);
-        builder.setView(view);
-        TextView positive = view.findViewById(R.id.dialogPositiveButton);
-        TextView negative = view.findViewById(R.id.dialogNegativeButton);
-        TextView text = view.findViewById(R.id.dialogAskMessage);
-        text.setText("");
-        positive.setText("확인");
-        dialog = builder.create();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        positive.setOnClickListener(v -> {
+        PositiveNegativeDialog dialogClass = new PositiveNegativeDialog(getContext(), ServiceType.Zatch, PNDialogMessage.MakeMeeting);
+        AlertDialog dialog = dialogClass.createDialog();
+        dialogClass.getNegative().setOnClickListener(v->{
             dialog.dismiss();
-            listener.finishBottomSheet(true);
-            dismiss();
         });
-        negative.setOnClickListener(v -> {
+        dialogClass.getPositive().setOnClickListener(v->{
+            listener.finishBottomSheet(true);
             dialog.dismiss();
         });
         dialog.show();
+
+
     }
 }

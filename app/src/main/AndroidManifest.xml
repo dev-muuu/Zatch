@@ -48,7 +48,7 @@
         <activity android:name=".location.SetLocationActivity" />
         <activity android:name=".location.MapViewActivity"/>
         <activity android:name=".MyZatchActivity" />
-        <activity android:name=".zatch_register.ZatchRegisterActivity" />
+<!--        <activity android:name=".zatch_register.ZatchRegisterActivity" />-->
 <!--        <activity android:name=".MainActivity" />-->
         <activity android:name=".navigation.my_zatch.gatch_upload"/>
         <activity android:name=".navigation.my_zatch.my_gatch_detail"/>

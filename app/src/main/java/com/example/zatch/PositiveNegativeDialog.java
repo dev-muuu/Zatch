@@ -57,4 +57,8 @@ public class PositiveNegativeDialog {
     public TextView getMessage() {
         return message;
     }
+
+    public String getMessageText(){
+        return message.getText().toString();
+    }
 }
