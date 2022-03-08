@@ -28,7 +28,6 @@ public class SwipeHelperCallback extends ItemTouchHelper.Callback{
         int drag_flags = ItemTouchHelper.UP|ItemTouchHelper.DOWN;
         int swipe_flags = ItemTouchHelper.START|ItemTouchHelper.END;
         return  makeMovementFlags(drag_flags,swipe_flags);
-
     }
 
     //move(drag) 기능은 사용하지 않을 예정
@@ -56,9 +55,13 @@ public class SwipeHelperCallback extends ItemTouchHelper.Callback{
     //swipe 인식 위해 view 이동시켜야 하는 정도 지정
     @Override
     public float getSwipeThreshold(@NonNull RecyclerView.ViewHolder viewHolder) {
+
+        if(viewHolder instanceof ZatchChatListAdapter.ViewHolder)
+            if(((ZatchChatListAdapter.ViewHolder) viewHolder).getInfoViewVisibility())
+                return 0.7f;
         boolean isClamp = getTag(viewHolder);
         setTag(viewHolder, !isClamp && currentDx <= -exitWidth );
-        return .3f;
+        return 2f;
     }
 
     //일정 속도 미만, action 취소?
@@ -73,18 +76,21 @@ public class SwipeHelperCallback extends ItemTouchHelper.Callback{
                             float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
         if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+            boolean isClamp = getTag(viewHolder);
+            View view = ((ZatchChatListAdapter.ViewHolder) viewHolder).itemView;
             if(dX < 0) {  //오른쪽 swipe
                 ((ZatchChatListAdapter.ViewHolder) viewHolder).getExitButton().setVisibility(View.VISIBLE);
                 ((ZatchChatListAdapter.ViewHolder) viewHolder).getInfoView().setVisibility(View.INVISIBLE);
 
-                View view = ((ZatchChatListAdapter.ViewHolder) viewHolder).itemView;
-                boolean isClamp = getTag(viewHolder);
                 float x = calculateDxSize(view,dX,isClamp,isCurrentlyActive);
                 currentDx = x;
                 getDefaultUIUtil().onDraw(c, recyclerView, getView(viewHolder),x,dY,actionState,isCurrentlyActive);
             }
             else {   //왼쪽 swipe
-                if (viewHolder instanceof ZatchChatListAdapter.ViewHolder) {
+                if(isClamp) {   //고정상태일 때 추가로 swipe 진행할 경우, 고정 취소되는..
+                    float x = calculateDxSize(view,dX,isClamp,isCurrentlyActive);
+                    getDefaultUIUtil().onDraw(c, recyclerView, getView(viewHolder), x, dY, actionState, isCurrentlyActive);
+                } else if (viewHolder instanceof ZatchChatListAdapter.ViewHolder) {
                     ((ZatchChatListAdapter.ViewHolder) viewHolder).getExitButton().setVisibility(View.INVISIBLE);
                     ((ZatchChatListAdapter.ViewHolder) viewHolder).getInfoView().setVisibility(View.VISIBLE);
                     getDefaultUIUtil().onDraw(c, recyclerView, getView(viewHolder),dX,dY,actionState,isCurrentlyActive);
@@ -95,17 +101,23 @@ public class SwipeHelperCallback extends ItemTouchHelper.Callback{
 
     private float calculateDxSize(View view, float dX, boolean isClamp, boolean isCurrnetlyActive){
 
-        float min = (float)-view.getWidth()/2;
         float x;
         if(isClamp){
-            if(isCurrnetlyActive)
-                x = dX - exitWidth;
-            else
+            //현재 swipe
+            if(isCurrnetlyActive) {
+                if(dX < 0)
+                    x = dX/3 -exitWidth;
+                else
+                    x = dX - exitWidth;
+            }
+            //현재 swipe아님
+            else {
                 x = -exitWidth;
+            }
         }else
             x = dX;
 
-        return Math.min(Math.max(min, x), 0f);
+        return Math.min(x, 0f);
     }
 
     private void setTag(RecyclerView.ViewHolder viewHolder, boolean isClamped){

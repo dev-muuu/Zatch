@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -43,6 +42,9 @@ public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdap
         }
         public TextView getExitButton(){
             return this.exitButton;
+        }
+        public boolean getInfoViewVisibility(){
+            return this.infoView.getVisibility() == View.VISIBLE ? true : false;
         }
     }
 

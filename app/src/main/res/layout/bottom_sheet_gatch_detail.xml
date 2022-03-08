@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/c1"
+        android:id="@+id/c0"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <RelativeLayout
-                android:id="@+id/r4"
+                android:id="@+id/r0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

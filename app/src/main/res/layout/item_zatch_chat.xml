@@ -120,8 +120,9 @@
         <TextView
             android:id="@+id/chatNameZatch"
             style="@style/chattingListPersonNameText"
-            android:text="한민지"
-            app:layout_constraintStart_toEndOf="@id/chatImageZatch" />
+            android:text="숑"
+            app:layout_constraintStart_toEndOf="@id/chatImageZatch"
+            tools:layout_editor_absoluteY="18dp" />
 
         <TextView
             android:id="@+id/chatMessageZatch"

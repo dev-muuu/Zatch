@@ -41,7 +41,6 @@ public class PositiveNegativeDialog {
         return dialog;
     }
 
-    //message 수정시 사용할 코드
     public void setMessageText(String newMessage){
         this.message.setText(newMessage);
     }
@@ -54,11 +53,8 @@ public class PositiveNegativeDialog {
         return positive;
     }
 
-    public TextView getMessage() {
-        return message;
-    }
-
     public String getMessageText(){
         return message.getText().toString();
     }
+
 }
