@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,6 +41,9 @@ public class GatchChatListFragment extends Fragment {
 
 //        ItemTouchHelper helper = new ItemTouchHelper(new SwipeHelperCallback(getActivity()));
 //        helper.attachToRecyclerView(recyclerView);
+
+
+//        new ItemTouchHelper(new SwipeHelperCallback(getActivity())).attachToRecyclerView(recyclerView);
 
         return view;
     }

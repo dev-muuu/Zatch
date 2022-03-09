@@ -1,7 +1,6 @@
 package com.example.zatch.navigation.chat;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.BaseRequestOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
@@ -47,7 +45,7 @@ public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_right, viewGroup, false);
             return new RightMessageViewHolder(view);
         }else if(viewType == ChatType.LEFT_IMAGE){
-            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chate_image_left, viewGroup, false);
+            view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_image_left, viewGroup, false);
             return new LeftImageViewHolder(view);
         }else{
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_image_right, viewGroup, false);

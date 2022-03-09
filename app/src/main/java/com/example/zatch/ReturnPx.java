@@ -7,6 +7,7 @@ public class ReturnPx {
 
     private float dp;
     private Activity activity;
+    private static DisplayMetrics displayMetrics = new DisplayMetrics();
 
     public ReturnPx(int dp, Activity activity) {
         this.dp = dp;
@@ -14,7 +15,7 @@ public class ReturnPx {
     }
 
     public float returnPx(){
-        DisplayMetrics displayMetrics = new DisplayMetrics();
+//        DisplayMetrics displayMetrics = new DisplayMetrics();
         this.activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         float density = displayMetrics.density;
 

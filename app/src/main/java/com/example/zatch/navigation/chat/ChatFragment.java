@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
@@ -16,13 +17,19 @@ import com.example.zatch.ServiceType;
 
 public class ChatFragment extends Fragment{
 
-    private View view,textLine;
+    private View textLine;
     private CheckBox zatchTab, gatchTab;
     private ConstraintLayout.LayoutParams params;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_chat, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         zatchTab = view.findViewById(R.id.zatchChatTab);
         gatchTab = view.findViewById(R.id.gatchChatTab);
@@ -36,7 +43,6 @@ public class ChatFragment extends Fragment{
         zatchTab.setChecked(true);
         gatchTab.setChecked(false);
 
-        return view;
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
