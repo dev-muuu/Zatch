@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +19,20 @@ import com.example.zatch.PNDialogMessage;
 import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
+import com.example.zatch.navigation.chat.data.SearchPlaceData;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
+
+import javax.xml.transform.Result;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements TimePickerDialog.TimePickerDialogListener {
 
@@ -30,10 +41,13 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
     private Switch alarmSwitch;
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
-    private RelativeLayout timeLayout1,timeLayout2;
+    private RelativeLayout timeLayout1, timeLayout2;
     private TextView meetingHour, meetingMinute, meetingMonth, meetingDate;
 
-    interface MakeMeetingBottomSheetListener{
+    static final String BASE_URL = "https://dapi.kakao.com/";
+    static final String API_KEY = "KakaoAK de8b17f677631d70f9545c4b19608dcf";
+
+    interface MakeMeetingBottomSheetListener {
         void finishBottomSheet(boolean isFinish);
     }
 
@@ -46,7 +60,7 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        view = inflater.inflate(R.layout.bottom_sheet_make_meeting,container);
+        view = inflater.inflate(R.layout.bottom_sheet_make_meeting, container);
 
         view.findViewById(R.id.button9).setOnClickListener(v -> {
             makeReservationInfoDialog();
@@ -54,7 +68,7 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
 
         alarmSwitch = view.findViewById(R.id.switch1);
         alarmSwitch.setOnClickListener(v -> {
-            if(alarmSwitch.isChecked())
+            if (alarmSwitch.isChecked())
                 sendDialogMessage();
         });
 
@@ -73,11 +87,12 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
         meetingMonth = view.findViewById(R.id.makeMeetingMonth);
         meetingDate = view.findViewById(R.id.makeMeetingDate);
 
+        searchByKeyword("상현동");
 
         return view;
     }
 
-    void openCalendarDialog(){
+    void openCalendarDialog() {
 
         MaterialDatePicker.Builder builder = MaterialDatePicker.Builder.datePicker();
         builder.setTitleText("");
@@ -92,16 +107,16 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
 
             datePicker.dismiss();
         });
-        datePicker.addOnNegativeButtonClickListener(selection->{
-           datePicker.dismiss();
+        datePicker.addOnNegativeButtonClickListener(selection -> {
+            datePicker.dismiss();
         });
-        datePicker.show(getParentFragmentManager(),null);
+        datePicker.show(getParentFragmentManager(), null);
     }
 
-    void openTimepickerDialog(){
+    void openTimepickerDialog() {
         TimePickerDialog dialog = TimePickerDialog.newInstance();
         dialog.setDialogListener(this);
-        dialog.show(getParentFragmentManager(),null);
+        dialog.show(getParentFragmentManager(), null);
     }
 
     @Override
@@ -111,10 +126,10 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
 
     }
 
-    void sendDialogMessage(){
+    void sendDialogMessage() {
 
         builder = new AlertDialog.Builder(getContext());
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_message,null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_message, null);
         builder.setView(view);
         TextView ok = view.findViewById(R.id.dialogOKButton);
         TextView text = view.findViewById(R.id.dialogInfoMessageText);
@@ -127,19 +142,50 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
         dialog.show();
     }
 
-    void makeReservationInfoDialog(){
+    void makeReservationInfoDialog() {
 
         PositiveNegativeDialog dialogClass = new PositiveNegativeDialog(getContext(), ServiceType.Zatch, PNDialogMessage.MakeMeeting);
         AlertDialog dialog = dialogClass.createDialog();
-        dialogClass.getNegative().setOnClickListener(v->{
+        dialogClass.getNegative().setOnClickListener(v -> {
             dialog.dismiss();
         });
-        dialogClass.getPositive().setOnClickListener(v->{
+        dialogClass.getPositive().setOnClickListener(v -> {
             listener.finishBottomSheet(true);
             dialog.dismiss();
         });
         dialog.show();
+    }
+
+    //장소 검색
+
+    public class ResultSearchKeyword {
+        List<SearchPlaceData> documents;
+    }
+
+    private void searchByKeyword(String keyword) {
+        Retrofit.Builder builder = new Retrofit.Builder();
+        builder.baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create());
+        KakaoApiService api = builder.build().create(KakaoApiService.class);
+        Call<ResultSearchKeyword> call = api.getKakaoAddress(API_KEY, keyword);
+
+        call.enqueue(new Callback<ResultSearchKeyword>() {
+            @Override
+            public void onResponse(Call<ResultSearchKeyword> call, Response<ResultSearchKeyword> response) {
+                Log.d("Test", "Raw: ${response.raw()}");
+//                Log.d("Test", response.body().documents);
+                System.out.println(response.raw());
+                System.out.println(response.body().documents.get(0).getPlace_name());
+            }
+
+            @Override
+            public void onFailure(Call<ResultSearchKeyword> call, Throwable t) {
+                Log.w("통신실패", "Raw: ${response.raw()}");
+            }
+        });
 
 
     }
+
 }
+
