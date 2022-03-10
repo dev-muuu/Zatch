@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.zatch.R;
+import com.example.zatch.ReturnPx;
 import com.example.zatch.bottomsheet.MyTownBottomSheet;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -33,22 +34,21 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
     Group gatchGroup;
     EditText searchField;
     Button alarmButton, searchButton;
-    View view;
     ConstraintLayout.LayoutParams params;
     boolean isParamOriginal = true;
-    float density;
     InputMethodManager inputMethodManager;
-    
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    int margin_8, margin_16;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_main_top, container, false);
+        View view = inflater.inflate(R.layout.fragment_main_top, container, false);
 
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -73,17 +73,13 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
 
         params = (ConstraintLayout.LayoutParams) searchField.getLayoutParams();
 
-        //density for dp
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        density = displayMetrics.density;
-
         //keyboard control
         inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 
+        //dp to px setting
+        margin_8 = (int) new ReturnPx(8,getActivity()).returnPx();
+        margin_16 = (int) new ReturnPx(16,getActivity()).returnPx();
 
-        return view;
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -125,12 +121,12 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
             params.width = 0;
             params.rightToLeft = R.id.bellButton;
             params.leftToRight = R.id.moveMainFragButton;
-            params.leftMargin = (int) (8 * density + 0.5f);
-            params.rightMargin = (int) (8 * density + 0.5f);
+            params.leftMargin = margin_8;
+            params.rightMargin = margin_8;
         }else{
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            params.leftMargin = (int) (16 * density + 0.5f);
-            params.rightMargin = (int) (16 * density + 0.5f);
+            params.leftMargin = margin_16;
+            params.rightMargin = margin_16;
         }
         searchField.setLayoutParams(params);
     }
@@ -166,7 +162,7 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
 
     //search field 강제 종료
     void forceFinishSearch(){
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(),0);
         searchField.setVisibility(View.GONE);
         alarmButton.setVisibility(View.VISIBLE);
         searchButton.setVisibility(View.VISIBLE);
@@ -175,7 +171,7 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
 
     //search field 입력 end
     void searchInputFinish(){
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(),0);
         if(!isParamOriginal)
             isParamOriginal = true;
         alarmButton.setVisibility(View.VISIBLE);

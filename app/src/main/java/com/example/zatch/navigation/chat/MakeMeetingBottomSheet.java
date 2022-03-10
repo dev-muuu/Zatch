@@ -172,10 +172,8 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
         call.enqueue(new Callback<ResultSearchKeyword>() {
             @Override
             public void onResponse(Call<ResultSearchKeyword> call, Response<ResultSearchKeyword> response) {
-                Log.d("Test", "Raw: ${response.raw()}");
-//                Log.d("Test", response.body().documents);
                 System.out.println(response.raw());
-                System.out.println(response.body().documents.get(0).getPlace_name());
+                System.out.println(response.body().documents.get(0).getPlaceName());
             }
 
             @Override

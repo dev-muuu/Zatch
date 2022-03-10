@@ -36,6 +36,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.zatch.R;
+import com.example.zatch.ReturnPx;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -55,8 +56,7 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
     AlertDialog.Builder builder;
     AlertDialog dialog;
     String messageText[];
-
-    float density;
+    private ReturnPx returnPx = new ReturnPx(getActivity());
 
     final int PERMISSION_REQUEST_CODE = 1;
     final int GALLERY_ACCESS = 1;
@@ -66,7 +66,19 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_zatch_register_product_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_zatch_register_product_info, container, false);
+
+//        //<check box> part
+//        check1 = view.findViewById(R.id.productCheckBox1);
+////        check1.setOnClickListener(onClickListener);
+//        check2 = view.findViewById(R.id.productCheckBox2);
+////        check2.setOnClickListener(onClickListener);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         view.findViewById(R.id.imageAddButton).setOnClickListener(onClickListener);
         imageLayout = view.findViewById(R.id.zatchImageStack);
@@ -77,7 +89,6 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
 
         infoLayout = view.findViewById(R.id.moreInfoInputLayout);
         infoLayout.setVisibility(View.INVISIBLE);
-
 
         //<category spinner> part
         categorySpinner = view.findViewById(R.id.productCategorySpinner);
@@ -116,24 +127,7 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
 
 
         productName = view.findViewById(R.id.inputProductNameText);
-
-        //density for dp
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-
-        density = displayMetrics.density;
-
-
-//        //<check box> part
-//        check1 = view.findViewById(R.id.productCheckBox1);
-////        check1.setOnClickListener(onClickListener);
-//        check2 = view.findViewById(R.id.productCheckBox2);
-////        check2.setOnClickListener(onClickListener);
-
-        return view;
     }
-
-
 
     private void showDatePickerDialog(String title) {
 
@@ -311,8 +305,12 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
         img.setScaleType(ImageView.ScaleType.FIT_XY);
 
         // dp = (int) (84*density + 0.5f);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams((int) (84 * density + 0.5f), (int) (84 * density + 0.5f));
-        layoutParams.leftMargin = (int) (8 * density + 0.5f);
+        int margin_84 = (int)returnPx.returnPx(84);
+        int margin_8 = (int) returnPx.returnPx(8);
+        int margin_4 = (int) returnPx.returnPx(4);
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(margin_84, margin_84);
+        layoutParams.leftMargin = margin_8;
         img.setLayoutParams(layoutParams);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -330,7 +328,7 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
             }
         });
         imageLayout.addView(img);
-        Glide.with(getContext()).load(uri).transform(new RoundedCorners((int) (4 * density + 0.5f))).into(img);
+        Glide.with(getContext()).load(uri).transform(new RoundedCorners(margin_4)).into(img);
         imageAddList.add(uri);
         imageCountText.setText(String.valueOf(imageAddList.size()));
 

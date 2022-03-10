@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
@@ -24,6 +25,11 @@ public class MainFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         String[] dataset1 = new String[]{"1","2","3","4","5","6","7"};
 
         RecyclerView aroundZatch = view.findViewById(R.id.aroundZatchRecyclerView);
@@ -43,8 +49,6 @@ public class MainFragment extends Fragment {
 
         view.findViewById(R.id.goSearchButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.moreGatchMoveButton).setOnClickListener(onClickListener);
-
-        return view;
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

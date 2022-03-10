@@ -18,15 +18,18 @@ import com.example.zatch.ReturnPx;
 
 public class ZatchChatListFragment extends Fragment {
 
-    View view;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        view = inflater.inflate(R.layout.fragment_zatch_chat_list,container,false);
+        View view = inflater.inflate(R.layout.fragment_zatch_chat_list,container,false);
 
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //임시 data
         String[] data = new String[10];
 
@@ -38,11 +41,9 @@ public class ZatchChatListFragment extends Fragment {
 
         ItemTouchHelper helper = new ItemTouchHelper(new SwipeHelperCallback(getActivity(),recyclerView));
         helper.attachToRecyclerView(recyclerView);
-
-        return view;
     }
 
     void navigateGatchChat(){
-        Navigation.findNavController(view).navigate(R.id.action_zatchChatListFragment_to_gatchChatListFragment);
+        Navigation.findNavController(getView()).navigate(R.id.action_zatchChatListFragment_to_gatchChatListFragment);
     }
 }

@@ -8,7 +8,7 @@ public class SearchPlaceData {
     String x;                    // X 좌표값 혹은 longitude
     String y;                    // Y 좌표값 혹은 latitude
 
-    public String getPlace_name() {
+    public String getPlaceName() {
         return place_name;
     }
 }

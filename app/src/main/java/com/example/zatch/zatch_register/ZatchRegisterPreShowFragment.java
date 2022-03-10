@@ -22,17 +22,18 @@ import com.example.zatch.ServiceType;
 
 public class ZatchRegisterPreShowFragment extends Fragment {
 
-    View view;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_zatch_register_pre_show, container, false);
-
-        view.findViewById(R.id.zatchRegisterButton).setOnClickListener(onClickListener);
+        View view = inflater.inflate(R.layout.fragment_zatch_register_pre_show, container, false);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        view.findViewById(R.id.zatchRegisterButton).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

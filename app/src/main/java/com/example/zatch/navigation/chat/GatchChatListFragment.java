@@ -21,16 +21,17 @@ import java.util.Arrays;
 
 public class GatchChatListFragment extends Fragment {
 
-    View view;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_gatch_chat_list,container,false);
 
-        view = inflater.inflate(R.layout.fragment_gatch_chat_list,container,false);
-        //임시 data
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         ArrayList<GatchJoinState> data = new ArrayList<>(Arrays.asList(GatchJoinState.Admin,GatchJoinState.member,GatchJoinState.AdminAccept));
 
         RecyclerView recyclerView = view.findViewById(R.id.gatchChatListRecycler);
@@ -39,16 +40,10 @@ public class GatchChatListFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-//        ItemTouchHelper helper = new ItemTouchHelper(new SwipeHelperCallback(getActivity()));
-//        helper.attachToRecyclerView(recyclerView);
-
-
 //        new ItemTouchHelper(new SwipeHelperCallback(getActivity())).attachToRecyclerView(recyclerView);
-
-        return view;
     }
 
     void navigateZatchChat(){
-        Navigation.findNavController(view).navigate(R.id.action_gatchChatListFragment_to_zatchChatListFragment);
+        Navigation.findNavController(getView()).navigate(R.id.action_gatchChatListFragment_to_zatchChatListFragment);
     }
 }

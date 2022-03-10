@@ -26,7 +26,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyTownBottomSheetListener, CategoryBottomSheet.CategoryBottomSheetListener {
 
-    View view;
+//    View view;
     CheckBox nowFilter;
     TextView gatchTownArea, gatchSeatchCategory;
     float density;
@@ -35,7 +35,13 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_more_gatch,container,false);
+        View view = inflater.inflate(R.layout.fragment_more_gatch,container,false);
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -108,8 +114,6 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
         //가치 카테고리 설정
         gatchSeatchCategory = view.findViewById(R.id.gatchSearchCategory);
         gatchSeatchCategory.setOnClickListener(onClickListener);
-
-        return view;
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

@@ -30,9 +30,7 @@ import java.sql.SQLOutput;
 public class GatchDetailBottomSheet extends BottomSheetDialogFragment{
 
     View view;
-    float density;
-    //임시 data
-    String data;
+    String data;    //임시 data
     TextView detailExplain;
     BottomSheetDialog dialog;
     BottomSheetBehavior behavior;
@@ -57,28 +55,21 @@ public class GatchDetailBottomSheet extends BottomSheetDialogFragment{
 
         detailExplain = view.findViewById(R.id.gatchDetailMultilineText);
 
-        ConstraintLayout entire = view.findViewById(R.id.detailEntire);
-        ConstraintLayout.LayoutParams entireParam = (ConstraintLayout.LayoutParams) entire.getLayoutParams();
-
         int etcHeight = (int) new ReturnPx(88,getActivity()).returnPx();
+        int dispalyHeight = new ReturnPx(getActivity()).returnDisplayHeight();
 
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getRealSize(size); // or getSize(size)
-        int dispalyHeight = size.y;
-
+        int finalDispalyHeight = dispalyHeight - etcHeight;
 
         NestedScrollView scrollView = view.findViewById(R.id.detailNestedScrollView);
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) scrollView.getLayoutParams();
-
-        behavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
-        int finalDispalyHeight = dispalyHeight - etcHeight;
 
         Button exitButton = view.findViewById(R.id.gatchDetailExitButton);
         exitButton.setOnClickListener(v->{
             dialog.dismiss();
         });
 
+        ConstraintLayout entire = view.findViewById(R.id.detailEntire);
+        behavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
         behavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {

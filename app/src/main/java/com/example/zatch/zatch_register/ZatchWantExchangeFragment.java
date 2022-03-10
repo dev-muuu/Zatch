@@ -17,7 +17,6 @@ import com.example.zatch.R;
 
 public class ZatchWantExchangeFragment extends Fragment {
 
-    View view;
     Spinner firstSpinner, secondSpinner, thirdSpinner;
     TextView firstWant, secondWant, thirdWant;
 
@@ -25,8 +24,13 @@ public class ZatchWantExchangeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        view = inflater.inflate(R.layout.fragment_zatch_register_want_exchange, container, false);
+        View view = inflater.inflate(R.layout.fragment_zatch_register_want_exchange, container, false);
 
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         firstSpinner = view.findViewById(R.id.firstWantSpinner);
         secondSpinner = view.findViewById(R.id.secondWantSpinner);
         thirdSpinner = view.findViewById(R.id.thirdWantSpinner);
@@ -48,8 +52,6 @@ public class ZatchWantExchangeFragment extends Fragment {
         thirdWant = view.findViewById(R.id.thirdWantInput);
 
         view.findViewById(R.id.moveRegisterStep3Button).setOnClickListener(onClickListener);
-
-        return view;
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
