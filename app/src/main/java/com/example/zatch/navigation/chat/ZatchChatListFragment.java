@@ -15,16 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 import com.example.zatch.ReturnPx;
+import com.example.zatch.databinding.FragmentZatchChatListBinding;
 
 public class ZatchChatListFragment extends Fragment {
+
+    private FragmentZatchChatListBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        View view = inflater.inflate(R.layout.fragment_zatch_chat_list,container,false);
-
+        binding = FragmentZatchChatListBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
         return view;
     }
 
@@ -33,7 +36,7 @@ public class ZatchChatListFragment extends Fragment {
         //임시 data
         String[] data = new String[10];
 
-        RecyclerView recyclerView = view.findViewById(R.id.zatchChatListRecycler);
+        RecyclerView recyclerView = binding.zatchChatListRecycler;
         ZatchChatListAdapter adapter = new ZatchChatListAdapter(data,getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);

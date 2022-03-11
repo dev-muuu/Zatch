@@ -16,9 +16,6 @@ public class MyZatchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_zatch);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-
 //        findViewById(R.id.moveRegisterFloatingButton).setOnClickListener(onClickListener);
     }
 

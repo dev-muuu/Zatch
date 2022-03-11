@@ -24,6 +24,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.transform.Result;
@@ -43,6 +44,7 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
     private AlertDialog dialog;
     private RelativeLayout timeLayout1, timeLayout2;
     private TextView meetingHour, meetingMinute, meetingMonth, meetingDate;
+    private List<SearchPlaceData> placeList;
 
     static final String BASE_URL = "https://dapi.kakao.com/";
     static final String API_KEY = "KakaoAK de8b17f677631d70f9545c4b19608dcf";
@@ -87,7 +89,7 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
         meetingMonth = view.findViewById(R.id.makeMeetingMonth);
         meetingDate = view.findViewById(R.id.makeMeetingDate);
 
-        searchByKeyword("상현동");
+        searchByKeyword("이디");
 
         return view;
     }
@@ -143,7 +145,6 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
     }
 
     void makeReservationInfoDialog() {
-
         PositiveNegativeDialog dialogClass = new PositiveNegativeDialog(getContext(), ServiceType.Zatch, PNDialogMessage.MakeMeeting);
         AlertDialog dialog = dialogClass.createDialog();
         dialogClass.getNegative().setOnClickListener(v -> {
@@ -157,7 +158,6 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
     }
 
     //장소 검색
-
     public class ResultSearchKeyword {
         List<SearchPlaceData> documents;
     }
@@ -172,17 +172,21 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment implements
         call.enqueue(new Callback<ResultSearchKeyword>() {
             @Override
             public void onResponse(Call<ResultSearchKeyword> call, Response<ResultSearchKeyword> response) {
-                System.out.println(response.raw());
-                System.out.println(response.body().documents.get(0).getPlaceName());
+                storePlaceData(response.body());
             }
-
             @Override
             public void onFailure(Call<ResultSearchKeyword> call, Throwable t) {
                 Log.w("통신실패", "Raw: ${response.raw()}");
             }
         });
+    }
 
+    private void storePlaceData(ResultSearchKeyword data){
+        placeList = data.documents;
 
+        for(SearchPlaceData each: placeList){
+            System.out.println(each.getPlaceName());
+        }
     }
 
 }

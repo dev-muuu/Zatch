@@ -12,9 +12,8 @@
         android:layout_height="56dp">
 
         <android.widget.Button
-            android:id="@+id/button5"
-            style="@style/backArrowButton_20"
-            tools:layout_editor_absoluteX="20dp" />
+            android:id="@+id/zatchChatBackButton"
+            style="@style/backArrowButton_20"/>
 
         <TextView
             android:id="@+id/textView81"
@@ -26,7 +25,7 @@
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/button5"
+            app:layout_constraintLeft_toRightOf="@id/zatchChatBackButton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -311,4 +310,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    <androidx.drawerlayout.widget.DrawerLayout-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="match_parent">-->
+
+<!--    </androidx.drawerlayout.widget.DrawerLayout>-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

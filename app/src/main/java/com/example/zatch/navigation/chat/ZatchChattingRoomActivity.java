@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,11 +22,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
+import com.example.zatch.databinding.DrawerLayoutChattingRoomZatchBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
 import com.example.zatch.navigation.chat.data.ChatType;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -44,16 +47,17 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
     private ConstraintLayout moreEtcLayout;
     private Button sendButton;
     private ArrayList<ChatItemData> chattingData;
+    private DrawerLayout memberFragment;
 
     private final int RequestCodeGallery = 100;
     private final int RequestCodeCamera = 200;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_zatch_chatting_room);
-        getSupportActionBar().hide();
+        setContentView(R.layout.drawer_layout_chatting_room_zatch);
 
         findViewById(R.id.sendChatButtonZatch).setOnClickListener(onClickListener);
         findViewById(R.id.moreEtcMakeMeeting).setOnClickListener(onClickListener);
@@ -61,6 +65,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
         findViewById(R.id.chattingMoreEtcButton).setOnClickListener(onClickListener);
         findViewById(R.id.moreEtcCamera).setOnClickListener(onClickListener);
         findViewById(R.id.moreEtcGallery).setOnClickListener(onClickListener);
+        findViewById(R.id.zatchChatBackButton).setOnClickListener(onClickListener);
 
         chattingMessage = findViewById(R.id.writeChattingMessage);
         chattingMessage.addTextChangedListener(new TextWatcher() {
@@ -95,6 +100,8 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
         chattingRecycler.setLayoutManager(layoutManager);
         chattingRecycler.setAdapter(adapter);
 
+        //test
+        memberFragment = findViewById(R.id.drawer_zatch);
 
     }
 
@@ -112,11 +119,15 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
                 case R.id.sendChatButtonZatch:
                     sendMessage();
                     break;
+                case R.id.zatchChatBackButton:
+                    finish();
+                    break;
                 case R.id.moreEtcMakeMeeting:
                     makeReservationBottomSheet();
                     break;
                 case R.id.roomEtcButton:
-                    makeRoomEtcBottomSheet();
+                    memberFragment.openDrawer(Gravity.RIGHT);
+//                    makeRoomEtcBottomSheet();
                     break;
                 case R.id.moreEtcCamera:
                     Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);

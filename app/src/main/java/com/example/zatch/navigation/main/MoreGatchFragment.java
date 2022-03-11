@@ -36,7 +36,6 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_more_gatch,container,false);
-
         return view;
     }
 

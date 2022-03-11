@@ -32,7 +32,6 @@ public class GatchChattingRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_gatch_chatting_room);
-        getSupportActionBar().hide();
 
         sendButton = findViewById(R.id.sendChatButtonGatch);
         chattingMessage = findViewById(R.id.writeChattingMessageGatch);

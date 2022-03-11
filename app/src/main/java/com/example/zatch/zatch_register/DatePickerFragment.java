@@ -6,24 +6,22 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.NumberPicker;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.zatch.R;
+import com.example.zatch.databinding.DialogDatepickerBinding;
+
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment{
 
-    NumberPicker yearPicker,monthPicker,datePicker;
-    Button saveButton;
+    private DatePickerDialogListener dialogListener;
+    private DialogDatepickerBinding binding;
+
 
     public static DatePickerFragment newInstance(String title) {
         DatePickerFragment frag = new DatePickerFragment();
@@ -41,9 +39,6 @@ public class DatePickerFragment extends DialogFragment{
         this.dialogListener = dialogListener;
     }
 
-    DatePickerDialogListener dialogListener;
-
-
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @NonNull
     @Override
@@ -52,63 +47,52 @@ public class DatePickerFragment extends DialogFragment{
         //title 정보 받아오
         String title = getArguments().getString("title");
 
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.CustomAlertDialog);
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_datepicker,null);
 
+        binding = DialogDatepickerBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
         builder.setView(view);
         Dialog dialog = builder.create();
-
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        binding.datePickerTitleText.setText(title);
+        binding.numberPickerYear.setTextColor(Color.BLACK);
+        binding.numberPickerMonth.setTextColor(Color.BLACK);
+        binding.numberPickerDate.setTextColor(Color.BLACK);
 
-        TextView pickerTitle = view.findViewById(R.id.datePickerTitleText);
-        pickerTitle.setText(title);
-        yearPicker = view.findViewById(R.id.numberPickerYear);
-        yearPicker.setTextColor(Color.BLACK);
-        monthPicker = view.findViewById(R.id.numberPickerMonth);
-        monthPicker.setTextColor(Color.BLACK);
-        datePicker = view.findViewById(R.id.numberPickerDate);
-        datePicker.setTextColor(Color.BLACK);
-
-        saveButton = view.findViewById(R.id.datePickerSaveButton);
         Calendar c = Calendar.getInstance();
         int todayYear = c.get(Calendar.YEAR);
         int todayMonth = c.get(Calendar.MONTH);
         int todayDate = c.get(Calendar.DATE);
 
-//        yearPicker.setMinValue(1980);
-//        yearPicker.setMaxValue(todayYear+30);
         String[] yearString = new String[todayYear + 30 - 1980 + 1];
         for (int i = 1980, j = 0; i <= todayYear+30; i++,j++)
             yearString[j] = String.valueOf(i)+"년";
-        yearPicker.setMinValue(0);
-        yearPicker.setMaxValue(yearString.length-1);
-        yearPicker.setValue(todayYear - 1980);
-        yearPicker.setDisplayedValues(yearString);
+        binding.numberPickerYear.setMinValue(0);
+        binding.numberPickerYear.setMaxValue(yearString.length-1);
+        binding.numberPickerYear.setValue(todayYear - 1980);
+        binding.numberPickerYear.setDisplayedValues(yearString);
 
-        monthPicker.setMinValue(0);
-        monthPicker.setMaxValue(11);
-        monthPicker.setValue(todayMonth);
+        binding.numberPickerMonth.setMinValue(0);
+        binding.numberPickerMonth.setMaxValue(11);
+        binding.numberPickerMonth.setValue(todayMonth);
         String[] monthString = new String[]{"1월", "2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"};
-        monthPicker.setDisplayedValues(monthString);
+        binding.numberPickerMonth.setDisplayedValues(monthString);
 
-        datePicker.setMinValue(0);
-        datePicker.setMaxValue(30);
-        datePicker.setValue(todayDate-1);
+        binding.numberPickerDate.setMinValue(0);
+        binding.numberPickerDate.setMaxValue(30);
+        binding.numberPickerDate.setValue(todayDate-1);
         String[] dateString = new String[31];
         for (int i = 1, j = 0; i <= 31; i++,j++)
             dateString[j] = String.valueOf(i)+"일";
-        datePicker.setDisplayedValues(dateString);
+        binding.numberPickerDate.setDisplayedValues(dateString);
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        binding.datePickerSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int year = yearPicker.getValue() + 1980;
-                int month = monthPicker.getValue()+1;
-                int date = datePicker.getValue()+1;
+                int year = binding.numberPickerYear.getValue() + 1980;
+                int month = binding.numberPickerMonth.getValue()+1;
+                int date = binding.numberPickerDate.getValue()+1;
 
                 dialogListener.onDialogFinish(year,month,date, title);
                 dialog.dismiss();

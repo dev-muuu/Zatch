@@ -22,10 +22,6 @@ public class LogInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         findViewById(R.id.loginButton).setOnClickListener(onClickListener);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

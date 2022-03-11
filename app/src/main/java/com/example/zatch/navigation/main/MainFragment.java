@@ -16,58 +16,47 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
+import com.example.zatch.databinding.FragmentMainBinding;
 import com.example.zatch.search.SearchActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class MainFragment extends Fragment {
 
+    private FragmentMainBinding binding;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-
+        binding = FragmentMainBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         String[] dataset1 = new String[]{"1","2","3","4","5","6","7"};
 
-        RecyclerView aroundZatch = view.findViewById(R.id.aroundZatchRecyclerView);
-        ZatchScrollAdapter adapter1 = new ZatchScrollAdapter(getContext(),dataset1);
-        aroundZatch.setAdapter(adapter1);
-        aroundZatch.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+        binding.aroundZatchRecyclerView.setAdapter(new ZatchScrollAdapter(getContext(),dataset1));
+        binding.aroundZatchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
 
-        RecyclerView popularZatch = view.findViewById(R.id.popularZatchRecyclerView);
-        ZatchScrollAdapter adapter2 = new ZatchScrollAdapter(getContext(),dataset1);
-        popularZatch.setAdapter(adapter2);
-        popularZatch.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+        binding.popularZatchRecyclerView.setAdapter(new ZatchScrollAdapter(getContext(),dataset1));
+        binding.popularZatchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
 
-        RecyclerView aroundGatch = view.findViewById(R.id.gatchRecyclerView);
-        GatchScrollAdapter adapter3 = new GatchScrollAdapter(dataset1, this);
-        aroundGatch.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
-        aroundGatch.setAdapter(adapter3);
+        binding.gatchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+        binding.gatchRecyclerView.setAdapter(new GatchScrollAdapter(dataset1, this));
 
-        view.findViewById(R.id.goSearchButton).setOnClickListener(onClickListener);
-        view.findViewById(R.id.moreGatchMoveButton).setOnClickListener(onClickListener);
+        //button click listener
+        binding.goSearchButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SearchActivity.class);
+            startActivity(intent);
+        });
+
+        binding.moreGatchMoveButton.setOnClickListener(v->{
+            NavHostFragment fr = (NavHostFragment) MainFragment.this.getParentFragment();
+            MainTopFragment top = (MainTopFragment) fr.getParentFragment();
+            top.visibleChange();
+            Navigation.findNavController(getView()).navigate(R.id.action_mainFragment_to_moreGatchFragment);
+        });
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.goSearchButton:
-                    Intent intent = new Intent(getContext(), SearchActivity.class);
-                    startActivity(intent);
-                    break;
-
-                case R.id.moreGatchMoveButton:
-                    NavHostFragment fr = (NavHostFragment) MainFragment.this.getParentFragment();
-                    MainTopFragment top = (MainTopFragment) fr.getParentFragment();
-                    top.visibleChange();
-
-                    Navigation.findNavController(getView()).navigate(R.id.action_mainFragment_to_moreGatchFragment);
-                    break;
-            }
-        }
-    };
 }

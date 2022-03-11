@@ -30,9 +30,6 @@ public class ZatchRegisterActivity extends AppCompatActivity {
         //viewPager swipe gesture 금지
         viewPager.setUserInputEnabled(false);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
-
         fragments = new ArrayList<>();
         fragments.add(new ZatchProductInfoFragment());
         fragments.add(new ZatchWantExchangeFragment());

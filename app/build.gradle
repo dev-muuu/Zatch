@@ -78,6 +78,9 @@ dependencies {
     //circle image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //for side sheet, drawerlayout use
+    implementation "androidx.drawerlayout:drawerlayout:1.1.1"
+
 
 annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }
