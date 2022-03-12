@@ -4,19 +4,16 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import android.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.PNDialogMessage;
 import com.example.zatch.PositiveNegativeDialog;
-import com.example.zatch.R;
 import com.example.zatch.ServiceType;
+import com.example.zatch.databinding.ActivityGatchChattingRoomBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
 
 import java.util.ArrayList;
@@ -24,28 +21,27 @@ import java.util.ArrayList;
 public class GatchChattingRoomActivity extends AppCompatActivity {
 
     private ChattingMessageAdapter adapter;
-    private EditText chattingMessage;
-    private Button sendButton;
+    private ActivityGatchChattingRoomBinding binding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_gatch_chatting_room);
+        binding = ActivityGatchChattingRoomBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-        sendButton = findViewById(R.id.sendChatButtonGatch);
-        chattingMessage = findViewById(R.id.writeChattingMessageGatch);
-        chattingMessage.addTextChangedListener(new TextWatcher() {
+        binding.writeChattingMessageGatch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(chattingMessage.getText().toString().equals(""))
-                    sendButton.setEnabled(false);
+                if(binding.writeChattingMessageGatch.getText().toString().equals(""))
+                    binding.sendChatButtonGatch.setEnabled(false);
                 else
-                    sendButton.setEnabled(true);
+                    binding.sendChatButtonGatch.setEnabled(true);
             }
 
             @Override
@@ -53,47 +49,26 @@ public class GatchChattingRoomActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.gatchRoomBackButton).setOnClickListener(onClickListener);
-        findViewById(R.id.gatchRefuseButton).setOnClickListener(onClickListener);
-        findViewById(R.id.gatchAcceptButton).setOnClickListener(onClickListener);
-        findViewById(R.id.gatchRequestCancelButton).setOnClickListener(onClickListener);
-        findViewById(R.id.chattingMoreEtcButtonGatch).setOnClickListener(onClickListener);
-        findViewById(R.id.sendChatButtonGatch).setOnClickListener(onClickListener);
+        binding.gatchRoomBackButton.setOnClickListener(v->{
+            finish();
+        });
+        binding.gatchRefuseButton.setOnClickListener(v->{
+            showNegativePositiveDialog(PNDialogMessage.GatchRefuse);
+        });
+        binding.gatchAcceptButton.setOnClickListener(v->{
+            showNegativePositiveDialog(PNDialogMessage.GatchAccept);
+        });
+        binding.sendChatButtonGatch.setOnClickListener(v->{
+            sendMessage();
+        });
 
         ArrayList<ChatItemData> data = new ArrayList<>();
-        RecyclerView chattingRecycler = findViewById(R.id.gatchChatRecycler);
-        adapter = new ChattingMessageAdapter(ServiceType.Gatch,data,getBaseContext());
-        chattingRecycler.setAdapter(adapter);
+        adapter = new ChattingMessageAdapter(ServiceType.Gatch,data,this);
+        binding.gatchChatRecycler.setAdapter(adapter);
         LinearLayoutManager manager = new LinearLayoutManager(getBaseContext());
-        chattingRecycler.setLayoutManager(manager);
+        binding.gatchChatRecycler.setLayoutManager(manager);
 
     }
-
-
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.gatchRoomBackButton:
-                    finish();
-                    break;
-                case R.id.gatchRefuseButton:
-                    showNegativePositiveDialog(PNDialogMessage.GatchRefuse);
-                    break;
-                case R.id.gatchAcceptButton:
-                    showNegativePositiveDialog(PNDialogMessage.GatchAccept);
-                    //dialog
-                    break;
-                case R.id.gatchRequestCancelButton:
-                    break;
-                case R.id.chattingMoreEtcButtonGatch:
-                    break;
-                case R.id.sendChatButtonGatch:
-                    sendMessage();
-                    break;
-            }
-        }
-    };
 
     void showNegativePositiveDialog(PNDialogMessage type){
 
@@ -110,7 +85,6 @@ public class GatchChattingRoomActivity extends AppCompatActivity {
 
     void sendMessage(){
         //chatting room에 message send & 입력창 초기화
-//        adapter.addItem(chattingMessage.getText().toString());
-        chattingMessage.setText("");
+        binding.writeChattingMessageGatch.setText("");
     }
 }

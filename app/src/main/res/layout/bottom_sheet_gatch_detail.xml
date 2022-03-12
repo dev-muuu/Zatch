@@ -240,37 +240,38 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/detailNestedScrollView"
+<!--        <androidx.core.widget.NestedScrollView-->
+<!--            android:id="@+id/detailNestedScrollView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:fillViewport="true"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/detailEntire"-->
+<!--            app:layout_constraintVertical_bias="0.0">-->
+
+        <TextView
+            android:id="@+id/gatchDetailMultilineText"
+            style="@style/gatchDetailLayoutMargin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fillViewport="true"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            android:ems="10"
+            android:fontFamily="@font/pretendard_regular"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:text="재치 마랴샹궈 가치하실 분 구해요! 맵기 1단계입니다! "
+            android:textColor="@color/black_85"
+            android:textSize="14dp"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/detailEntire"
-            app:layout_constraintVertical_bias="0.0">
-
-            <TextView
-                android:id="@+id/gatchDetailMultilineText"
-                style="@style/gatchDetailLayoutMargin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@null"
-                android:ems="10"
-                android:fontFamily="@font/pretendard_regular"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:text="재치 마랴샹궈 가치하실 분 구해요! 맵기 1단계입니다! "
-                android:textColor="@color/black_85"
-                android:textSize="14dp"
-                android:visibility="visible" />
-        </androidx.core.widget.NestedScrollView>
+            tools:layout_editor_absoluteX="20dp" />
+<!--        </androidx.core.widget.NestedScrollView>-->
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailNestedScrollView"
+            app:layout_constraintTop_toBottomOf="@id/gatchDetailMultilineText"
             app:layout_constraintVertical_bias="1.0">
 
             <android.widget.Button

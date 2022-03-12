@@ -23,27 +23,24 @@ import androidx.navigation.Navigation;
 import com.example.zatch.R;
 import com.example.zatch.ReturnPx;
 import com.example.zatch.bottomsheet.MyTownBottomSheet;
+import com.example.zatch.databinding.FragmentMainTopBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 
 public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTownBottomSheetListener {
 
-    String[] dataset2;
-    TextView myTownText, gatchTextView;
-    Group gatchGroup;
-    EditText searchField;
-    Button alarmButton, searchButton;
-    ConstraintLayout.LayoutParams params;
-    boolean isParamOriginal = true;
-    InputMethodManager inputMethodManager;
-    int margin_8, margin_16;
+    private String[] dataset2;
+    private ConstraintLayout.LayoutParams params;
+    private boolean isParamOriginal = true;
+    private InputMethodManager inputMethodManager;
+    private int margin_8, margin_16;
+    private FragmentMainTopBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_main_top, container, false);
-
+        binding = FragmentMainTopBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
         return view;
     }
 
@@ -58,20 +55,32 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
         });
 
         dataset2 = new String[]{"상현동","성복동","인계동"};
-        myTownText = view.findViewById(R.id.myTownSelectText);
-        myTownText.setText(dataset2[0]);
-        view.findViewById(R.id.myTownSelectText).setOnClickListener(onClickListener);
+        binding.myTownSelectText.setText(dataset2[0]);
 
-        gatchGroup = view.findViewById(R.id.backButtonGroup);
-        view.findViewById(R.id.moveMainFragButton).setOnClickListener(onClickListener);
-        view.findViewById(R.id.searchButton).setOnClickListener(onClickListener);
-        searchButton = view.findViewById(R.id.searchButton);
-        searchField = view.findViewById(R.id.searchGatchFieldText);
-        searchField.setOnEditorActionListener(onEditorListener);
-        alarmButton = view.findViewById(R.id.bellButton);
-        gatchTextView = view.findViewById(R.id.textView43);
+        binding.myTownSelectText.setOnClickListener(v->{
+            showTownBottomSheet();
+        });
 
-        params = (ConstraintLayout.LayoutParams) searchField.getLayoutParams();
+        binding.moveMainFragButton.setOnClickListener(v->{
+            forceFinishSearch();
+            visibleChange();
+        });
+
+        binding.searchButton.setOnClickListener(v->{
+            isGatchFragmentCalled();
+        });
+
+        binding.searchGatchFieldText.setOnEditorActionListener((v, actionId, event) -> {
+            switch (actionId){
+                case IME_ACTION_DONE:
+                    binding.searchGatchFieldText.setCursorVisible(false);
+                    isSearchFieldContainContent();
+                    return true;
+            }
+            return false;
+        });
+
+        params = (ConstraintLayout.LayoutParams) binding.searchGatchFieldText.getLayoutParams();
 
         //keyboard control
         inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -82,45 +91,12 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
 
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.myTownSelectText:
-                    showTownBottomSheet();
-                    break;
-
-                case R.id.moveMainFragButton:
-                    forceFinishSearch();
-                    visibleChange();
-                    break;
-
-                case R.id.searchButton:
-                    isGatchFragmentCalled();
-                    break;
-            }
-        }
-    };
-
-    TextView.OnEditorActionListener onEditorListener = new TextView.OnEditorActionListener() {
-        @Override
-        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-            switch (actionId){
-                case IME_ACTION_DONE:
-                    searchField.setCursorVisible(false);
-                    isSearchFieldContainContent();
-                    return true;
-            }
-            return false;
-        }
-    };
-
     void newParamSetting(){
         if(isParamOriginal) {
             isParamOriginal = false;
             params.width = 0;
-            params.rightToLeft = R.id.bellButton;
-            params.leftToRight = R.id.moveMainFragButton;
+            params.rightToLeft = binding.bellButton.getId();
+            params.leftToRight = binding.moveMainFragButton.getId();
             params.leftMargin = margin_8;
             params.rightMargin = margin_8;
         }else{
@@ -128,7 +104,7 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
             params.leftMargin = margin_16;
             params.rightMargin = margin_16;
         }
-        searchField.setLayoutParams(params);
+        binding.searchGatchFieldText.setLayoutParams(params);
     }
 
     void isGatchFragmentCalled(){
@@ -141,19 +117,18 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
     }
 
     void searchFieldOpen(){
-        searchField.setText("");
-        searchField.setCursorVisible(true);
-        searchField.setVisibility(View.VISIBLE);
+        binding.searchGatchFieldText.setText("");
+        binding.searchGatchFieldText.setCursorVisible(true);
+        binding.searchGatchFieldText.setVisibility(View.VISIBLE);
         if(!isParamOriginal)
             newParamSetting();
-        alarmButton.setVisibility(View.GONE);
-        searchButton.setVisibility(View.INVISIBLE);
-        inputMethodManager.showSoftInput(searchField,InputMethodManager.SHOW_FORCED);
+        binding.bellButton.setVisibility(View.GONE);
+        binding.searchButton.setVisibility(View.INVISIBLE);
+        inputMethodManager.showSoftInput( binding.searchGatchFieldText,InputMethodManager.SHOW_FORCED);
     }
 
     void isSearchFieldContainContent(){
-//        searchField.setCursorVisible(false);
-        if(searchField.getText().toString().equals(""))
+        if(binding.searchGatchFieldText.getText().toString().equals(""))
             forceFinishSearch();
         else
             searchInputFinish();
@@ -163,10 +138,10 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
     //search field 강제 종료
     void forceFinishSearch(){
         inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(),0);
-        searchField.setVisibility(View.GONE);
-        alarmButton.setVisibility(View.VISIBLE);
-        searchButton.setVisibility(View.VISIBLE);
-        gatchTextView.setTextColor(getResources().getColor(R.color.black_85));
+        binding.searchGatchFieldText.setVisibility(View.GONE);
+        binding.bellButton.setVisibility(View.VISIBLE);
+        binding.searchButton.setVisibility(View.VISIBLE);
+        binding.textView43.setTextColor(getResources().getColor(R.color.black_85));
     }
 
     //search field 입력 end
@@ -174,32 +149,31 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
         inputMethodManager.hideSoftInputFromWindow(getView().getWindowToken(),0);
         if(!isParamOriginal)
             isParamOriginal = true;
-        alarmButton.setVisibility(View.VISIBLE);
-        gatchTextView.setTextColor(getResources().getColor(R.color.white));
+        binding.bellButton.setVisibility(View.VISIBLE);
+        binding.textView43.setTextColor(getResources().getColor(R.color.white));
         newParamSetting();
     }
 
     @Override
     public void MyTownBottomFinish(String townName) {
-        myTownText.setText(townName);
+        binding.myTownSelectText.setText(townName);
     }
 
     void showTownBottomSheet(){
-        MyTownBottomSheet bottomSheet = new MyTownBottomSheet(dataset2,myTownText.getText().toString());
+        MyTownBottomSheet bottomSheet = new MyTownBottomSheet(dataset2,binding.myTownSelectText.getText().toString());
         bottomSheet.setDialogListener(this);
         BottomSheetDialogFragment dialogFragment = bottomSheet;
         dialogFragment.show(getParentFragmentManager(),null);
     }
 
     public void visibleChange(){
-       if(gatchGroup.getVisibility() == View.GONE){
-           gatchGroup.setVisibility(View.VISIBLE);
-           myTownText.setVisibility(View.GONE);
-       }else{
-           Navigation.findNavController(getView().findViewById(R.id.mainContentFragment)).popBackStack();
-           gatchGroup.setVisibility(View.GONE);
-           myTownText.setVisibility(View.VISIBLE);
-       }
+        if(binding.backButtonGroup.getVisibility() == View.GONE){
+            binding.backButtonGroup.setVisibility(View.VISIBLE);
+            binding.myTownSelectText.setVisibility(View.GONE);
+        }else{
+            Navigation.findNavController(getView().findViewById(R.id.mainContentFragment)).popBackStack();
+            binding.backButtonGroup.setVisibility(View.GONE);
+            binding.myTownSelectText.setVisibility(View.VISIBLE);
+        }
     }
-
 }

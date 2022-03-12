@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
+import com.example.zatch.databinding.ActivityZatchChattingRoomBinding;
 import com.example.zatch.databinding.DrawerLayoutChattingRoomZatchBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
 import com.example.zatch.navigation.chat.data.ChatType;
@@ -96,7 +97,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
         //chatting recycler
         chattingData = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
-        adapter = new ChattingMessageAdapter(ServiceType.Zatch,chattingData,getBaseContext());
+        adapter = new ChattingMessageAdapter(ServiceType.Zatch,chattingData,this);
         chattingRecycler.setLayoutManager(layoutManager);
         chattingRecycler.setAdapter(adapter);
 

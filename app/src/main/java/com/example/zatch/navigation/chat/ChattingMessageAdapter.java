@@ -1,11 +1,9 @@
 package com.example.zatch.navigation.chat;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +13,12 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.zatch.R;
+import com.example.zatch.ReturnPx;
 import com.example.zatch.ServiceType;
+import com.example.zatch.databinding.ItemChatImageLeftBinding;
+import com.example.zatch.databinding.ItemChatImageRightBinding;
+import com.example.zatch.databinding.ItemChatLeftBinding;
+import com.example.zatch.databinding.ItemChatRightBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
 import com.example.zatch.navigation.chat.data.ChatType;
 
@@ -24,13 +27,13 @@ import java.util.ArrayList;
 public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private ArrayList<ChatItemData> chatItem;
-    private Context context;
+    private Activity activity;
     private ServiceType type;
 
-    public ChattingMessageAdapter(ServiceType type, ArrayList<ChatItemData> dataSet, Context context) {
+    public ChattingMessageAdapter(ServiceType type, ArrayList<ChatItemData> dataSet, Activity activity) {
         this.type = type;
         this.chatItem = dataSet;
-        this.context = context;
+        this.activity = activity;
     }
 
     @Override
@@ -40,16 +43,16 @@ public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         if(viewType == ChatType.LEFT_MESSAGE){
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_left, viewGroup, false);
-            return new LeftMessageViewHolder(view);
+            return new LeftMessageViewHolder(ItemChatLeftBinding.bind(view));
         }else if(viewType == ChatType.RIGHT_MESSAGE){
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_right, viewGroup, false);
-            return new RightMessageViewHolder(view);
+            return new RightMessageViewHolder(ItemChatRightBinding.bind(view));
         }else if(viewType == ChatType.LEFT_IMAGE){
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_image_left, viewGroup, false);
-            return new LeftImageViewHolder(view);
+            return new LeftImageViewHolder(ItemChatImageLeftBinding.bind(view));
         }else{
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_image_right, viewGroup, false);
-            return new RightImageViewHolder(view);
+            return new RightImageViewHolder(ItemChatImageRightBinding.bind(view));
         }
     }
 
@@ -68,89 +71,80 @@ public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
     public class LeftMessageViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView message, time;
-        private final ImageView profile;
+        private ItemChatLeftBinding binding;
 
-        public LeftMessageViewHolder(View view) {
-            super(view);
-            this.message = (TextView) view.findViewById(R.id.otherChat);
-            this.time = (TextView) view.findViewById(R.id.otherChatTime);
-            this.profile = (ImageView) view.findViewById(R.id.otherProfileImage);
+        public LeftMessageViewHolder(ItemChatLeftBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         public void setItem(ChatItemData data) {
-            this.message.setText(data.getContent());
-            this.time.setText(data.getTimeText());
+            this.binding.otherChat.setText(data.getContent());
+            this.binding.otherChatTime.setText(data.getTimeText());
             if(data.getUserImage() != null)
-                this.profile.setImageURI(data.getUserImage());
+                this.binding.otherProfileImage.setImageURI(data.getUserImage());
         }
     }
 
     public class RightMessageViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView message, time;
+        private ItemChatRightBinding binding;
 
-        public RightMessageViewHolder(View view) {
-            super(view);
-            this.message = (TextView) view.findViewById(R.id.myChat);
-            this.time = (TextView) view.findViewById(R.id.myChatTime);
+        public RightMessageViewHolder(ItemChatRightBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         public void setItem(ChatItemData data) {
             if(type.equals(ServiceType.Gatch))
-                message.setBackground(context.getDrawable(R.drawable.drawable_chat_gatch_right));
-            this.message.setText(data.getContent());
-            this.time.setText(data.getTimeText());
+                binding.myChat.setBackground(activity.getDrawable(R.drawable.drawable_chat_gatch_right));
+            this.binding.myChat.setText(data.getContent());
+            this.binding.myChatTime.setText(data.getTimeText());
         }
     }
 
     public class LeftImageViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView time;
-        private final ImageView image, profile;
+        private ItemChatImageLeftBinding binding;
 
-        public LeftImageViewHolder(View view) {
-            super(view);
-            this.time = (TextView) view.findViewById(R.id.imageOtherChatTime);
-            this.image = (ImageView) view.findViewById(R.id.imageOtherImage);
-            this.profile = (ImageView) view.findViewById(R.id.imageOtherProfileImage);
+        public LeftImageViewHolder(ItemChatImageLeftBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         public void setItem(ChatItemData data) {
-            this.time.setText(data.getTimeText());
-            MultiTransformation option = new MultiTransformation(new CenterCrop(), new RoundedCorners(8));
-            Glide.with(context)
+            this.binding.imageOtherChatTime.setText(data.getTimeText());
+            MultiTransformation option = new MultiTransformation(new CenterCrop(), new RoundedCorners((int)new ReturnPx(8,activity).returnPx()));
+            Glide.with(activity)
                     .load(data.getContent())
                     .apply(RequestOptions.bitmapTransform(option))
-                    .into(image);
+                    .into(this.binding.imageOtherImage);
 
             if(data.getUserImage() != null) {
-                Glide.with(context)
+                Glide.with(activity)
                         .load(data.getUserImage())
                         .circleCrop()
-                        .into(profile);
+                        .into(this.binding.imageOtherProfileImage);
             }
         }
     }
 
     public class RightImageViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView time;
-        private final ImageView image;
+        private ItemChatImageRightBinding binding;
 
-        public RightImageViewHolder(View view) {
-            super(view);
-            this.time = (TextView) view.findViewById(R.id.imageMyChatTime);
-            this.image = (ImageView) view.findViewById(R.id.imageMyChatImage);
+        public RightImageViewHolder(ItemChatImageRightBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         public void setItem(ChatItemData data) {
-            this.time.setText(data.getTimeText());
-            MultiTransformation option = new MultiTransformation(new CenterCrop(), new RoundedCorners(8));
-            Glide.with(context)
+            this.binding.imageMyChatTime.setText(data.getTimeText());
+            MultiTransformation option = new MultiTransformation(new CenterCrop(), new RoundedCorners((int)new ReturnPx(8, activity).returnPx()));
+            Glide.with(activity)
                     .load(data.getContent())
                     .apply(RequestOptions.bitmapTransform(option))
-                    .into(image);
+                    .into(this.binding.imageMyChatImage);
 
         }
     }

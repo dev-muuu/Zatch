@@ -27,7 +27,7 @@
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="636aa7f1b6a52dd8c64ef4de78b5f849"/>
 
 <!--        임시 main-->
-        <activity android:name=".zatch_register.ZatchRegisterActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

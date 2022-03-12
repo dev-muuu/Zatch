@@ -14,48 +14,34 @@ import androidx.fragment.app.Fragment;
 
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
+import com.example.zatch.databinding.FragmentChatBinding;
 
 public class ChatFragment extends Fragment{
 
-    private View textLine;
-    private CheckBox zatchTab, gatchTab;
     private ConstraintLayout.LayoutParams params;
+    private FragmentChatBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        binding = FragmentChatBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        zatchTab = view.findViewById(R.id.zatchChatTab);
-        gatchTab = view.findViewById(R.id.gatchChatTab);
-        textLine = view.findViewById(R.id.textBottomLine);
-        params = (ConstraintLayout.LayoutParams) textLine.getLayoutParams();
+        params = (ConstraintLayout.LayoutParams) binding.textBottomLine.getLayoutParams();
+        binding.zatchChatTab.setChecked(true);
+        binding.gatchChatTab.setChecked(false);
 
-        zatchTab.setOnClickListener(onClickListener);
-        gatchTab.setOnClickListener(onClickListener);
+        binding.zatchChatTab.setOnClickListener(v->{
+            navigateChatList(ServiceType.Zatch);
+        });
 
-        //초기화
-        zatchTab.setChecked(true);
-        gatchTab.setChecked(false);
-
+        binding.gatchChatTab.setOnClickListener(v->{
+            navigateChatList(ServiceType.Gatch);
+        });
     }
-
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.zatchChatTab:
-                    navigateChatList(ServiceType.Zatch);
-                    break;
-                case R.id.gatchChatTab:
-                    navigateChatList(ServiceType.Gatch);
-                    break;
-            }
-        }
-    };
 
     Fragment getChildFragment(){
         Fragment fragment = getChildFragmentManager().findFragmentById(R.id.chatListViewPagerFragment);
@@ -66,25 +52,25 @@ public class ChatFragment extends Fragment{
     void navigateChatList(ServiceType wantList){
 
         if(wantList.equals(ServiceType.Zatch)){
-            if(gatchTab.isChecked()) {
-                params.endToEnd = zatchTab.getId();
-                params.startToStart = zatchTab.getId();
-                textLine.setBackgroundResource(R.color.zatch_purple);
-                gatchTab.toggle();
-                textLine.setLayoutParams(params);
+            if(binding.gatchChatTab.isChecked()) {
+                params.endToEnd = binding.zatchChatTab.getId();
+                params.startToStart = binding.zatchChatTab.getId();
+                binding.textBottomLine.setBackgroundResource(R.color.zatch_purple);
+                binding.gatchChatTab.toggle();
+                binding.textBottomLine.setLayoutParams(params);
                 ((GatchChatListFragment) getChildFragment()).navigateZatchChat();
             }else
-                zatchTab.toggle();
+                binding.zatchChatTab.toggle();
         }else if(wantList.equals(ServiceType.Gatch)){
-            if(zatchTab.isChecked()) {
-                params.endToEnd = gatchTab.getId();
-                params.startToStart = gatchTab.getId();
-                textLine.setBackgroundResource(R.color.zatch_yellow);
-                zatchTab.toggle();
-                textLine.setLayoutParams(params);
+            if(binding.zatchChatTab.isChecked()) {
+                params.endToEnd = binding.gatchChatTab.getId();
+                params.startToStart = binding.gatchChatTab.getId();
+                binding.textBottomLine.setBackgroundResource(R.color.zatch_yellow);
+                binding.zatchChatTab.toggle();
+                binding.textBottomLine.setLayoutParams(params);
                 ((ZatchChatListFragment) getChildFragment()).navigateGatchChat();
             }else
-                gatchTab.toggle();
+                binding.gatchChatTab.toggle();
         }
     }
 

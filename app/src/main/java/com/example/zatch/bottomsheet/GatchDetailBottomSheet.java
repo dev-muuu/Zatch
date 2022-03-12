@@ -1,39 +1,28 @@
 package com.example.zatch.bottomsheet;
 
 import android.app.Dialog;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Space;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.widget.NestedScrollView;
 
-import com.example.zatch.R;
 import com.example.zatch.ReturnPx;
+import com.example.zatch.databinding.BottomSheetGatchDetailBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-import java.sql.SQLOutput;
-
 
 public class GatchDetailBottomSheet extends BottomSheetDialogFragment{
 
-    View view;
     String data;    //임시 data
-    TextView detailExplain;
-    BottomSheetDialog dialog;
-    BottomSheetBehavior behavior;
+    private BottomSheetDialog dialog;
+    private BottomSheetBehavior behavior;
+    private BottomSheetGatchDetailBinding binding;
 
     //oncreatedialog oncreateview 차이..?
 
@@ -42,54 +31,63 @@ public class GatchDetailBottomSheet extends BottomSheetDialogFragment{
     }
 
     // oncreatedialog 이후 oncreateview 호출
-    //        behavior.setPeekHeight((int) (546 * density + 0.5f));
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-
         dialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
-        view = View.inflate(getContext(),R.layout.bottom_sheet_gatch_detail,null);
-        dialog.setContentView(view);
-        behavior = BottomSheetBehavior.from((View)view.getParent());
+        return dialog;
+    }
 
-        detailExplain = view.findViewById(R.id.gatchDetailMultilineText);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = BottomSheetGatchDetailBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
+        behavior = BottomSheetBehavior.from((View)view.getParent());
 
         int etcHeight = (int) new ReturnPx(88,getActivity()).returnPx();
         int dispalyHeight = new ReturnPx(getActivity()).returnDisplayHeight();
-
         int finalDispalyHeight = dispalyHeight - etcHeight;
 
-        NestedScrollView scrollView = view.findViewById(R.id.detailNestedScrollView);
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) scrollView.getLayoutParams();
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) binding.gatchDetailMultilineText.getLayoutParams();
 
-        Button exitButton = view.findViewById(R.id.gatchDetailExitButton);
-        exitButton.setOnClickListener(v->{
+        binding.gatchDetailExitButton.setOnClickListener(v->{
             dialog.dismiss();
         });
 
-        ConstraintLayout entire = view.findViewById(R.id.detailEntire);
+        params.height = finalDispalyHeight - binding.detailEntire.getHeight();
+        binding.gatchDetailMultilineText.setLayoutParams(params);
+
         behavior.setPeekHeight(BottomSheetBehavior.PEEK_HEIGHT_AUTO);
         behavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                params.height = finalDispalyHeight - entire.getHeight();
-                scrollView.setLayoutParams(params);
                 if(newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    scrollView.setVisibility(View.VISIBLE);
-                    exitButton.setVisibility(View.VISIBLE);
+                    binding.gatchDetailMultilineText.setVisibility(View.VISIBLE);
+                    binding.gatchDetailExitButton.setVisibility(View.VISIBLE);
                 }else
-                    exitButton.setVisibility(View.INVISIBLE);
+                    binding.gatchDetailExitButton.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
                 if(slideOffset > 0)
-                    scrollView.setVisibility(View.VISIBLE);
+                    binding.gatchDetailMultilineText.setVisibility(View.VISIBLE);
                 else
-                    scrollView.setVisibility(View.GONE);
+                    binding.gatchDetailMultilineText.setVisibility(View.GONE);
             }
         });
-        return dialog;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

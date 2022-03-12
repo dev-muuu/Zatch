@@ -16,10 +16,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 public class TownAreaBottomSheet extends BottomSheetDialogFragment implements SeekBar.OnSeekBarChangeListener {
 
     View view;
-    TownAreaBottomSheetListener dialogListener;
     String[] townData;
     String currentArea;
     ImageView image;
+    private TownAreaBottomSheetListener dialogListener;
 
     public void setDialogListener(TownAreaBottomSheetListener dialogListener){
         this.dialogListener = dialogListener;

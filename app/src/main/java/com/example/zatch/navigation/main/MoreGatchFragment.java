@@ -20,22 +20,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
+import com.example.zatch.ReturnPx;
 import com.example.zatch.bottomsheet.MyTownBottomSheet;
 import com.example.zatch.bottomsheet.CategoryBottomSheet;
+import com.example.zatch.databinding.FragmentMoreGatchBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyTownBottomSheetListener, CategoryBottomSheet.CategoryBottomSheetListener {
+public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyTownBottomSheetListener,
+        CategoryBottomSheet.CategoryBottomSheetListener {
 
-//    View view;
-    CheckBox nowFilter;
-    TextView gatchTownArea, gatchSeatchCategory;
-    float density;
+    private CheckBox nowFilter;
+    private FragmentMoreGatchBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_more_gatch,container,false);
+        binding = FragmentMoreGatchBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
         return view;
     }
 
@@ -57,7 +58,6 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
             @Override
             public void handleOnBackPressed() {
                 // Handle the back button event
-
                 NavHostFragment fragment = (NavHostFragment) MoreGatchFragment.this.getParentFragment();
                 MainTopFragment topFragment = (MainTopFragment) fragment.getParentFragment();
                 topFragment.isSearchFieldContainContent();
@@ -68,21 +68,12 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
 
         //recycler view setting
         String[] data = new String[]{"1","2","3","4"};
-        RecyclerView recyclerView = view.findViewById(R.id.moreGatchRecyclerView);
-        recyclerView.setAdapter(new MoreGatchAdapter(data,this));
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(manager);
+        binding.moreGatchRecyclerView.setAdapter(new MoreGatchAdapter(data,this));
+        binding.moreGatchRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        //density for dp
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) binding.gatchSearchCategoryLayout.getLayoutParams();
 
-        density = displayMetrics.density;
-
-        LinearLayout searchCategory = view.findViewById(R.id.gatchSearchCategoryLayout);
-        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) searchCategory.getLayoutParams();
-        //density 수정 필
-        params.leftMargin = (int)(8 * density + 0.5f);
+        params.leftMargin = (int) new ReturnPx(8,getActivity()).returnPx();
 
         ContextThemeWrapper wrapper = new ContextThemeWrapper(getContext(), R.style.SearchCategoryCheckBox);
         for(String category: getResources().getStringArray(R.array.gatch_search_category)){
@@ -92,11 +83,10 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
                 nowFilter = each;
                 each.setChecked(true);
             }
-
             each.setText(category);
             each.setClickable(true);
             each.setLayoutParams(params);
-            searchCategory.addView(each,searchCategory.indexOfChild(view.findViewById(R.id.gatchSearchCategory)));
+            binding.gatchSearchCategoryLayout.addView(each,binding.gatchSearchCategoryLayout.indexOfChild(binding.gatchSearchCategory));
             each.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -107,27 +97,15 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
         }
 
         //가치 동네 설정
-        gatchTownArea = view.findViewById(R.id.gatchTownAreaText);
-        gatchTownArea.setOnClickListener(onClickListener);
+        binding.gatchTownAreaText.setOnClickListener(v->{
+            townBottomSheet();
+        });
 
         //가치 카테고리 설정
-        gatchSeatchCategory = view.findViewById(R.id.gatchSearchCategory);
-        gatchSeatchCategory.setOnClickListener(onClickListener);
+        binding.gatchSearchCategory.setOnClickListener(v->{
+            categoryBottomSheet();
+        });
     }
-
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.gatchTownAreaText:
-                    townBottomSheet();
-                    break;
-                case R.id.gatchSearchCategory:
-                    categoryBottomSheet();
-                    break;
-            }
-        }
-    };
 
     void categoryBottomSheet(){
         //임시 data
@@ -155,6 +133,6 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
 
     @Override
     public void MyTownBottomFinish(String townName) {
-        gatchTownArea.setText(townName);
+        binding.gatchTownAreaText.setText(townName);
     }
 }

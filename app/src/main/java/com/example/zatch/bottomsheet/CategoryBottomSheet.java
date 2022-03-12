@@ -57,5 +57,4 @@ public class CategoryBottomSheet extends BottomSheetDialogFragment {
 
         return view;
     }
-
 }

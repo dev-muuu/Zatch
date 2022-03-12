@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.zatch.databinding.ActivityLoginBinding;
 import com.example.zatch.location.StartLocationActivity;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.Account;
@@ -15,26 +16,35 @@ import com.kakao.sdk.user.model.Account;
 public class LogInActivity extends AppCompatActivity {
 
     private String TAG = "LoginActivity";
+    private ActivityLoginBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
-        findViewById(R.id.loginButton).setOnClickListener(onClickListener);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+
+        binding.loginButton.setOnClickListener(v->{
+            Log.e("LogInActivity","tryLogin");
+            tryLogin();
+        });
+
+//        findViewById(R.id.loginButton).setOnClickListener(onClickListener);
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.loginButton:
-                    Log.e("LogInActivity","tryLogin");
-                    tryLogin();
-                    break;
-            }
-        }
-    };
+//    View.OnClickListener onClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            switch (v.getId()){
+//                case R.id.loginButton:
+//                    Log.e("LogInActivity","tryLogin");
+//                    tryLogin();
+//                    break;
+//            }
+//        }
+//    };
 
     private void tryLogin(){
 //        // 카카오계정으로 로그인
