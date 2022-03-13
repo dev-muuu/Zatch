@@ -276,10 +276,9 @@
 
             <android.widget.Button
                 android:id="@+id/button"
-                style="@style/ZatchPurpleButton_74"
+                style="@style/ZatchYellowButton_74"
                 android:layout_marginTop="28dp"
                 android:layout_marginBottom="24dp"
-                android:background="@drawable/button_yellow"
                 android:text="가치 신청하기" />
         </RelativeLayout>
 

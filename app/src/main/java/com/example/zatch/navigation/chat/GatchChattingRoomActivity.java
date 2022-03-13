@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import android.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -14,14 +15,16 @@ import com.example.zatch.PNDialogMessage;
 import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.ServiceType;
 import com.example.zatch.databinding.ActivityGatchChattingRoomBinding;
+import com.example.zatch.databinding.LayoutGatchTutorialBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
+import com.example.zatch.navigation.chat.data.GatchDepositData;
 
 import java.util.ArrayList;
 
-public class GatchChattingRoomActivity extends AppCompatActivity {
+public class GatchChattingRoomActivity extends AppCompatActivity implements DepositBottomSheet.BottomSheetDepositListener{
 
-    private ChattingMessageAdapter adapter;
     private ActivityGatchChattingRoomBinding binding;
+    private LayoutGatchTutorialBinding tutorialBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +33,8 @@ public class GatchChattingRoomActivity extends AppCompatActivity {
         binding = ActivityGatchChattingRoomBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        tutorialBinding = binding.gatchTutorial;
 
         binding.writeChattingMessageGatch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -49,25 +54,41 @@ public class GatchChattingRoomActivity extends AppCompatActivity {
             }
         });
 
-        binding.gatchRoomBackButton.setOnClickListener(v->{
-            finish();
+        binding.gatchRoomBackButton.setOnClickListener(v-> finish());
+        binding.gatchRefuseButton.setOnClickListener(v-> showNegativePositiveDialog(PNDialogMessage.GatchRefuse));
+        binding.gatchAcceptButton.setOnClickListener(v-> showNegativePositiveDialog(PNDialogMessage.GatchAccept));
+        binding.sendChatButtonGatch.setOnClickListener(v-> sendMessage());
+        binding.chattingMoreEtcButtonGatch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked)
+                binding.chattingMoreEtcLayout.setVisibility(View.VISIBLE);
+            else
+                binding.chattingMoreEtcLayout.setVisibility(View.GONE);
         });
-        binding.gatchRefuseButton.setOnClickListener(v->{
-            showNegativePositiveDialog(PNDialogMessage.GatchRefuse);
+        //more etc layout 내 버튼 클릭
+        binding.moreEtcDeposit.setOnClickListener(v -> {
+            showDepositBottomSheet();
         });
-        binding.gatchAcceptButton.setOnClickListener(v->{
-            showNegativePositiveDialog(PNDialogMessage.GatchAccept);
-        });
-        binding.sendChatButtonGatch.setOnClickListener(v->{
-            sendMessage();
-        });
-
         ArrayList<ChatItemData> data = new ArrayList<>();
-        adapter = new ChattingMessageAdapter(ServiceType.Gatch,data,this);
-        binding.gatchChatRecycler.setAdapter(adapter);
-        LinearLayoutManager manager = new LinearLayoutManager(getBaseContext());
-        binding.gatchChatRecycler.setLayoutManager(manager);
+        binding.gatchChatRecycler.setAdapter(new ChattingMessageAdapter(ServiceType.Gatch,data,this));
+        binding.gatchChatRecycler.setLayoutManager(new LinearLayoutManager(getBaseContext()));
 
+        //tutorial ui setting
+        tutorialBinding.checkBox4.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) {
+                tutorialBinding.tutorialExplainText.setVisibility(View.VISIBLE);
+                tutorialBinding.tutorialManagerText.setVisibility(View.VISIBLE);
+            }
+            else {
+                tutorialBinding.tutorialExplainText.setVisibility(View.GONE);
+                tutorialBinding.tutorialManagerText.setVisibility(View.GONE);
+            }
+        });
+
+    }
+
+    private void showDepositBottomSheet(){
+        DepositBottomSheet bottomSheet = new DepositBottomSheet(this);
+        bottomSheet.show(getSupportFragmentManager(),null);
     }
 
     void showNegativePositiveDialog(PNDialogMessage type){
@@ -80,11 +101,18 @@ public class GatchChattingRoomActivity extends AppCompatActivity {
         dialogClass.getPositive().setOnClickListener(v->{
             dialog.dismiss();
         });
+
         dialog.show();
     }
 
     void sendMessage(){
         //chatting room에 message send & 입력창 초기화
         binding.writeChattingMessageGatch.setText("");
+    }
+
+    @Override
+    public void finishBottomSheet(GatchDepositData data) {
+        System.out.println(data.getMoreInfo());
+        System.out.println(data.getAccountOwner());
     }
 }

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/textView70"
+        style="@style/bottomSheetTitleText"
+        android:layout_marginTop="22dp"
+        android:text="계좌정보" />
+
+    <TextView
+        android:id="@+id/chooseBankText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawble_spinner_category_stroke"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="34dp"
+        android:paddingLeft="16dp"
+        android:text="은행 선택"
+        app:layout_constraintTop_toBottomOf="@id/textView70"/>
+
+    <TextView
+        android:id="@+id/bankAccountText"
+        style="@style/depositEditTextStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="계좌 번호 입력"
+        android:inputType="number"
+        app:layout_constraintTop_toBottomOf="@id/chooseBankText"
+        tools:layout_editor_absoluteX="20dp" />
+
+    <TextView
+        android:id="@+id/bankOwnerText"
+        app:layout_constraintTop_toBottomOf="@id/bankAccountText"
+        style="@style/depositEditTextStyle"
+        android:hint="이름 입력" />
+
+    <RelativeLayout
+        android:id="@+id/r1"
+        app:layout_constraintTop_toBottomOf="@id/bankOwnerText"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="36dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView75"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="인당 금액" />
+
+        <TextView
+            android:id="@+id/priceForDeposit"
+            android:layout_toRightOf="@id/textView75"
+            android:drawableBottom="@drawable/vector_126"
+            android:layout_width="wrap_content"
+            android:maxWidth="80dp"
+            android:gravity="center"
+            android:layout_marginLeft="22dp"
+            android:layout_height="wrap_content"
+            android:text="1222" />
+        <TextView
+            android:id="@+id/textView77"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/priceForDeposit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="원" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/moreInfo"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/drawble_add_explain"
+        android:ems="10"
+        android:fontFamily="@font/pretendard_medium"
+        android:gravity="start|top"
+        android:hint="추가 설명이 필요하다면 여기에 적어주세요."
+        android:inputType="textMultiLine"
+        android:textColor="@color/black_85"
+        android:textColorHint="@color/black_20"
+        android:textSize="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/r1" />
+
+    <android.widget.Button
+        android:id="@+id/depositInfoRegisterButton"
+        app:layout_constraintTop_toBottomOf="@id/moreInfo"
+        style="@style/ZatchYellowButton_74"
+        android:text="등록하기"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

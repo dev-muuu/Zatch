@@ -31,6 +31,22 @@
         <item name="android:layout_marginBottom">54dp</item>
     </style>
 
+    <style name="ZatchYellowButton_74" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button_yellow</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:fontFamily">@font/zatch_font</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="layout_constraintLeft_toLeftOf">parent</item>
+        <item name="layout_constraintRight_toRightOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="android:layout_marginLeft">74dp</item>
+        <item name="android:layout_marginRight">74dp</item>
+        <item name="android:layout_marginBottom">54dp</item>
+    </style>
+
 
     <style name="backArrowButton_20" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/arrow_left</item>
@@ -112,6 +128,23 @@
         <item name="fontFamily">@font/zatch_font</item>
         <item name="android:textSize">14dp</item>
         <item name="android:paddingLeft">16dp</item>
+    </style>
+
+    <style name="depositEditTextStyle" parent="@android:style/Widget.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/drawble_plain_text</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:inputType">textPersonName</item>
+        <item name="android:textColor">@color/black_85</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="hintTextColor">#59000000</item>
     </style>
 
     <style name="SearchCategoryCheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox" >

@@ -50,4 +50,23 @@
         <item>잔여인원</item>
         <item>마감임박</item>
     </string-array>
+
+    <string-array name ="bank_list">
+        <item>NH농협</item>
+        <item>KB국민</item>
+        <item>카카오뱅크</item>
+        <item>신한</item>
+        <item>우리</item>
+        <item>케이뱅크</item>
+        <item>SC제일</item>
+        <item>우체국</item>
+        <item>신협</item>
+        <item>토스뱅크</item>
+        <item>부산</item>
+        <item>대구</item>
+        <item>광주</item>
+        <item>전북</item>
+        <item>제주</item>
+        <item>기타</item>
+    </string-array>
 </resources>
