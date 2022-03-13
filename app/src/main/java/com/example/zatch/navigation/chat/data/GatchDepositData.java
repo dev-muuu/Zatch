@@ -28,16 +28,16 @@ public class GatchDepositData {
         return bankName;
     }
 
-    public int getBankAccount() {
-        return bankAccount;
+    public String getBankAccount() {
+        return String.valueOf(bankAccount);
     }
 
     public String getAccountOwner() {
         return accountOwner;
     }
 
-    public int getPricePerPeson() {
-        return pricePerPeson;
+    public String getPricePerPeson() {
+        return String.valueOf(pricePerPeson);
     }
 
     public String getMoreInfo() {

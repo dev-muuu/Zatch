@@ -40,7 +40,8 @@ public class DepositBottomSheet extends BottomSheetDialogFragment{
     }
 
     public void finish(){
-        DepositInputInfoFragment fragment = (DepositInputInfoFragment) getChildFragmentManager().findFragmentById(R.id.depositFragment).getChildFragmentManager().findFragmentById(R.id.depositFragment);
+        DepositInputInfoFragment fragment = (DepositInputInfoFragment) getChildFragmentManager().findFragmentById(R.id.depositFragment)
+                .getChildFragmentManager().findFragmentById(R.id.depositFragment);
         listener.finishBottomSheet(fragment.registerDepositInfo());
         dismiss();
     }

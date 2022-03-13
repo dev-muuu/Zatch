@@ -25,6 +25,7 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
 
     private ActivityGatchChattingRoomBinding binding;
     private LayoutGatchTutorialBinding tutorialBinding;
+    private boolean tutorialRegister = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +36,12 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
         setContentView(view);
 
         tutorialBinding = binding.gatchTutorial;
+
+        //tutorial visibility init
+        if(tutorialRegister)
+            binding.gatchTutorial.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.gatchTutorial.getRoot().setVisibility(View.GONE);
 
         binding.writeChattingMessageGatch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,7 +119,14 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
 
     @Override
     public void finishBottomSheet(GatchDepositData data) {
-        System.out.println(data.getMoreInfo());
-        System.out.println(data.getAccountOwner());
+        //data setting
+        tutorialBinding.tutorialManagerText.setText(data.getAccountOwner());
+        tutorialBinding.tutorialExplainText.setText(data.getMoreInfo());
+        tutorialBinding.tutorialBankName.setText(data.getBankName());
+        tutorialBinding.pricePerson.setText(data.getPricePerPeson());
+        tutorialBinding.tutorialBankAccount.setText(data.getBankAccount());
+        tutorialRegister = true;
+        binding.gatchTutorial.getRoot().setVisibility(View.VISIBLE);
+        binding.chattingMoreEtcButtonGatch.setChecked(false);
     }
 }
