@@ -3,7 +3,7 @@
 
     <item
         android:state_checked="false"
-        android:drawable="@drawable/silver_text_background_10"/>
+        android:drawable="@drawable/text_background_b10_10"/>
     <item
         android:state_checked="true"
         android:drawable="@drawable/text_background_purple_40"

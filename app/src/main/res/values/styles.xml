@@ -23,7 +23,7 @@
 
     <style name="CustomCheckBoxZatchSearch">
         <item name="android:background">@drawable/selector_search_pick_zatch</item>
-        <item name="android:textColor">@drawable/selelctor_search_textcolor</item>
+        <item name="android:textColor">@drawable/selector_color_45_to_deep_yellow</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">28dp</item>
         <item name="android:button">@null</item>
@@ -53,6 +53,17 @@
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">14dp</item>
+    </style>
+
+<!--    deposit check checkbox-->
+    <style name="CustomCheckBoxDepositCheck">
+        <item name="android:background">@drawable/selector_text_background_b5_to_yel</item>
+        <item name="android:textColor">@drawable/selector_color_45_to_deep_yellow</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">13dp</item>
     </style>
 
     <!--    bottomSheetDialog corner radius 적용-->

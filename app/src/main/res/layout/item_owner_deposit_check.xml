@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/userImage"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/profile_yellow"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="한민지"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/userImage"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <CheckBox
+        android:id="@+id/checkDepositState"
+        android:button="@null"
+        style="@style/CustomCheckBoxDepositCheck"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="28dp"
+        android:gravity="center"
+        android:text="입금 전" />
+    <View
+        android:id="@+id/imageView26"
+        style="@style/chattingRecyclerDividerVectorStyle" />
+</androidx.constraintlayout.widget.ConstraintLayout>

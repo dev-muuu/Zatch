@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.zatch.R;
 import com.example.zatch.databinding.BottomSheetDepositBinding;
@@ -18,13 +19,16 @@ public class DepositBottomSheet extends BottomSheetDialogFragment{
 
     private BottomSheetDepositBinding binding;
     private BottomSheetDepositListener listener;
+    private boolean isDepositInfoRegister;
 
     interface BottomSheetDepositListener{
         void finishBottomSheet(GatchDepositData data);
     }
 
-    public DepositBottomSheet(BottomSheetDepositListener listener) {
+    public DepositBottomSheet(BottomSheetDepositListener listener, boolean register) {
         this.listener = listener;
+        //if true, binding 다른걸로 되도록 수정
+        this.isDepositInfoRegister = register;
     }
 
     @Nullable
@@ -37,9 +41,13 @@ public class DepositBottomSheet extends BottomSheetDialogFragment{
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        if(!isDepositInfoRegister)
+            NavHostFragment.findNavController(getChildFragmentManager().findFragmentById(R.id.depositFragment)).setGraph(R.navigation.navigation_deposit_bottom_sheet);
+        else
+            NavHostFragment.findNavController(getChildFragmentManager().findFragmentById(R.id.depositFragment)).setGraph(R.navigation.navigation_deposit_check);
     }
 
-    public void finish(){
+    public void registerFinish(){
         DepositInputInfoFragment fragment = (DepositInputInfoFragment) getChildFragmentManager().findFragmentById(R.id.depositFragment)
                 .getChildFragmentManager().findFragmentById(R.id.depositFragment);
         listener.finishBottomSheet(fragment.registerDepositInfo());

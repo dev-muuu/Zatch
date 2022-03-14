@@ -60,7 +60,7 @@
                     android:id="@+id/textView57"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/text_background_yellow"
+                    android:background="@drawable/text_background_yellow_14"
                     android:text="음식"
                     android:textColor="@color/zatch_deepyellow"
                     android:textSize="12dp" />

@@ -42,7 +42,7 @@ public class DepositInputInfoFragment extends Fragment {
 
         binding.depositInfoRegisterButton.setOnClickListener(v->{
             if(checkNullDataExist())
-                ((DepositBottomSheet) getParentFragment().getParentFragment()).finish();
+                ((DepositBottomSheet) getParentFragment().getParentFragment()).registerFinish();
         });
     }
 

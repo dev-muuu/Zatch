@@ -28,10 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
-import com.example.zatch.databinding.ActivityZatchChattingRoomBinding;
-import com.example.zatch.databinding.DrawerLayoutChattingRoomZatchBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
-import com.example.zatch.navigation.chat.data.ChatType;
+import com.example.zatch.navigation.chat.data.ChatViewType;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.ByteArrayOutputStream;
@@ -195,7 +193,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
     }
 
     void sendImageMessage(Uri imageUri){
-        adapter.addItem(new ChatItemData("숑",String.valueOf(imageUri),System.currentTimeMillis(),null, ChatType.RIGHT_IMAGE));
+        adapter.addItem(new ChatItemData("숑",String.valueOf(imageUri),System.currentTimeMillis(),null, ChatViewType.RIGHT_IMAGE));
         adapter.notifyDataSetChanged();
         chattingRecycler.scrollToPosition(chattingData.size()-1);
     }
@@ -209,7 +207,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
     void sendMessage(){
         //chatting room에 message send & 입력창 초기화
         adapter.addItem(new ChatItemData("숑",chattingMessage.getText().toString(),
-                System.currentTimeMillis(),null, ChatType.RIGHT_MESSAGE));
+                System.currentTimeMillis(),null, ChatViewType.RIGHT_MESSAGE));
         chattingMessage.setText("");
         chattingRecycler.scrollToPosition(chattingData.size()-1);
     }

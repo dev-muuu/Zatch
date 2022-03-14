@@ -10,18 +10,29 @@
         android:id="@+id/imageOtherProfileImage"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/profile_purple" />
+
+    <TextView
+        android:id="@+id/imageOtherName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="8dp"
+        android:textSize="12dp"
+        app:layout_constraintLeft_toRightOf="@id/imageOtherProfileImage"
+        android:text="이름" />
 
     <ImageView
         android:id="@+id/imageOtherImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
         android:adjustViewBounds="true"
         android:maxWidth="200dp"
-        app:layout_constraintLeft_toRightOf="@id/imageOtherProfileImage" />
+        app:layout_constraintLeft_toRightOf="@id/imageOtherProfileImage"
+        app:layout_constraintTop_toBottomOf="@id/imageOtherName"/>
 
     <TextView
         android:id="@+id/imageOtherChatTime"

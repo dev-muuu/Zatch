@@ -20,7 +20,7 @@ import com.example.zatch.databinding.ItemChatImageRightBinding;
 import com.example.zatch.databinding.ItemChatLeftBinding;
 import com.example.zatch.databinding.ItemChatRightBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
-import com.example.zatch.navigation.chat.data.ChatType;
+import com.example.zatch.navigation.chat.data.ChatViewType;
 
 import java.util.ArrayList;
 
@@ -41,13 +41,13 @@ public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         View view;
 
-        if(viewType == ChatType.LEFT_MESSAGE){
+        if(viewType == ChatViewType.LEFT_MESSAGE){
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_left, viewGroup, false);
             return new LeftMessageViewHolder(ItemChatLeftBinding.bind(view));
-        }else if(viewType == ChatType.RIGHT_MESSAGE){
+        }else if(viewType == ChatViewType.RIGHT_MESSAGE){
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_right, viewGroup, false);
             return new RightMessageViewHolder(ItemChatRightBinding.bind(view));
-        }else if(viewType == ChatType.LEFT_IMAGE){
+        }else if(viewType == ChatViewType.LEFT_IMAGE){
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_chat_image_left, viewGroup, false);
             return new LeftImageViewHolder(ItemChatImageLeftBinding.bind(view));
         }else{
@@ -79,10 +79,16 @@ public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         }
 
         public void setItem(ChatItemData data) {
+            this.binding.otherName.setText(data.getUserName());
             this.binding.otherChat.setText(data.getContent());
             this.binding.otherChatTime.setText(data.getTimeText());
-            if(data.getUserImage() != null)
-                this.binding.otherProfileImage.setImageURI(data.getUserImage());
+            if(data.getUserImage() != null) {
+                Glide.with(activity)
+                        .load(data.getUserImage())
+                        .circleCrop()
+                        .into(this.binding.otherProfileImage);
+            }else if(type == ServiceType.Gatch)
+                this.binding.otherProfileImage.setBackground(activity.getDrawable(R.drawable.profile_yellow));
         }
     }
 
@@ -114,6 +120,8 @@ public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
         public void setItem(ChatItemData data) {
             this.binding.imageOtherChatTime.setText(data.getTimeText());
+            this.binding.imageOtherName.setText(data.getUserName());
+
             MultiTransformation option = new MultiTransformation(new CenterCrop(), new RoundedCorners((int)new ReturnPx(8,activity).returnPx()));
             Glide.with(activity)
                     .load(data.getContent())
@@ -125,7 +133,8 @@ public class ChattingMessageAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                         .load(data.getUserImage())
                         .circleCrop()
                         .into(this.binding.imageOtherProfileImage);
-            }
+            }else if(type == ServiceType.Gatch)
+                this.binding.imageOtherProfileImage.setBackground(activity.getDrawable(R.drawable.profile_yellow));
         }
     }
 

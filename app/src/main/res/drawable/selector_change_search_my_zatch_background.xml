@@ -6,6 +6,6 @@
 
     <item
         android:state_selected="false"
-        android:drawable="@drawable/text_background_yellow"/>
+        android:drawable="@drawable/text_background_yellow_14"/>
 
 </selector>
