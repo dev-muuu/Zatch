@@ -22,7 +22,7 @@ public class DepositBottomSheet extends BottomSheetDialogFragment{
     private boolean isDepositInfoRegister;
 
     interface BottomSheetDepositListener{
-        void finishBottomSheet(GatchDepositData data);
+        void uploadTutorial(GatchDepositData data);
     }
 
     public DepositBottomSheet(BottomSheetDepositListener listener, boolean register) {
@@ -50,7 +50,7 @@ public class DepositBottomSheet extends BottomSheetDialogFragment{
     public void registerFinish(){
         DepositInputInfoFragment fragment = (DepositInputInfoFragment) getChildFragmentManager().findFragmentById(R.id.depositFragment)
                 .getChildFragmentManager().findFragmentById(R.id.depositFragment);
-        listener.finishBottomSheet(fragment.registerDepositInfo());
+        listener.uploadTutorial(fragment.registerDepositInfo());
         dismiss();
     }
 

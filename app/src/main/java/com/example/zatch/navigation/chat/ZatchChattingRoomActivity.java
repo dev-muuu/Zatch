@@ -11,23 +11,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.zatch.R;
 import com.example.zatch.ServiceType;
+import com.example.zatch.databinding.ActivityZatchChattingRoomBinding;
+import com.example.zatch.databinding.DrawerLayoutChattingRoomZatchBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
 import com.example.zatch.navigation.chat.data.ChatViewType;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -38,15 +32,10 @@ import java.util.ArrayList;
 public class ZatchChattingRoomActivity extends AppCompatActivity implements MakeMeetingBottomSheet.MakeMeetingBottomSheetListener,
         RoomEtcBottomSheet.RoomEtcBottomSheetListener {
 
-    private TextView isMakeReservation;
-    private EditText chattingMessage;
-    private RecyclerView chattingRecycler;
     private ChattingMessageAdapter adapter;
-    private CheckBox moreEtcButton;
-    private ConstraintLayout moreEtcLayout;
-    private Button sendButton;
     private ArrayList<ChatItemData> chattingData;
-    private DrawerLayout memberFragment;
+    private DrawerLayoutChattingRoomZatchBinding binding;
+    private ActivityZatchChattingRoomBinding chattingBinding;
 
     private final int RequestCodeGallery = 100;
     private final int RequestCodeCamera = 200;
@@ -56,88 +45,71 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
 
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.drawer_layout_chatting_room_zatch);
+        binding = DrawerLayoutChattingRoomZatchBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
-        findViewById(R.id.sendChatButtonZatch).setOnClickListener(onClickListener);
-        findViewById(R.id.moreEtcMakeMeeting).setOnClickListener(onClickListener);
-        findViewById(R.id.roomEtcButton).setOnClickListener(onClickListener);
-        findViewById(R.id.chattingMoreEtcButton).setOnClickListener(onClickListener);
-        findViewById(R.id.moreEtcCamera).setOnClickListener(onClickListener);
-        findViewById(R.id.moreEtcGallery).setOnClickListener(onClickListener);
-        findViewById(R.id.zatchChatBackButton).setOnClickListener(onClickListener);
+        chattingBinding = binding.activityChattingLayout;
 
-        chattingMessage = findViewById(R.id.writeChattingMessage);
-        chattingMessage.addTextChangedListener(new TextWatcher() {
-
+        chattingBinding.writeChattingMessage.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(chattingMessage.getText().toString().equals(""))
-                    sendButton.setEnabled(false);
+                if(chattingBinding.writeChattingMessage.getText().toString().equals(""))
+                    chattingBinding.sendChatButtonZatch.setEnabled(false);
                 else
-                    sendButton.setEnabled(true);
+                    chattingBinding.sendChatButtonZatch.setEnabled(true);
             }
-
             @Override
             public void afterTextChanged(Editable s) {
             }
         });
 
-        isMakeReservation = findViewById(R.id.textView83);
-        chattingRecycler = findViewById(R.id.chattingRecycler);
-        moreEtcButton = findViewById(R.id.chattingMoreEtcButton);
-        moreEtcLayout = findViewById(R.id.chattingMoreEtcLayout);
-        sendButton = findViewById(R.id.sendChatButtonZatch);
-
         //chatting recycler
         chattingData = new ArrayList<>();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getBaseContext());
         adapter = new ChattingMessageAdapter(ServiceType.Zatch,chattingData,this);
-        chattingRecycler.setLayoutManager(layoutManager);
-        chattingRecycler.setAdapter(adapter);
+        chattingBinding.chattingRecycler.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+        chattingBinding.chattingRecycler.setAdapter(adapter);
 
-        //test
-        memberFragment = findViewById(R.id.drawer_zatch);
-
+        //clicklistener 구현 메서드
+        onClickListenerInit();
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    private void onClickListenerInit(){
+        chattingBinding.chattingMoreEtcButton.setOnClickListener(v->{
+            if(chattingBinding.chattingMoreEtcButton.isChecked())
+                chattingBinding.chattingMoreEtcLayout.setVisibility(View.VISIBLE);
+            else
+                chattingBinding.chattingMoreEtcLayout.setVisibility(View.GONE);
+        });
 
-            switch (v.getId()){
-                case R.id.chattingMoreEtcButton:
-                    if(moreEtcButton.isChecked())
-                        moreEtcLayout.setVisibility(View.VISIBLE);
-                    else
-                        moreEtcLayout.setVisibility(View.GONE);
-                    break;
-                case R.id.sendChatButtonZatch:
-                    sendMessage();
-                    break;
-                case R.id.zatchChatBackButton:
-                    finish();
-                    break;
-                case R.id.moreEtcMakeMeeting:
-                    makeReservationBottomSheet();
-                    break;
-                case R.id.roomEtcButton:
-                    memberFragment.openDrawer(Gravity.RIGHT);
-//                    makeRoomEtcBottomSheet();
-                    break;
-                case R.id.moreEtcCamera:
-                    Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, RequestCodeCamera);
-                    break;
-                case R.id.moreEtcGallery:
-                    permissionCheck();
-                    break;
-            }
-        }
-    };
+        chattingBinding.sendChatButtonZatch.setOnClickListener(v->{
+            sendMessage();
+        });
+
+        chattingBinding.zatchChatBackButton.setOnClickListener(v->{
+            finish();
+        });
+
+        chattingBinding.moreEtcMakeMeeting.setOnClickListener(v->{
+            makeReservationBottomSheet();
+        });
+
+        chattingBinding.roomEtcButton.setOnClickListener(v->{
+            binding.drawerZatch.openDrawer(Gravity.RIGHT);
+        });
+
+        chattingBinding.moreEtcCamera.setOnClickListener(v->{
+            Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent, RequestCodeCamera);
+        });
+
+        chattingBinding.moreEtcGallery.setOnClickListener(v->{
+            permissionCheck();
+        });
+    }
 
     private void permissionCheck(){
 
@@ -195,7 +167,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
     void sendImageMessage(Uri imageUri){
         adapter.addItem(new ChatItemData("숑",String.valueOf(imageUri),System.currentTimeMillis(),null, ChatViewType.RIGHT_IMAGE));
         adapter.notifyDataSetChanged();
-        chattingRecycler.scrollToPosition(chattingData.size()-1);
+        chattingBinding.chattingRecycler.scrollToPosition(chattingData.size()-1);
     }
 
     void makeRoomEtcBottomSheet(){
@@ -206,10 +178,10 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
 
     void sendMessage(){
         //chatting room에 message send & 입력창 초기화
-        adapter.addItem(new ChatItemData("숑",chattingMessage.getText().toString(),
+        adapter.addItem(new ChatItemData("숑",chattingBinding.writeChattingMessage.getText().toString(),
                 System.currentTimeMillis(),null, ChatViewType.RIGHT_MESSAGE));
-        chattingMessage.setText("");
-        chattingRecycler.scrollToPosition(chattingData.size()-1);
+        chattingBinding.writeChattingMessage.setText("");
+        chattingBinding.chattingRecycler.scrollToPosition(chattingData.size()-1);
     }
 
     void makeReservationBottomSheet(){
@@ -224,19 +196,19 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
             case Block:
                 //리스트에서 채팅방 삭제 코드 추가 필요
                 finish();
-                break;
+                return;
             case Declaration:
-                break;
+                return;
             case Exit:
                 //리스트에서 채팅방 삭제 코드 추가 필요
                 finish();
-                break;
+                return;
         }
     }
 
     @Override
     public void finishBottomSheet(boolean isFinish) {
         if(isFinish)
-            isMakeReservation.setText("예약완료");
+            chattingBinding.isReservationMade.setText("예약완료");
     }
 }

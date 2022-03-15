@@ -9,7 +9,7 @@
     tools:openDrawer="end">
 
     <include
-        android:id="@+id/memberListLayout"
+        android:id="@+id/activityChattingLayout"
         layout="@layout/activity_zatch_chatting_room"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -1,9 +1,12 @@
 package com.example.zatch.navigation.chat;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,6 +16,7 @@ import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.app.AlertDialog;
 
@@ -36,9 +40,10 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
 
     private ActivityGatchChattingRoomBinding binding;
     private LayoutGatchTutorialBinding tutorialBinding;
-    private boolean tutorialRegister = true; //잠시 true로 변경시켜놓음
+    private boolean tutorialRegister = false; //잠시 true로 변경시켜놓음
     private ArrayList<ChatItemData> data;
     private ChattingMessageAdapter adapter;
+    private ClipboardManager clipboardManager;
 
     private final int RequestCodeGallery = 100;
     private final int RequestCodeCamera = 200;
@@ -53,9 +58,10 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
         tutorialBinding = binding.gatchTutorial;
 
         //tutorial visibility init
-        if(tutorialRegister)
+        if(tutorialRegister) {
             binding.gatchTutorial.getRoot().setVisibility(View.VISIBLE);
-        else
+            uploadTutorial(new GatchDepositData("신한","0101","ssooya","2000","ㅋ"));
+        }else
             binding.gatchTutorial.getRoot().setVisibility(View.GONE);
 
         binding.writeChattingMessageGatch.addTextChangedListener(new TextWatcher() {
@@ -70,9 +76,34 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
                 else
                     binding.sendChatButtonGatch.setEnabled(true);
             }
-
             @Override
             public void afterTextChanged(Editable s) {
+            }
+        });
+
+        //recyclerview 설정
+        data = new ArrayList<>();
+        adapter = new ChattingMessageAdapter(ServiceType.Gatch,data,this);
+        binding.gatchChatRecycler.setAdapter(adapter);
+        binding.gatchChatRecycler.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+
+        //clipboard
+        clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+        onClickListenerInit();
+
+    }
+
+    private void onClickListenerInit(){
+        //tutorial ui setting
+        tutorialBinding.checkBox4.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) {
+                tutorialBinding.tutorialExplainText.setVisibility(View.VISIBLE);
+                tutorialBinding.tutorialManagerText.setVisibility(View.VISIBLE);
+            }
+            else {
+                tutorialBinding.tutorialExplainText.setVisibility(View.GONE);
+                tutorialBinding.tutorialManagerText.setVisibility(View.GONE);
             }
         });
 
@@ -94,27 +125,8 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
         binding.moreEtcGallery.setOnClickListener(v-> permissionCheck());
         binding.moreEtcCamera.setOnClickListener(v-> {
             Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, RequestCodeCamera);}
-        );
-
-        //recyclerview 설정
-        data = new ArrayList<>();
-        adapter = new ChattingMessageAdapter(ServiceType.Gatch,data,this);
-        binding.gatchChatRecycler.setAdapter(adapter);
-        binding.gatchChatRecycler.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-
-        //tutorial ui setting
-        tutorialBinding.checkBox4.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked) {
-                tutorialBinding.tutorialExplainText.setVisibility(View.VISIBLE);
-                tutorialBinding.tutorialManagerText.setVisibility(View.VISIBLE);
-            }
-            else {
-                tutorialBinding.tutorialExplainText.setVisibility(View.GONE);
-                tutorialBinding.tutorialManagerText.setVisibility(View.GONE);
-            }
+            startActivityForResult(intent, RequestCodeCamera);
         });
-
     }
 
     private void showDepositBottomSheet(){
@@ -204,13 +216,18 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
     }
 
     @Override
-    public void finishBottomSheet(GatchDepositData data) {
+    public void uploadTutorial(GatchDepositData data) {
         //data setting
         tutorialBinding.tutorialManagerText.setText(data.getAccountOwner());
         tutorialBinding.tutorialExplainText.setText(data.getMoreInfo());
         tutorialBinding.tutorialBankName.setText(data.getBankName());
         tutorialBinding.pricePerson.setText(data.getPricePerPeson());
         tutorialBinding.tutorialBankAccount.setText(data.getBankAccount());
+        tutorialBinding.tutorialBankAccount.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        tutorialBinding.tutorialBankAccount.setOnClickListener(v -> {
+            ClipData clipData = ClipData.newPlainText("accountNumber",tutorialBinding.tutorialBankAccount.getText().toString());
+            clipboardManager.setPrimaryClip(clipData);
+        });
         tutorialRegister = true;
         binding.gatchTutorial.getRoot().setVisibility(View.VISIBLE);
         binding.chattingMoreEtcButtonGatch.setChecked(false);
