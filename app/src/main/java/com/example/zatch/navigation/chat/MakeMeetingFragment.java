@@ -28,7 +28,6 @@ import java.text.SimpleDateFormat;
 
 public class MakeMeetingFragment extends Fragment implements TimePickerDialog.TimePickerDialogListener {
 
-    private MakeMeetingBottomSheet.MakeMeetingBottomSheetListener listener;
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
     private Bundle bundle = new Bundle();
@@ -75,7 +74,6 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
 
         //약속 장소 잡기
         binding.meetingPlace.setOnClickListener(v->{
-            Log.e("call","call");
             onSaveInstanceState(bundle);
             Navigation.findNavController(getView()).navigate(R.id.action_makeMeetingFragment_to_addressSearchFragment);
         });
@@ -92,7 +90,6 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        Log.e("save_override","save_override");
         outState.putString("month",binding.makeMeetingMonth.getText().toString());
         outState.putString("date",binding.makeMeetingDate.getText().toString());
         outState.putString("hour",binding.makeMeetingHourText.getText().toString());
@@ -103,7 +100,6 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        Log.e("restore_override","restore_override");
         if(savedInstanceState != null) {
             binding.makeMeetingMonth.setText(savedInstanceState.getString("month"));
             binding.makeMeetingDate.setText(savedInstanceState.getString("date"));
@@ -190,9 +186,23 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
             dialog.dismiss();
         });
         dialogClass.getPositive().setOnClickListener(v -> {
-            listener.finishBottomSheet(true);
+            MakeMeetingBottomSheet bottomSheet = (MakeMeetingBottomSheet) getParentFragment().getParentFragment();
+            bottomSheet.getBottomSheetListener().finishBottomSheet(makeDataClass());
+            bottomSheet.dismiss();
             dialog.dismiss();
         });
         dialog.show();
+    }
+
+    private MeetingData makeDataClass(){
+        MeetingData data = new MeetingData(
+            binding.makeMeetingMonth.getText().toString(),
+            binding.makeMeetingDate.getText().toString(),
+            binding.makeMeetingHourText.getText().toString(),
+            binding.makeMeetingMinuteText.getText().toString(),
+            binding.meetingPlace.getText().toString(),
+            binding.alarmSwitch.isChecked()
+        );
+        return data;
     }
 }

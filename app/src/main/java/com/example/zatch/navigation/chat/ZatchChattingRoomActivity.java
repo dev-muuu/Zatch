@@ -24,6 +24,7 @@ import com.example.zatch.databinding.ActivityZatchChattingRoomBinding;
 import com.example.zatch.databinding.DrawerLayoutChattingRoomZatchBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
 import com.example.zatch.navigation.chat.data.ChatViewType;
+import com.example.zatch.navigation.chat.data.MeetingData;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.ByteArrayOutputStream;
@@ -36,6 +37,8 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
     private ArrayList<ChatItemData> chattingData;
     private DrawerLayoutChattingRoomZatchBinding binding;
     private ActivityZatchChattingRoomBinding chattingBinding;
+    private boolean isMeetingMade = false;
+    private MeetingData meetingData;
 
     private final int RequestCodeGallery = 100;
     private final int RequestCodeCamera = 200;
@@ -188,7 +191,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
     }
 
     void makeReservationBottomSheet(){
-        MakeMeetingBottomSheet bottomSheet = new MakeMeetingBottomSheet(this);
+        MakeMeetingBottomSheet bottomSheet = new MakeMeetingBottomSheet(this, isMeetingMade);
         BottomSheetDialogFragment dialogFragment = bottomSheet;
         dialogFragment.show(getSupportFragmentManager(),null);
     }
@@ -210,8 +213,9 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
     }
 
     @Override
-    public void finishBottomSheet(boolean isFinish) {
-        if(isFinish)
-            chattingBinding.isReservationMade.setText("예약완료");
+    public void finishBottomSheet(MeetingData meetingData) {
+        chattingBinding.isReservationMade.setText("예약완료");
+        this.isMeetingMade = true;
+        this.meetingData = meetingData;
     }
 }

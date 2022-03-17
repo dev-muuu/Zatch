@@ -12,20 +12,22 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.zatch.R;
 import com.example.zatch.databinding.BottomSheetMakeMeetingBinding;
+import com.example.zatch.navigation.chat.data.MeetingData;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class MakeMeetingBottomSheet extends BottomSheetDialogFragment{
 
     private MakeMeetingBottomSheetListener listener;
     private BottomSheetMakeMeetingBinding binding;
-    private boolean isMeetingMade = false;
+    private boolean isMeetingMade;
 
     interface MakeMeetingBottomSheetListener {
-        void finishBottomSheet(boolean isFinish);
+        void finishBottomSheet(MeetingData meetingData);
     }
 
-    public MakeMeetingBottomSheet(MakeMeetingBottomSheetListener listener) {
+    public MakeMeetingBottomSheet(MakeMeetingBottomSheetListener listener, boolean isMeetingMade) {
         this.listener = listener;
+        this.isMeetingMade = isMeetingMade;
     }
 
     @Nullable
@@ -51,6 +53,10 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment{
 
     public boolean getIsMeetingMade(){
         return this.isMeetingMade;
+    }
+
+    public MakeMeetingBottomSheetListener getBottomSheetListener(){
+        return this.listener;
     }
 }
 
