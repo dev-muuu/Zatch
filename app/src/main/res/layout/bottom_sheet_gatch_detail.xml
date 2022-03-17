@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/c"
@@ -16,10 +16,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <View
+                android:id="@+id/view"
+                android:layout_width="40dp"
+                android:layout_height="4dp"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="160dp"
+                android:background="@drawable/bottom_sheet_top_line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <RelativeLayout
                 android:id="@+id/r0"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/view">
 
                 <TextView
                     android:id="@+id/textView54"
@@ -240,13 +253,13 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--        <androidx.core.widget.NestedScrollView-->
-<!--            android:id="@+id/detailNestedScrollView"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:fillViewport="true"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/detailEntire"-->
-<!--            app:layout_constraintVertical_bias="0.0">-->
+        <!--        <androidx.core.widget.NestedScrollView-->
+        <!--            android:id="@+id/detailNestedScrollView"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:fillViewport="true"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/detailEntire"-->
+        <!--            app:layout_constraintVertical_bias="0.0">-->
 
         <TextView
             android:id="@+id/gatchDetailMultilineText"
@@ -265,7 +278,7 @@
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/detailEntire"
             tools:layout_editor_absoluteX="20dp" />
-<!--        </androidx.core.widget.NestedScrollView>-->
+        <!--        </androidx.core.widget.NestedScrollView>-->
 
         <RelativeLayout
             android:layout_width="match_parent"

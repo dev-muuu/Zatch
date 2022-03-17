@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView74"
+        style="@style/bottomSheetTitleText"
+        android:layout_marginTop="22dp"
+        android:text="주소검색" />
+
+    <EditText
+        android:id="@+id/inputPlaceText"
+        style="@style/SearchSilverTextField"
+        app:layout_constraintTop_toBottomOf="@id/textView74"
+        android:layout_marginTop="16dp"
+        android:inputType="textPersonName"
+        android:hint="이름(동,면,읍)으로 검색"/>
+
+    <TextView
+        android:id="@+id/textView76"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 위치로 설정"
+        android:drawablePadding="4dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:drawableLeft="@drawable/size_spot_20"
+        app:layout_constraintTop_toBottomOf="@id/inputPlaceText" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/c0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/text_background_stroke_b10_8"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView76">
+
+        <TextView
+            android:id="@+id/textView78"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:text="검색 TIP"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView79"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:textSize="13dp"
+            android:text="\u2022 도로명+건물번호\n\u2022 역명+번지\n\u2022 건물명+아파트명"
+            android:fontFamily="@font/pretendard_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView78" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <android.widget.Button
+        android:id="@+id/button3"
+        style="@style/ZatchPurpleButton_74"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="36dp"
+        android:text="완료"
+        app:layout_constraintTop_toBottomOf="@id/c0"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

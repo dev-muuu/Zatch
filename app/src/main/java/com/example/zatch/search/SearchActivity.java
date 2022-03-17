@@ -1,13 +1,10 @@
 package com.example.zatch.search;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 
 import com.example.zatch.R;
@@ -18,8 +15,6 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
-        getSupportActionBar().hide();
 
         FragmentContainerView searchFragment = findViewById(R.id.searchFragment);
 

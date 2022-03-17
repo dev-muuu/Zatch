@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_make_meeting"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/makeMeetingFragment">
+
+    <fragment
+        android:id="@+id/makeMeetingFragment"
+        android:name="com.example.zatch.navigation.chat.MakeMeetingFragment"
+        android:label="MakeMeetingFragment"
+        tools:layout="@layout/fragment_make_meeting">
+        <action
+            android:id="@+id/action_makeMeetingFragment_to_addressSearchFragment"
+            app:destination="@id/addressSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addressSearchFragment"
+        android:name="com.example.zatch.navigation.chat.AddressSearchFragment"
+        android:label="AddressSearchFragment"
+        tools:layout="@layout/fragment_find_place_search">
+        <action
+            android:id="@+id/action_addressSearchFragment_to_addressResultFragment"
+            app:destination="@id/addressResultFragment"
+            app:popUpTo="@id/makeMeetingFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addressResultFragment"
+        android:name="com.example.zatch.navigation.chat.AddressResultFragment"
+        android:label="AddressResultFragment"
+        tools:layout="@layout/fragment_find_place_result"/>
+    <fragment
+        android:id="@+id/makeMeetingEditFragment"
+        android:name="com.example.zatch.navigation.chat.MakeMeetingEditFragment"
+        android:label="MakeMeetingEditFragment"
+        tools:layout="@layout/fragment_make_meeting_edit">
+        <action
+            android:id="@+id/action_makeMeetingEditFragment_to_makeMeetingFragment"
+            app:destination="@id/makeMeetingFragment" />
+    </fragment>
+</navigation>

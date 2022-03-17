@@ -227,4 +227,11 @@
         <item name="layout_constraintEnd_toEndOf">parent</item>
     </style>
 
+    <style name="makeMeetingCompleteText" parent="android:style/Widget.TextView">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">2dp</item>
+    </style>
+
 </resources>

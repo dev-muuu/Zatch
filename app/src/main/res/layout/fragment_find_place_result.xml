@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView74"
+        style="@style/bottomSheetTitleText"
+        android:layout_marginTop="22dp"
+        android:text="주소검색" />
+
+    <EditText
+        android:id="@+id/searchTextField"
+        style="@style/SearchSilverTextField"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/text_background_stroke_purple_40_8"
+        android:drawableLeft="@null"
+        android:drawableRight="@drawable/size_search_20"
+        android:drawableTint="@color/zatch_purple"
+        app:layout_constraintTop_toBottomOf="@id/textView74"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/textView76"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="12dp"
+        android:drawableLeft="@drawable/size_spot_20"
+        android:drawablePadding="4dp"
+        android:text="내 위치로 설정"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchTextField" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/black_5"
+        app:layout_constraintTop_toBottomOf="@id/textView76" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addressRecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="124dp"
+        app:layout_constraintBottom_toTopOf="@id/button3"
+        app:layout_constraintTop_toBottomOf="@id/view2" />
+
+    <android.widget.Button
+        android:id="@+id/button3"
+        style="@style/ZatchPurpleButton_74"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="36dp"
+        android:text="완료"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addressRecyclerview"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="74dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -55,6 +55,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(chattingBinding.writeChattingMessage.getText().toString().equals(""))
@@ -62,6 +63,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
                 else
                     chattingBinding.sendChatButtonZatch.setEnabled(true);
             }
+            
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -78,6 +80,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
     }
 
     private void onClickListenerInit(){
+
         chattingBinding.chattingMoreEtcButton.setOnClickListener(v->{
             if(chattingBinding.chattingMoreEtcButton.isChecked())
                 chattingBinding.chattingMoreEtcLayout.setVisibility(View.VISIBLE);

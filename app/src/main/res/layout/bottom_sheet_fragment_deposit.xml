@@ -54,16 +54,19 @@
             android:layout_height="wrap_content"
             android:text="인당 금액" />
 
-        <TextView
+        <EditText
             android:id="@+id/priceForDeposit"
-            android:layout_toRightOf="@id/textView75"
-            android:drawableBottom="@drawable/vector_126"
             android:layout_width="wrap_content"
-            android:maxWidth="80dp"
-            android:gravity="center"
-            android:layout_marginLeft="22dp"
             android:layout_height="wrap_content"
-            android:text="1222" />
+            android:layout_marginLeft="22dp"
+            android:layout_toRightOf="@id/textView75"
+            android:background="@null"
+            android:drawableBottom="@drawable/vector_126"
+            android:gravity="center"
+            android:inputType="number"
+            android:maxWidth="80dp"
+            android:text=""
+            android:textSize="14dp" />
         <TextView
             android:id="@+id/textView77"
             android:layout_marginLeft="4dp"
