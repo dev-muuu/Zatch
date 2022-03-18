@@ -58,7 +58,6 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
         }
 
         binding.button9.setOnClickListener(v-> makeReservationInfoDialog());
-
         binding.alarmSwitch.setOnCheckedChangeListener((buttonView, isChecked) ->  {
             if(isChecked)
                 sendDialogMessage();
@@ -84,7 +83,6 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
             binding.meetingPlace.setText(o.toString());
         });
     }
-
 
 
     @Override
@@ -127,7 +125,6 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
         binding.makeMeetingHourText.setTextColor(getResources().getColor(R.color.zatch_purple));
         binding.makeMeetingMinuteText.setTextColor(getResources().getColor(R.color.zatch_purple));
         binding.meetingPlace.setTextColor(getResources().getColor(R.color.zatch_purple));
-
     }
 
     void openCalendarDialog() {

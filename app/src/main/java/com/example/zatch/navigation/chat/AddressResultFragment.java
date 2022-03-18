@@ -53,12 +53,8 @@ public class AddressResultFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         binding.searchTextField.setText(searchPlace);
-
         binding.addressRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
     }
 
     //장소 검색
@@ -90,7 +86,6 @@ public class AddressResultFragment extends Fragment {
     private void storePlaceData(ResultSearchKeyword data) {
         this.placeList = data.documents;
     }
-
 
     public class FindPlaceAdapter extends RecyclerView.Adapter<FindPlaceAdapter.ViewHolder> {
 
@@ -125,7 +120,10 @@ public class AddressResultFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, final int position) {
             viewHolder.setData(placeList.get(position));
             viewHolder.itemView.setOnClickListener(v->{
-                Navigation.findNavController(getView()).getBackStackEntry(R.id.makeMeetingFragment).getSavedStateHandle().set("result",viewHolder.getPlaceName());
+                Navigation.findNavController(getView())
+                        .getBackStackEntry(R.id.makeMeetingFragment)
+                        .getSavedStateHandle()
+                        .set("result",viewHolder.getPlaceName());
                 Navigation.findNavController(getView()).popBackStack();
             });
         }

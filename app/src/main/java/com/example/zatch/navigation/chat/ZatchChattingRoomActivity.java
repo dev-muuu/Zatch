@@ -177,7 +177,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
     }
 
     void makeRoomEtcBottomSheet(){
-        RoomEtcBottomSheet bottomSheet = new RoomEtcBottomSheet(this);
+        RoomEtcBottomSheet bottomSheet = new RoomEtcBottomSheet(this,ServiceType.Zatch);
         BottomSheetDialogFragment dialogFragment = bottomSheet;
         dialogFragment.show(getSupportFragmentManager(),null);
     }
@@ -205,7 +205,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
                 return;
             case Declaration:
                 return;
-            case Exit:
+            case Out:
                 //리스트에서 채팅방 삭제 코드 추가 필요
                 finish();
                 return;

@@ -3,10 +3,10 @@
 
     <item
         android:state_checked="false"
-        android:drawable="@drawable/drawble_stroke_silver" />
+        android:drawable="@drawable/text_background_b45_18" />
     <item
         android:state_checked="true"
-        android:drawable="@drawable/drawble_stroke_yellow"
+        android:drawable="@drawable/text_background_stroke_yel_18"
         />
 
 </selector>

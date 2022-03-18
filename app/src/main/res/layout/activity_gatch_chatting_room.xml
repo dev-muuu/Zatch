@@ -43,11 +43,16 @@
             app:layout_constraintLeft_toRightOf="@id/textView105"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <android.widget.Button
+            android:id="@+id/etcButton"
+            style="@style/dotButton"/>
+
         <RelativeLayout
             android:id="@+id/gatchRoomHostLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -57,7 +62,7 @@
                 android:id="@+id/gatchRefuseButton"
                 style="@style/gatchRefuseAcceptButtonText"
                 android:background="@drawable/drawable_timer_black"
-                android:text="거절"/>
+                android:text="거절" />
 
             <TextView
                 android:id="@+id/gatchAcceptButton"
@@ -65,7 +70,7 @@
                 android:layout_marginLeft="4dp"
                 android:layout_toRightOf="@id/gatchRefuseButton"
                 android:background="@drawable/drawble_timer_red"
-                android:text="수락"/>
+                android:text="수락" />
         </RelativeLayout>
 
 

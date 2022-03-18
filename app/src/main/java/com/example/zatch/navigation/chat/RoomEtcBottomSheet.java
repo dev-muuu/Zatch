@@ -1,14 +1,10 @@
 package com.example.zatch.navigation.chat;
 
 import android.app.AlertDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,16 +18,18 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 enum EtcFunc{
     Block,
     Declaration,
-    Exit
+    Out
 }
 
 public class RoomEtcBottomSheet extends BottomSheetDialogFragment {
 
     private View view;
     private RoomEtcBottomSheetListener listener;
+    private ServiceType type;
 
-    public RoomEtcBottomSheet(RoomEtcBottomSheetListener listener) {
+    public RoomEtcBottomSheet(RoomEtcBottomSheetListener listener, ServiceType type) {
         this.listener = listener;
+        this.type = type;
     }
 
     interface RoomEtcBottomSheetListener{
@@ -69,7 +67,7 @@ public class RoomEtcBottomSheet extends BottomSheetDialogFragment {
     };
 
     private void printDialogMessage(PNDialogMessage dialogData){
-        PositiveNegativeDialog dialogClass = new PositiveNegativeDialog(getContext(), ServiceType.Zatch, dialogData);
+        PositiveNegativeDialog dialogClass = new PositiveNegativeDialog(getContext(), type, dialogData);
         AlertDialog dialog = dialogClass.createDialog();
         dialogClass.getNegative().setOnClickListener(v->{
             dialog.dismiss();
@@ -78,7 +76,7 @@ public class RoomEtcBottomSheet extends BottomSheetDialogFragment {
             dialog.dismiss();
             dismiss();
             if(dialogData == PNDialogMessage.Exit)
-                listener.finishBottomSheet(EtcFunc.Exit);
+                listener.finishBottomSheet(EtcFunc.Out);
             else
                 listener.finishBottomSheet(EtcFunc.Block);
         });

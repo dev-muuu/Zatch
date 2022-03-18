@@ -57,13 +57,8 @@
 
         <android.widget.Button
             android:id="@+id/roomEtcButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/dot"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            style="@style/dotButton"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout

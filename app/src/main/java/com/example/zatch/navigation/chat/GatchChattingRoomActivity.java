@@ -12,13 +12,14 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.app.AlertDialog;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -28,18 +29,22 @@ import com.example.zatch.PNDialogMessage;
 import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.ServiceType;
 import com.example.zatch.databinding.ActivityGatchChattingRoomBinding;
+import com.example.zatch.databinding.DrawerLayoutChattingRommtGatchBinding;
 import com.example.zatch.databinding.LayoutGatchTutorialBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
 import com.example.zatch.navigation.chat.data.ChatViewType;
 import com.example.zatch.navigation.chat.data.GatchDepositData;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GatchChattingRoomActivity extends AppCompatActivity implements DepositBottomSheet.BottomSheetDepositListener{
 
     private ActivityGatchChattingRoomBinding binding;
     private LayoutGatchTutorialBinding tutorialBinding;
+    private DrawerLayoutChattingRommtGatchBinding drawerBinding;
     private boolean tutorialRegister = false; //잠시 true로 변경시켜놓음
     private ArrayList<ChatItemData> data;
     private ChattingMessageAdapter adapter;
@@ -52,9 +57,10 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityGatchChattingRoomBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        drawerBinding = DrawerLayoutChattingRommtGatchBinding.inflate(getLayoutInflater());
+        setContentView(drawerBinding.getRoot());
 
+        binding = drawerBinding.activityChattingLayout;
         tutorialBinding = binding.gatchTutorial;
 
         //tutorial visibility init
@@ -92,6 +98,15 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
 
         onClickListenerInit();
 
+        //drawer layout
+        List<Boolean> memberList = new ArrayList<Boolean>(){};
+        memberList.add(true);
+        memberList.add(false);
+        memberList.add(false);
+        memberList.add(false);
+        drawerBinding.memberRecyclerview.setLayoutManager(new LinearLayoutManager(GatchChattingRoomActivity.this));
+        drawerBinding.memberRecyclerview.setAdapter(new ChattingMemberListAdapter(memberList,getSupportFragmentManager()));
+
     }
 
     private void onClickListenerInit(){
@@ -127,6 +142,13 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
             Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, RequestCodeCamera);
         });
+
+        binding.etcButton.setOnClickListener(v->{
+            drawerBinding.drawerGatch.openDrawer(Gravity.RIGHT);
+        });
+
+        drawerBinding.exitRoom.setOnClickListener(v->
+            showNegativePositiveDialog(PNDialogMessage.Exit));
     }
 
     private void showDepositBottomSheet(){
@@ -135,17 +157,25 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
     }
 
     void showNegativePositiveDialog(PNDialogMessage type){
-
         PositiveNegativeDialog dialogClass = new PositiveNegativeDialog(GatchChattingRoomActivity.this, ServiceType.Gatch, type);
         AlertDialog dialog = dialogClass.createDialog();
         dialogClass.getNegative().setOnClickListener(v->{
             dialog.dismiss();
         });
         dialogClass.getPositive().setOnClickListener(v->{
-            dialog.dismiss();
+            positiveActionByType(type, dialog);
         });
 
         dialog.show();
+    }
+
+    private void positiveActionByType(PNDialogMessage type, AlertDialog dialog){
+        switch (type){
+            case Exit:
+                dialog.dismiss();
+                finish();
+                break;
+        }
     }
 
     private void permissionCheck(){
@@ -223,13 +253,26 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
         tutorialBinding.tutorialBankName.setText(data.getBankName());
         tutorialBinding.pricePerson.setText(data.getPricePerPeson());
         tutorialBinding.tutorialBankAccount.setText(data.getBankAccount());
+        
         tutorialBinding.tutorialBankAccount.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        tutorialBinding.tutorialBankName.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        
         tutorialBinding.tutorialBankAccount.setOnClickListener(v -> {
-            ClipData clipData = ClipData.newPlainText("accountNumber",tutorialBinding.tutorialBankAccount.getText().toString());
-            clipboardManager.setPrimaryClip(clipData);
+            registerBankDataClipBoard();
         });
+        tutorialBinding.tutorialBankName.setOnClickListener(v -> {
+            registerBankDataClipBoard();
+        });
+        
         tutorialRegister = true;
         binding.gatchTutorial.getRoot().setVisibility(View.VISIBLE);
         binding.chattingMoreEtcButtonGatch.setChecked(false);
+    }
+    
+    private void registerBankDataClipBoard(){
+        String bankData = String.format("%s %s",tutorialBinding.tutorialBankName.getText().toString(),tutorialBinding.tutorialBankAccount.getText().toString());
+        ClipData clipData = ClipData.newPlainText("accountNumber",bankData);
+        clipboardManager.setPrimaryClip(clipData);
+        Toast.makeText(this, "계좌번호가 클립보드에 복사되었습니다.", Toast.LENGTH_SHORT).show();
     }
 }
