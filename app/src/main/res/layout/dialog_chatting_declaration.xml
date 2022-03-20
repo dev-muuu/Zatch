@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@drawable/inset_dialog_16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView91"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="행복한호랑이님을 신고하시겠습니까?\n고객센터로 요청이 접수됩니다."
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView91">
+
+        <RadioButton
+            android:id="@+id/radioButton3"
+            style="@style/declarationRadioButton"
+            android:text="모인 인원들끼리 남은 금액은 1/n 할게요." />
+
+        <RadioButton
+            android:id="@+id/radioButton4"
+            style="@style/declarationRadioButton"
+            android:text="제가 남은 금액을 부담할게요"
+            app:layout_constraintTop_toBottomOf="@id/radioButton3" />
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            style="@style/declarationRadioButton"
+            android:text="원치 않는 상업성 콘텐츠 또는 스팸"
+            app:layout_constraintTop_toBottomOf="@id/radioButton4" />
+
+        <RadioButton
+            android:id="@+id/radioButton6"
+            style="@style/declarationRadioButton"
+            android:text="기타"
+            app:layout_constraintTop_toBottomOf="@id/radioButton5" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/etcText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/radioBox"
+        app:layout_constraintStart_toStartOf="@id/radioBox"
+        android:layout_marginLeft="65dp"
+        android:textSize="14dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/radioBox"/>
+
+    <TextView
+        android:id="@+id/button4"
+        style="@style/dialogNegativeButtonText"
+        android:text="취소"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toStartOf="@+id/button5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@id/radioBox" />
+
+    <TextView
+        android:id="@+id/button5"
+        style="@style/dialogPositiveButtonText"
+        android:text="신고"
+        android:layout_marginTop="4dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@id/radioBox" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

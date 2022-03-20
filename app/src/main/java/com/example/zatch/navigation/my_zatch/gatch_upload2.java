@@ -109,7 +109,7 @@ public class gatch_upload2 extends Activity {
     private void registerGatchToServer(){
 
         GatchRegisterData data = new GatchRegisterData(0,true,"z",1000,3,
-                "z",false,1,"ab",false);
+                "z",false,1,"ab.jpg",false);
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .connectTimeout(2, TimeUnit.MINUTES)

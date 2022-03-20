@@ -72,7 +72,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <android.widget.Button
-        android:id="@+id/button3"
+        android:id="@+id/placeCheckFinishButton"
         style="@style/ZatchPurpleButton_74"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="36dp"

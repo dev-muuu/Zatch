@@ -1,6 +1,8 @@
 package com.example.zatch.navigation.chat;
 
 import android.app.AlertDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +59,7 @@ public class RoomEtcBottomSheet extends BottomSheetDialogFragment {
                     printDialogMessage(PNDialogMessage.Block);
                     break;
                 case R.id.declarationButton:
+                    showDeclarationDialog();
                     listener.finishBottomSheet(EtcFunc.Declaration);
                     break;
                 case R.id.exitButton:
@@ -65,6 +68,16 @@ public class RoomEtcBottomSheet extends BottomSheetDialogFragment {
             }
         }
     };
+
+    void showDeclarationDialog(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_chatting_declaration,null);
+        dialog.setView(view);
+        AlertDialog dialog1 = dialog.create();
+        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog1.show();
+
+    }
 
     private void printDialogMessage(PNDialogMessage dialogData){
         PositiveNegativeDialog dialogClass = new PositiveNegativeDialog(getContext(), type, dialogData);

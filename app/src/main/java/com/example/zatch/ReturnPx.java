@@ -38,4 +38,8 @@ public class ReturnPx {
         display.getRealSize(size);
         return size.y;
     }
+
+    public void setDp(int dp) {
+        this.dp = dp;
+    }
 }
