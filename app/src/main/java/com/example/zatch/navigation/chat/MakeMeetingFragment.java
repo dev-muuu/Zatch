@@ -31,6 +31,8 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
     private Bundle bundle = new Bundle();
+    private ServiceType type;
+    private MakeMeetingBottomSheet bottomSheet;
 
     private FragmentMakeMeetingBinding binding;
 
@@ -41,6 +43,8 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
 
         binding = FragmentMakeMeetingBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
+        bottomSheet = (MakeMeetingBottomSheet)getParentFragment().getParentFragment();
+        this.type = bottomSheet.getType();
         return view;
     }
 
@@ -48,7 +52,7 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(((MakeMeetingBottomSheet)getParentFragment().getParentFragment()).getIsMeetingMade()) {
+        if(bottomSheet.getIsMeetingMade()) {
             try {
                 MeetingData meetingData = (MeetingData) getArguments().getSerializable("meetingData");
                 initData(meetingData);
@@ -57,7 +61,31 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
             }
         }
 
-        binding.button9.setOnClickListener(v-> makeReservationInfoDialog());
+        Navigation.findNavController(getView()).getCurrentBackStackEntry().getSavedStateHandle()
+                .getLiveData("result").observe(getViewLifecycleOwner(), o -> {
+            onViewStateRestored(bundle);
+            binding.meetingPlace.setText(o.toString());
+        });
+
+        onClickListener();
+
+        if(type == ServiceType.Gatch)
+            initColorZatchToGatch();
+    }
+
+    //기본 세팅인 재치 색상에서 가치로 색상 변경
+    private void initColorZatchToGatch(){
+        binding.timeTitle.setTextColor(getResources().getColor(R.color.zatch_yellow));
+        binding.placeTitle.setTextColor(getResources().getColor(R.color.zatch_yellow));
+        binding.alarmTitle.setTextColor(getResources().getColor(R.color.zatch_yellow));
+        binding.makeMeetingButton.setBackground(getResources().getDrawable(R.drawable.button_yellow));
+        binding.alarmSwitch.setThumbDrawable(getResources().getDrawable(R.drawable.selector_switch_yellow));
+        binding.alarmSwitch.setTrackDrawable(getResources().getDrawable(R.drawable.selector_switch_track_yellow));
+    }
+
+    private void onClickListener(){
+
+        binding.makeMeetingButton.setOnClickListener(v-> makeReservationInfoDialog());
         binding.alarmSwitch.setOnCheckedChangeListener((buttonView, isChecked) ->  {
             if(isChecked)
                 sendDialogMessage();
@@ -76,13 +104,8 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
             onSaveInstanceState(bundle);
             Navigation.findNavController(getView()).navigate(R.id.action_makeMeetingFragment_to_addressSearchFragment);
         });
-
-        Navigation.findNavController(getView()).getCurrentBackStackEntry().getSavedStateHandle()
-                .getLiveData("result").observe(getViewLifecycleOwner(), o -> {
-            onViewStateRestored(bundle);
-            binding.meetingPlace.setText(o.toString());
-        });
     }
+
 
 
     @Override
@@ -120,11 +143,20 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
         binding.meetingPlace.setText(data.getPlace());
         binding.alarmSwitch.setChecked(data.isGiveAlarm());
 
-        binding.makeMeetingMonth.setTextColor(getResources().getColor(R.color.zatch_purple));
-        binding.makeMeetingDate.setTextColor(getResources().getColor(R.color.zatch_purple));
-        binding.makeMeetingHourText.setTextColor(getResources().getColor(R.color.zatch_purple));
-        binding.makeMeetingMinuteText.setTextColor(getResources().getColor(R.color.zatch_purple));
-        binding.meetingPlace.setTextColor(getResources().getColor(R.color.zatch_purple));
+
+        if(type == ServiceType.Zatch) {
+            binding.makeMeetingMonth.setTextColor(getResources().getColor(R.color.zatch_purple));
+            binding.makeMeetingDate.setTextColor(getResources().getColor(R.color.zatch_purple));
+            binding.makeMeetingHourText.setTextColor(getResources().getColor(R.color.zatch_purple));
+            binding.makeMeetingMinuteText.setTextColor(getResources().getColor(R.color.zatch_purple));
+            binding.meetingPlace.setTextColor(getResources().getColor(R.color.zatch_purple));
+        }else{
+            binding.makeMeetingMonth.setTextColor(getResources().getColor(R.color.zatch_yellow));
+            binding.makeMeetingDate.setTextColor(getResources().getColor(R.color.zatch_yellow));
+            binding.makeMeetingHourText.setTextColor(getResources().getColor(R.color.zatch_yellow));
+            binding.makeMeetingMinuteText.setTextColor(getResources().getColor(R.color.zatch_yellow));
+            binding.meetingPlace.setTextColor(getResources().getColor(R.color.zatch_yellow));
+        }
     }
 
     void openCalendarDialog() {
@@ -166,6 +198,7 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_message, null);
         builder.setView(view);
         TextView ok = view.findViewById(R.id.dialogOKButton);
+        ok.setTextColor(getResources().getColor(R.color.zatch_yellow));
         TextView text = view.findViewById(R.id.dialogInfoMessageText);
         text.setText("약속시간 30분 전에 자동으로 알림이 울립니다.");
         ok.setOnClickListener(v ->

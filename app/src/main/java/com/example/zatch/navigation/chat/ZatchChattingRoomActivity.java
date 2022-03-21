@@ -191,7 +191,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
     }
 
     void makeReservationBottomSheet(){
-        MakeMeetingBottomSheet bottomSheet = new MakeMeetingBottomSheet(this, isMeetingMade);
+        MakeMeetingBottomSheet bottomSheet = new MakeMeetingBottomSheet(this, isMeetingMade, ServiceType.Zatch);
         BottomSheetDialogFragment dialogFragment = bottomSheet;
         dialogFragment.show(getSupportFragmentManager(),null);
     }

@@ -12,6 +12,7 @@ import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.zatch.R;
+import com.example.zatch.ServiceType;
 import com.example.zatch.databinding.BottomSheetMakeMeetingBinding;
 import com.example.zatch.navigation.chat.data.MeetingData;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -23,16 +24,17 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment{
     private MakeMeetingBottomSheetListener listener;
     private BottomSheetMakeMeetingBinding binding;
     private boolean isMeetingMade;
-    private BottomSheetBehavior behavior;
     public View view;
+    private ServiceType type;
 
     interface MakeMeetingBottomSheetListener {
         void finishBottomSheet(MeetingData meetingData);
     }
 
-    public MakeMeetingBottomSheet(MakeMeetingBottomSheetListener listener, boolean isMeetingMade) {
+    public MakeMeetingBottomSheet(MakeMeetingBottomSheetListener listener, boolean isMeetingMade, ServiceType type) {
         this.listener = listener;
         this.isMeetingMade = isMeetingMade;
+        this.type = type;
     }
 
     @Nullable
@@ -46,6 +48,7 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment{
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
 
         if(isMeetingMade) {
@@ -54,37 +57,15 @@ public class MakeMeetingBottomSheet extends BottomSheetDialogFragment{
             NavHostFragment.findNavController(getChildFragmentManager().findFragmentById(R.id.makeMeetingContainer)).setGraph(navGraph);
         }else{
         }
-
-//        behavior = BottomSheetBehavior.from((View)view.getParent());
-//        System.out.println(behaviourView.getY());
-//
-//        behavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-//            @Override
-//            public void onStateChanged(@NonNull View bottomSheet, int newState) {
-////                System.out.println(bottomSheet.getHeight());
-//                if(newState == BottomSheetBehavior.STATE_DRAGGING){
-//                    Log.e("drag","drag");
-////                    System.out.println(behaviourView.getY());
-////                    System.out.println(binding.placeCheckFinishButton.getY());
-//                }else if(newState == BottomSheetBehavior.STATE_EXPANDED){
-//                    Log.e("expand","expand");
-////                    System.out.println(bottomHeight);
-////                    System.out.println(behaviourView.getY());
-////                    System.out.println(binding.placeCheckFinishButton.getY());
-//                }else if(newState == BottomSheetBehavior.STATE_HALF_EXPANDED){
-//                    Log.e("half","half");
-////                    System.out.println(bottomHeight);
-////                    System.out.println(behaviourView.getY());
-////                    System.out.println(binding.placeCheckFinishButton.getY());
-//                }
-
     }
 
     public View sendBehaviourView(){
         return (View)this.view.getParent();
     }
 
-
+    public ServiceType getType(){
+        return this.type;
+    }
 
     public boolean getIsMeetingMade(){
         return this.isMeetingMade;

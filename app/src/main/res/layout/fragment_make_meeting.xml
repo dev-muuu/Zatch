@@ -137,15 +137,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="14dp"
-            android:thumb="@drawable/selector_switch"
-            android:track="@drawable/selector_switch_track"
+            android:thumb="@drawable/selector_switch_purple"
+            android:track="@drawable/selector_switch_track_purple"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <android.widget.Button
-        android:id="@+id/button9"
+        android:id="@+id/makeMeetingButton"
         style="@style/ZatchPurpleButton_74"
         android:layout_marginBottom="24dp"
         android:layout_marginTop="28dp"

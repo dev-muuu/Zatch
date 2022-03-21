@@ -34,13 +34,15 @@ import com.example.zatch.databinding.LayoutGatchTutorialBinding;
 import com.example.zatch.navigation.chat.data.ChatItemData;
 import com.example.zatch.navigation.chat.data.ChatViewType;
 import com.example.zatch.navigation.chat.data.GatchDepositData;
+import com.example.zatch.navigation.chat.data.MeetingData;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GatchChattingRoomActivity extends AppCompatActivity implements DepositBottomSheet.BottomSheetDepositListener{
+public class GatchChattingRoomActivity extends AppCompatActivity
+        implements DepositBottomSheet.BottomSheetDepositListener, MakeMeetingBottomSheet.MakeMeetingBottomSheetListener {
 
     private ActivityGatchChattingRoomBinding binding;
     private LayoutGatchTutorialBinding tutorialBinding;
@@ -52,6 +54,8 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
 
     private final int RequestCodeGallery = 100;
     private final int RequestCodeCamera = 200;
+
+    private boolean isMeetingMade = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -142,7 +146,11 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
             Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, RequestCodeCamera);
         });
-
+        binding.moreEtcMakeMeeting.setOnClickListener(v->{
+            MakeMeetingBottomSheet bottomSheet = new MakeMeetingBottomSheet(this,isMeetingMade,ServiceType.Gatch);
+            BottomSheetDialogFragment dialogFragment = bottomSheet;
+            dialogFragment.show(getSupportFragmentManager(),null);
+        });
         binding.etcButton.setOnClickListener(v->{
             drawerBinding.drawerGatch.openDrawer(Gravity.RIGHT);
         });
@@ -274,5 +282,10 @@ public class GatchChattingRoomActivity extends AppCompatActivity implements Depo
         ClipData clipData = ClipData.newPlainText("accountNumber",bankData);
         clipboardManager.setPrimaryClip(clipData);
         Toast.makeText(this, "계좌번호가 클립보드에 복사되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void finishBottomSheet(MeetingData meetingData) {
+
     }
 }

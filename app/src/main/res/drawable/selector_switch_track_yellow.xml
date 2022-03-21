@@ -3,9 +3,9 @@
 
     <item
         android:state_checked="true"
-        android:drawable="@drawable/drawable_switch_on"/>
+        android:drawable="@drawable/drawable_switch_track_on_yellow"/>
     <item
         android:state_checked="false"
-        android:drawable="@drawable/drawable_switch_off"/>
+        android:drawable="@drawable/drawable_switch_track_off"/>
 
 </selector>

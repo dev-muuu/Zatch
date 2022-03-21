@@ -54,21 +54,21 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/addressRecyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/c0"
-        app:layout_constraintVertical_bias="0.0" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/addressRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/c0"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <android.widget.Button
-        android:id="@+id/placeCheckFinishButton"
-        style="@style/ZatchPurpleButton_74"
-        android:layout_marginBottom="36dp"
-        android:text="완료"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="74dp" />
+        <android.widget.Button
+            android:id="@+id/placeCheckFinishButton"
+            style="@style/ZatchPurpleButton_74"
+            android:layout_marginBottom="36dp"
+            android:text="완료"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="74dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

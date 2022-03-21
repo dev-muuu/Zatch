@@ -1,5 +1,6 @@
 package com.example.zatch.navigation.chat;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,7 +9,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 import com.example.zatch.ReturnPx;
+import com.example.zatch.ServiceType;
 import com.example.zatch.databinding.FragmentFindPlaceResultBinding;
 import com.example.zatch.databinding.ItemFindPlaceResultBinding;
 import com.example.zatch.navigation.chat.data.SearchPlaceData;
@@ -34,9 +35,16 @@ public class AddressResultFragment extends Fragment {
     public FragmentFindPlaceResultBinding binding;
     private List<SearchPlaceData> placeList;
     private String searchPlace;
-    public int selectItemPosition;
     private int height;
+    private int buttonNewTop;
     private BottomSheetBehavior behavior;
+    private ServiceType type;
+    public boolean doFirstDrag = false;
+    int navigationHeight;
+
+    //item 선택 위한 변수
+    public static final int NULL = -1;
+    public int selectItemPosition = NULL;
 
     static final String BASE_URL = "https://dapi.kakao.com/";
     static final String API_KEY = "KakaoAK de8b17f677631d70f9545c4b19608dcf";
@@ -52,6 +60,7 @@ public class AddressResultFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentFindPlaceResultBinding.inflate(inflater,container,false);
+        type = ((MakeMeetingBottomSheet) getParentFragment().getParentFragment()).getType();
         return binding.getRoot();
     }
 
@@ -71,30 +80,37 @@ public class AddressResultFragment extends Fragment {
         //recyclerview height잡기
         ReturnPx pxClass = new ReturnPx(getActivity());
         height = pxClass.returnDisplayHeight();
-        float buttonHeight = pxClass.returnPx(72);
+        System.out.println(height);
+        navigationHeight = pxClass.getNavigationBarHeight();
+        int statusHeight = pxClass.getStatusBarHeight();
+        System.out.println(navigationHeight);
+
+        int buttonHeight = (int)pxClass.returnPx(72);
 
 
         View behaviourView = ((MakeMeetingBottomSheet) getParentFragment().getParentFragment()).sendBehaviourView();
         float viewHeight = behaviourView.getY() + behaviourView.getHeight();
-        float viewGetY = behaviourView.getY();
         behavior = BottomSheetBehavior.from(behaviourView);
 
-        float buttonTop = viewHeight - buttonHeight;
-        float buttonNewTop = viewGetY + buttonHeight;
-        binding.placeCheckFinishButton.setY(buttonNewTop);
+        int peekHeight = height/2;
+        buttonNewTop = peekHeight - buttonHeight;
+//        int buttonTop = (int)viewHeight - buttonHeight;
+        //bottomsheet height, display height 다른 이유는 navigation bar size 때
+//        int buttonTop = (int)height - 2*buttonHeight;
+        int buttonTop = (int)height - buttonHeight - navigationHeight - statusHeight;
+
+        behavior.setPeekHeight(peekHeight);
 
         behavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if(newState == BottomSheetBehavior.STATE_DRAGGING){
-                    Log.e("drag","drag");
-                }else if(newState == BottomSheetBehavior.STATE_EXPANDED){
+                doFirstDrag = true;
+                if(newState == BottomSheetBehavior.STATE_EXPANDED){
                     Log.e("expand","expand");
                     binding.placeCheckFinishButton.setY(buttonTop);
                 }else if(newState == BottomSheetBehavior.STATE_SETTLING){
                     Log.e("settling","settling");
-                    float newHeight = buttonNewTop;
-                    binding.placeCheckFinishButton.setY(newHeight);
+                    binding.placeCheckFinishButton.setY(buttonNewTop);
                 }
             }
 
@@ -103,6 +119,20 @@ public class AddressResultFragment extends Fragment {
 
             }
         });
+
+        if(type == ServiceType.Gatch)
+            initColorByType();
+
+    }
+
+    private void initColorByType(){
+        binding.searchTextField.setBackground(getResources().getDrawable(R.drawable.text_background_stroke_yellow_8));
+        binding.placeCheckFinishButton.setBackground(getResources().getDrawable(R.drawable.button_yellow));
+
+        for(Drawable d :binding.searchTextField.getCompoundDrawables()) {
+            if(d != null)
+                d.setTint(getResources().getColor(R.color.zatch_yellow));
+        }
     }
 
     //장소 검색
@@ -121,7 +151,7 @@ public class AddressResultFragment extends Fragment {
             @Override
             public void onResponse(Call<ResultSearchKeyword> call, Response<ResultSearchKeyword> response) {
                 storePlaceData(response.body());
-                int recyclerviewHeight = height - binding.c0.getHeight();
+                int recyclerviewHeight = height - binding.c0.getHeight() - navigationHeight;
                 binding.addressRecyclerview.getLayoutParams().height = recyclerviewHeight;
                 binding.addressRecyclerview.setAdapter(new FindPlaceAdapter());
             }
@@ -151,21 +181,36 @@ public class AddressResultFragment extends Fragment {
                 this.view = view;
                 this.adapterBinding = ItemFindPlaceResultBinding.bind(view);
                 view.setOnClickListener(v->{
-                    if(selectItemPosition != getAdapterPosition()) {
-                        view.setBackgroundColor(getResources().getColor(R.color.black_5));
-                        selectItemPosition = getAdapterPosition();
-                        binding.placeCheckFinishButton.setVisibility(View.VISIBLE);
+
+                    //처음 검색결과 보였을 때, 완료 버튼 높이 설정 코
+                    if(!doFirstDrag)
+                        binding.placeCheckFinishButton.setY(buttonNewTop);
+                    //item 선택하는 경우 짜기
+                    if(selectItemPosition != NULL) {
+//                        binding.placeCheckFinishButton.setY(buttonNewTop);
+                        if (selectItemPosition != getAdapterPosition()) {
+                            view.setBackgroundColor(getResources().getColor(R.color.black_5));
+                            selectItemPosition = getAdapterPosition();
+                            checkedView.setBackgroundColor(getResources().getColor(R.color.white));
+                            checkedView = this.view;
+                            binding.placeCheckFinishButton.setVisibility(View.VISIBLE);
+                        } else {
+                            selectItemPosition = NULL;
+                            checkedView = null;
+                            view.setBackgroundColor(getResources().getColor(R.color.white));
+                            binding.placeCheckFinishButton.setVisibility(View.INVISIBLE);
+                        }
                     }else{
-                        selectItemPosition = -1;
-                        view.setBackgroundColor(getResources().getColor(R.color.white));
-                        binding.placeCheckFinishButton.setVisibility(View.GONE);
+                        selectItemPosition = getAdapterPosition();
+                        view.setBackgroundColor(getResources().getColor(R.color.black_5));
+                        binding.placeCheckFinishButton.setVisibility(View.VISIBLE);
+                        checkedView = this.view;
                     }
 
                 });
             }
 
             public void setData(SearchPlaceData data){
-                Log.e("2","2");
                 this.view.setBackgroundColor(getResources().getColor(R.color.white));
                 this.adapterBinding.placeName.setText(data.getPlaceName());
                 this.adapterBinding.placeAddress.setText(data.getAddressName());

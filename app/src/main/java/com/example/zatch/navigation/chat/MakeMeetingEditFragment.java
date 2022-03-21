@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.zatch.R;
+import com.example.zatch.ServiceType;
 import com.example.zatch.databinding.FragmentMakeMeetingEditBinding;
 import com.example.zatch.navigation.chat.data.MeetingData;
 
@@ -18,6 +19,7 @@ public class MakeMeetingEditFragment extends Fragment {
 
     private FragmentMakeMeetingEditBinding binding;
     private MeetingData meetingData;
+    private ServiceType type;
 
     @Nullable
     @Override
@@ -25,7 +27,8 @@ public class MakeMeetingEditFragment extends Fragment {
         binding = FragmentMakeMeetingEditBinding.inflate(inflater,container,false);
 
         //임시 data set
-        meetingData = new MeetingData("4","22","13","56","성신여대 입구역",true);
+        meetingData = new MeetingData("4","22","13","56","성신여대입구역",true);
+        type = ((MakeMeetingBottomSheet) getParentFragment().getParentFragment()).getType();
         return binding.getRoot();
     }
 
@@ -33,7 +36,7 @@ public class MakeMeetingEditFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.button9.setOnClickListener(v->{
+        binding.makeMeetingButton.setOnClickListener(v->{
             Bundle bundle = new Bundle();
             bundle.putSerializable("meetingData",meetingData);
             Navigation.findNavController(getView()).navigate(R.id.action_makeMeetingEditFragment_to_makeMeetingFragment,bundle);
@@ -46,5 +49,14 @@ public class MakeMeetingEditFragment extends Fragment {
         binding.meetingPlace.setText(meetingData.getPlace());
         binding.alarmSwitch.setChecked(meetingData.isGiveAlarm());
         binding.alarmSwitch.setEnabled(false);
+
+        if(type == ServiceType.Gatch)
+            initColor();
+    }
+
+    private void initColor(){
+        binding.makeMeetingButton.setBackground(getResources().getDrawable(R.drawable.button_yellow));
+        binding.alarmSwitch.setThumbDrawable(getResources().getDrawable(R.drawable.selector_switch_yellow));
+        binding.alarmSwitch.setTrackDrawable(getResources().getDrawable(R.drawable.selector_switch_track_yellow));
     }
 }
