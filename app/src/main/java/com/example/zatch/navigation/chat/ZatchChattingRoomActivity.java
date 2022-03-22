@@ -1,6 +1,7 @@
 package com.example.zatch.navigation.chat;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -19,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.zatch.PNDialogMessage;
+import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.ServiceType;
 import com.example.zatch.databinding.ActivityZatchChattingRoomBinding;
 import com.example.zatch.databinding.DrawerLayoutChattingRoomZatchBinding;
@@ -29,6 +32,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ZatchChattingRoomActivity extends AppCompatActivity implements MakeMeetingBottomSheet.MakeMeetingBottomSheetListener,
         RoomEtcBottomSheet.RoomEtcBottomSheetListener {
@@ -78,13 +82,20 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
         chattingBinding.chattingRecycler.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         chattingBinding.chattingRecycler.setAdapter(adapter);
 
+        //chatting member recycer
+        List<Boolean> memberList = new ArrayList<Boolean>(){};
+        memberList.add(true);
+        memberList.add(false);
+        binding.memberRecyclerview.setLayoutManager(new LinearLayoutManager(ZatchChattingRoomActivity.this));
+        binding.memberRecyclerview.setAdapter(new ChattingMemberListAdapter(ServiceType.Zatch,memberList,binding.drawerZatch,getSupportFragmentManager(),this));
+
         //clicklistener 구현 메서드
         onClickListenerInit();
     }
 
     private void onClickListenerInit(){
 
-        chattingBinding.chattingMoreEtcButton.setOnClickListener(v->{
+        chattingBinding.chattingMoreEtcButton.setOnClickListener(v-> {
             if(chattingBinding.chattingMoreEtcButton.isChecked())
                 chattingBinding.chattingMoreEtcLayout.setVisibility(View.VISIBLE);
             else
@@ -115,6 +126,33 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
         chattingBinding.moreEtcGallery.setOnClickListener(v->{
             permissionCheck();
         });
+
+        binding.exitRoomZatch.setOnClickListener(v->{
+            binding.drawerZatch.closeDrawer(Gravity.RIGHT);
+            showNegativePositiveDialog(PNDialogMessage.Exit);
+        });
+    }
+    
+    void showNegativePositiveDialog(PNDialogMessage type){
+        PositiveNegativeDialog dialogClass = new PositiveNegativeDialog(ZatchChattingRoomActivity.this, ServiceType.Zatch, type);
+        AlertDialog dialog = dialogClass.createDialog();
+        dialogClass.getNegative().setOnClickListener(v->{
+            dialog.dismiss();
+        });
+        dialogClass.getPositive().setOnClickListener(v->{
+            positiveActionByType(type, dialog);
+        });
+
+        dialog.show();
+    }
+
+    private void positiveActionByType(PNDialogMessage type, AlertDialog dialog){
+        switch (type){
+            case Exit:
+                dialog.dismiss();
+                finish();
+                break;
+        }
     }
 
     private void permissionCheck(){
@@ -218,4 +256,7 @@ public class ZatchChattingRoomActivity extends AppCompatActivity implements Make
         this.isMeetingMade = true;
         this.meetingData = meetingData;
     }
+
 }
+
+

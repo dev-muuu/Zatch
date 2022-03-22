@@ -109,7 +109,7 @@ public class GatchChattingRoomActivity extends AppCompatActivity
         memberList.add(false);
         memberList.add(false);
         drawerBinding.memberRecyclerview.setLayoutManager(new LinearLayoutManager(GatchChattingRoomActivity.this));
-        drawerBinding.memberRecyclerview.setAdapter(new ChattingMemberListAdapter(memberList,getSupportFragmentManager()));
+        drawerBinding.memberRecyclerview.setAdapter(new ChattingMemberListAdapter(ServiceType.Gatch,memberList,drawerBinding.drawerGatch,getSupportFragmentManager(),this));
 
     }
 
@@ -155,8 +155,10 @@ public class GatchChattingRoomActivity extends AppCompatActivity
             drawerBinding.drawerGatch.openDrawer(Gravity.RIGHT);
         });
 
-        drawerBinding.exitRoom.setOnClickListener(v->
-            showNegativePositiveDialog(PNDialogMessage.Exit));
+        drawerBinding.exitRoom.setOnClickListener(v->{
+            drawerBinding.drawerGatch.closeDrawer(Gravity.RIGHT);
+            showNegativePositiveDialog(PNDialogMessage.Exit);
+        });
     }
 
     private void showDepositBottomSheet(){
