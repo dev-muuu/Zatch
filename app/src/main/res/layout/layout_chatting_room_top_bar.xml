@@ -1,0 +1,98 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/c1"
+    android:layout_width="match_parent"
+    android:layout_height="56dp">
+
+    <android.widget.Button
+        android:id="@+id/ChatBackButton"
+        style="@style/backArrowButton_20"/>
+
+    <TextView
+        android:id="@+id/textView81"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="한민지"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ChatBackButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/townText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="18dp"
+        android:text="중계동"
+        android:textColor="@color/zatch_purple"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/textView81"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/isReservationMade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/text_background_purple_radius_10"
+        android:text="예약중"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/roomEtcButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/roomEtcButton"
+        style="@style/dotButton"/>
+
+    <RelativeLayout
+        android:id="@+id/gatchRoomHostLayout"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/gatchRefuseButton"
+            style="@style/gatchRefuseAcceptButtonText"
+            android:background="@drawable/drawable_timer_black"
+            android:text="거절" />
+
+        <TextView
+            android:id="@+id/gatchAcceptButton"
+            style="@style/gatchRefuseAcceptButtonText"
+            android:layout_marginLeft="4dp"
+            android:layout_toRightOf="@id/gatchRefuseButton"
+            android:background="@drawable/drawble_timer_red"
+            android:text="수락" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/gatchRequestCancelButton"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/drawable_timer_black"
+        android:text="요청취소"
+        android:textColor="@color/white"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

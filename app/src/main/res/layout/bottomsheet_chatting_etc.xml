@@ -14,14 +14,19 @@
     <TextView
         android:id="@+id/declarationButton"
         style="@style/chattingRoomEtcFuncText"
+        android:layout_marginBottom="36dp"
         android:text="신고하기"
-        app:layout_constraintTop_toBottomOf="@id/blockButton" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/blockButton"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="181dp" />
 
     <TextView
         android:id="@+id/exitButton"
         style="@style/chattingRoomEtcFuncText"
         android:layout_marginBottom="36dp"
         android:text="채팅방 내보내기"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/declarationButton"
         tools:layout_editor_absoluteX="168dp" />

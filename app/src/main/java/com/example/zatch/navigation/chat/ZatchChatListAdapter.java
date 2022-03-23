@@ -2,6 +2,7 @@ package com.example.zatch.navigation.chat;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
+import com.example.zatch.ServiceType;
 
 public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdapter.ViewHolder>{
 
@@ -71,7 +73,8 @@ public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdap
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ZatchChattingRoomActivity.class);
+                Intent intent = new Intent(context, ChattingRoomActivity.class);
+                intent.putExtra("service", ServiceType.Zatch);
                 context.startActivity(intent);
             }
         });

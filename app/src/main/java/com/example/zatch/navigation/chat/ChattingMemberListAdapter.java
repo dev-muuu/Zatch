@@ -21,14 +21,14 @@ public class ChattingMemberListAdapter extends RecyclerView.Adapter<ChattingMemb
 
     private List<Boolean> localDataSet;
     public FragmentManager manager;
-    public ServiceType type;
+    public ServiceType serviceType;
     public Context context;
     private DrawerLayout drawerBinding;
 
-    public ChattingMemberListAdapter(ServiceType type, List<Boolean> dataSet, DrawerLayout drawerBinding, FragmentManager manager, Context context) {
+    public ChattingMemberListAdapter(ServiceType serviceType, List<Boolean> dataSet, DrawerLayout drawerBinding, FragmentManager manager, Context context) {
         this.localDataSet = dataSet;
         this.manager = manager;
-        this.type = type;
+        this.serviceType = serviceType;
         this.context = context;
         this.drawerBinding = drawerBinding;
     }
@@ -47,7 +47,7 @@ public class ChattingMemberListAdapter extends RecyclerView.Adapter<ChattingMemb
 
         public void setMemberData(boolean data){
             //zatch일 경우, 색상 변경
-            if(type == ServiceType.Zatch){
+            if(serviceType == ServiceType.Zatch){
                 binding.isOwner.setTextColor(context.getResources().getColor(R.color.zatch_purple));
                 binding.isOwner.setBackground(context.getResources().getDrawable(R.drawable.text_background_stroke_purple_10));
                 binding.imageView19.setImageResource(R.drawable.profile_purple);
@@ -68,7 +68,7 @@ public class ChattingMemberListAdapter extends RecyclerView.Adapter<ChattingMemb
         }
 
         private void makeRoomEtcBottomSheet(){
-            RoomEtcBottomSheet bottomSheet = new RoomEtcBottomSheet(this, type);
+            RoomEtcBottomSheet bottomSheet = new RoomEtcBottomSheet(this, serviceType);
             BottomSheetDialogFragment dialogFragment = bottomSheet;
             dialogFragment.show(manager,null);
             drawerBinding.closeDrawer(Gravity.RIGHT);

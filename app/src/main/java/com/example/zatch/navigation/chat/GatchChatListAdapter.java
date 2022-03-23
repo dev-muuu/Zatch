@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,8 @@ public class GatchChatListAdapter extends RecyclerView.Adapter<GatchChatListAdap
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, GatchChattingRoomActivity.class);
+                Intent intent = new Intent(context, ChattingRoomActivity.class);
+                intent.putExtra("service",ServiceType.Gatch);
                 context.startActivity(intent);
             }
         });
@@ -134,7 +136,8 @@ public class GatchChatListAdapter extends RecyclerView.Adapter<GatchChatListAdap
             localDataSet.set(getAdapterPosition(),GatchJoinState.AdminAccept);
             changeAccessLayout();
 
-            Intent intent = new Intent(context, GatchChattingRoomActivity.class);
+            Intent intent = new Intent(context, ChattingRoomActivity.class);
+            intent.putExtra("service",ServiceType.Gatch);
             context.startActivity(intent);
         }
 
