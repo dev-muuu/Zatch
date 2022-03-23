@@ -2,7 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_zatch"
+    android:id="@+id/drawerService"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -10,12 +10,12 @@
 
     <include
         android:id="@+id/activityChattingLayout"
-        layout="@layout/activity_zatch_chatting_room"
+        layout="@layout/activity_chatting_room"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/drawer_list"
+        android:id="@+id/drawerMemberList"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,10 +48,10 @@
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="@drawable/vector_126"
-            app:layout_constraintBottom_toTopOf="@id/exitRoomZatch" />
+            app:layout_constraintBottom_toTopOf="@id/exitChattingRoom" />
 
         <TextView
-            android:id="@+id/exitRoomZatch"
+            android:id="@+id/exitChattingRoom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="채팅방 나가기"

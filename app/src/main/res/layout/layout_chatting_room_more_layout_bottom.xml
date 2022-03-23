@@ -6,128 +6,128 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/b1"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_marginTop="16dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="44dp"
-    app:layout_constraintStart_toStartOf="parent">
-
-    <android.widget.Button
-        android:id="@+id/moreEtcCamera"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/camera_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView89"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/b1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="카메라"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/moreEtcCamera" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginStart="44dp"
+        app:layout_constraintStart_toStartOf="parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/b2"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_marginTop="16dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
-    app:layout_constraintLeft_toRightOf="@id/b1">
+        <android.widget.Button
+            android:id="@+id/moreEtcCamera"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/camera_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <android.widget.Button
-        android:id="@+id/moreEtcGallery"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/album_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/textView89"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="카메라"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/moreEtcCamera" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView102"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/b2"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="갤러리"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/moreEtcGallery" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginLeft="20dp"
+        app:layout_constraintLeft_toRightOf="@id/b1">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/b3"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_marginTop="16dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
-    app:layout_constraintLeft_toRightOf="@id/b2">
+        <android.widget.Button
+            android:id="@+id/moreEtcGallery"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/album_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <android.widget.Button
-        android:id="@+id/moreEtcMakeMeeting"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/calendar_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/textView102"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="갤러리"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/moreEtcGallery" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView103"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/b3"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="거래약속"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/moreEtcMakeMeeting" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginLeft="20dp"
+        app:layout_constraintLeft_toRightOf="@id/b2">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/depositLayout"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_marginTop="16dp"
-    android:visibility="invisible"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="20dp"
-    app:layout_constraintLeft_toRightOf="@id/b3">
+        <android.widget.Button
+            android:id="@+id/moreEtcMakeMeeting"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/calendar_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <android.widget.Button
-        android:id="@+id/moreEtcDeposit"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/deposit_design"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/textView103"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="거래약속"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/moreEtcMakeMeeting" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView104"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/depositLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="입금관리"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/moreEtcDeposit" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginLeft="20dp"
+        app:layout_constraintLeft_toRightOf="@id/b3">
+
+        <android.widget.Button
+            android:id="@+id/moreEtcDeposit"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/deposit_design"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView104"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="입금관리"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/moreEtcDeposit" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

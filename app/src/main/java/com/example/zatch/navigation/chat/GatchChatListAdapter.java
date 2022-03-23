@@ -154,7 +154,7 @@ public class GatchChatListAdapter extends RecyclerView.Adapter<GatchChatListAdap
         }
 
         private void changeAccessLayout(){
-            
+
             acceptLayout.setVisibility(View.GONE);
 
             ConstraintLayout.LayoutParams timeParams = (ConstraintLayout.LayoutParams) time.getLayoutParams();
