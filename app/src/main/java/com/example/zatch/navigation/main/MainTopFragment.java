@@ -1,6 +1,7 @@
 package com.example.zatch.navigation.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -68,6 +69,12 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
 
         binding.searchButton.setOnClickListener(v->{
             isGatchFragmentCalled();
+        });
+
+        binding.bellButton.setOnClickListener(v->{
+            Intent intent = new Intent(getContext(), NotificationActivity.class);
+            startActivity(intent);
+
         });
 
         binding.searchGatchFieldText.setOnEditorActionListener((v, actionId, event) -> {

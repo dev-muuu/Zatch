@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/r0"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <android.widget.Button
+            android:id="@+id/button3"
+            style="@style/backArrowButton_20"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:id="@+id/textView83"
+            style="@style/myPageActivityTitle"
+            android:text="알림" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notificationRecycer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/r0"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/emptyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/r0">
+
+        <TextView
+            android:id="@+id/textView82"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="새로운 알림이 없습니다."
+            android:textSize="13dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/vector_138"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView82" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

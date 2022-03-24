@@ -57,6 +57,7 @@
         <activity android:name=".navigation.my_zatch.my_zatch_detail"/>
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".navigation.chat.ChattingRoomActivity" />
+        <activity android:name=".navigation.main.NotificationActivity" />
 <!--        <activity android:name=".navigation.chat.ZatchChattingRoomActivity" />-->
 <!--        <activity android:name=".navigation.chat.GatchChattingRoomActivity" />-->
         <activity

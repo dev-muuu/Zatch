@@ -20,15 +20,8 @@ public class MoreGatchAdapter extends RecyclerView.Adapter<MoreGatchAdapter.Gatc
 
     public static class GatchDetailViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView textView;
-
         public GatchDetailViewHolder(@NonNull View view) {
             super(view);
-//            this.textView = view.findViewById(R.id.textView62);
-        }
-
-        public TextView getTextView() {
-            return textView;
         }
 
     }
@@ -38,7 +31,6 @@ public class MoreGatchAdapter extends RecyclerView.Adapter<MoreGatchAdapter.Gatc
         this.fragment = fragment;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public GatchDetailViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
@@ -65,15 +57,8 @@ public class MoreGatchAdapter extends RecyclerView.Adapter<MoreGatchAdapter.Gatc
         dialog.show(fragment.getParentFragmentManager(),null);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(GatchDetailViewHolder viewHolder, final int position) {
-
-        String data = localDataSet[position];
-
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-//        viewHolder.getTextView().setText(data);
 
     }
 
