@@ -12,7 +12,7 @@
         android:layout_height="56dp">
 
         <android.widget.Button
-            android:id="@+id/button3"
+            android:id="@+id/backArrowButton"
             style="@style/backArrowButton_20"
             android:layout_centerVertical="true" />
 

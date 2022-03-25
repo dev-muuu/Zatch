@@ -15,16 +15,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.zatch.R;
+import com.example.zatch.navigation.my_zatch.gatchDataItem;
 
 import java.util.ArrayList;
 
 public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.ViewHolder>{
-    private ArrayList<Uri> mData = null ;
+    private ArrayList<gatchDataItem> mData = null ;
     private Context mContext = null ;
 
+    public void clearAdapter(){
+        mData.clear();
+        notifyDataSetChanged();
+    }
+
     // 생성자에서 데이터 리스트 객체, Context를 전달받음.
-    MultiImageAdapter(ArrayList<Uri> list, Context context) {
-        mData = list ;
+    MultiImageAdapter(ArrayList<gatchDataItem> list, Context context) {
+        mData = list;
         mContext = context;
     }
 
@@ -32,27 +38,23 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         CheckBox star;
-        TextView proof;
+        TextView text;
         ViewHolder(View itemView) {
             super(itemView) ;
-
             // 뷰 객체에 대한 참조.
             image = itemView.findViewById(R.id.uploaded_img);
             star = itemView.findViewById(R.id.icon_star);
-            proof = itemView.findViewById(R.id.img_item_text);
-            star.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (star.isChecked()){
-                        proof.setVisibility(View.VISIBLE);
-                    } else {
-                        proof.setVisibility(View.INVISIBLE);
-                    }
-                }
-            });
+            text = itemView.findViewById(R.id.img_item_text);
+
+            if (star.isChecked()){
+                star.setVisibility(View.VISIBLE);
+                text.setVisibility(View.VISIBLE);
+            } else {
+                text.setVisibility(View.INVISIBLE);
+            }
+
         }
     }
-
 
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     // LayoutInflater - XML에 정의된 Resource(자원) 들을 View의 형태로 반환.
@@ -68,9 +70,17 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
 
     // onBindViewHolder() - position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
     @Override
-    public void onBindViewHolder(MultiImageAdapter.ViewHolder holder, int position) {
-        Uri image_uri = mData.get(position) ;
-
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final gatchDataItem item = mData.get(position);
+        Uri image_uri = item.getImage_uri();
+        holder.star.setOnCheckedChangeListener(null);
+        holder.star.setChecked(item.isSelected());
+        holder.star.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                item.setCheckbox(b);
+            }
+        });
         Glide.with(mContext)
                 .load(image_uri)
                 .into(holder.image);

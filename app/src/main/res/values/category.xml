@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category">
+        <item>식품 | 조리</item>
+        <item>식품 | 비조리</item>
+        <item>생활용품</item>
+        <item>가구/인테리어</item>
+        <item>디지털기기</item>
+        <item>잡화</item>
+        <item>의류</item>
+        <item>뷰티/미용</item>
+        <item>도서/문구류</item>
+        <item>문화생활(티켓,음반,악기)</item>
+        <item>게임/취미</item>
+        <item>스포츠 및 레저</item>
+        <item>반려동물용품</item>
+        <item>식물/원예용품</item>
+        <item>차량 용품</item>
+        <item>기타 물품</item>
+    </string-array>
+</resources>

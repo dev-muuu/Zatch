@@ -40,5 +40,9 @@ public class NotificationActivity extends AppCompatActivity {
             binding.notificationRecycer.setLayoutManager(new LinearLayoutManager(NotificationActivity.this));
             binding.notificationRecycer.setAdapter(new NotificationAdapter(dataList, NotificationActivity.this));
         }
+
+        binding.backArrowButton.setOnClickListener(v->{
+            finish();
+        });
     }
 }

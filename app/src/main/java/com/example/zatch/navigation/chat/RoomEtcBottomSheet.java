@@ -15,7 +15,7 @@ import com.example.zatch.PNDialogMessage;
 import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
-import com.example.zatch.databinding.BottomsheetChattingEtcBinding;
+import com.example.zatch.databinding.BottomSheetChattingEtcBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 enum EtcFunc{
@@ -28,7 +28,7 @@ public class RoomEtcBottomSheet extends BottomSheetDialogFragment {
 
     private RoomEtcBottomSheetListener listener;
     private ServiceType serviceType;
-    private BottomsheetChattingEtcBinding binding;
+    private BottomSheetChattingEtcBinding binding;
 
     public RoomEtcBottomSheet(RoomEtcBottomSheetListener listener, ServiceType serviceType) {
         this.listener = listener;
@@ -44,7 +44,7 @@ public class RoomEtcBottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        binding = BottomsheetChattingEtcBinding.inflate(getLayoutInflater());
+        binding = BottomSheetChattingEtcBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
 

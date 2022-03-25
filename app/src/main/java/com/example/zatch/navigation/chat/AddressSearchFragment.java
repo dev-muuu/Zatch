@@ -13,19 +13,20 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.example.zatch.R;
-import com.example.zatch.databinding.FragmentFindPlaceSearchBinding;
+import com.example.zatch.databinding.BottomSheetFragmentFindPlaceSearchBinding;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
+import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
 
 public class AddressSearchFragment extends Fragment {
 
-    private FragmentFindPlaceSearchBinding binding;
+    private BottomSheetFragmentFindPlaceSearchBinding binding;
     private InputMethodManager inputMethodManager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentFindPlaceSearchBinding.inflate(inflater,container,false);
+        binding = BottomSheetFragmentFindPlaceSearchBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
 
@@ -36,7 +37,7 @@ public class AddressSearchFragment extends Fragment {
 
         binding.inputPlaceText.setOnEditorActionListener((v, actionId, event) -> {
             switch (actionId){
-                case IME_ACTION_DONE:
+                case IME_ACTION_SEARCH:
                     binding.inputPlaceText.setCursorVisible(false);
                     isSearchFieldContainContent();
                     return true;

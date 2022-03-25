@@ -20,7 +20,8 @@ import com.example.zatch.PNDialogMessage;
 import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
-import com.example.zatch.databinding.FragmentMakeMeetingBinding;
+import com.example.zatch.databinding.BottoSheetFragmentMakeMeetingBinding;
+import com.example.zatch.databinding.BottoSheetFragmentMakeMeetingBinding;
 import com.example.zatch.navigation.chat.data.MeetingData;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
@@ -34,14 +35,15 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
     private ServiceType type;
     private MakeMeetingBottomSheet bottomSheet;
 
-    private FragmentMakeMeetingBinding binding;
+    private BottoSheetFragmentMakeMeetingBinding binding;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        binding = FragmentMakeMeetingBinding.inflate(inflater,container,false);
+        binding = BottoSheetFragmentMakeMeetingBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
         bottomSheet = (MakeMeetingBottomSheet)getParentFragment().getParentFragment();
         this.type = bottomSheet.getType();

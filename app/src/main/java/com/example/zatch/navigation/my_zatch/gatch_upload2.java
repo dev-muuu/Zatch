@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import androidx.annotation.Nullable;
 import com.example.zatch.R;
 import com.example.zatch.navigation.my_zatch.data.GatchRegisterData;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -29,6 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class gatch_upload2 extends Activity {
     Dialog dialog;
+    ArrayList<gatchDataItem> arrayList;
 
     private static final String BASE_URL = "http://ec2-3-34-33-239.ap-northeast-2.compute.amazonaws.com:3000";
 
@@ -40,6 +43,7 @@ public class gatch_upload2 extends Activity {
         Intent intent= getIntent();
         String name = intent.getStringExtra("name");
         String category = intent.getStringExtra("category");
+
         int[] infoArr = intent.getIntArrayExtra("info");
         boolean purchase_state[] = intent.getBooleanArrayExtra("purchase_state");
         boolean pstate = purchase_state[0];
@@ -47,11 +51,11 @@ public class gatch_upload2 extends Activity {
         if (!pstate) {
             state_tag.setText("구매 전");
             state_tag.setTextColor(getResources().getColor(R.color.black_45));
-            state_tag.setBackgroundResource(R.drawable.tag_gray);
+            state_tag.setBackgroundResource(R.drawable.tag_gray10);
         } else {
             state_tag.setText("구매 후");
-            state_tag.setTextColor(getResources().getColor(R.color.zatch_purple));
-            state_tag.setBackgroundResource(R.drawable.tag_purple);
+            state_tag.setTextColor(getResources().getColor(R.color.zatch_yellow));
+            state_tag.setBackgroundResource(R.drawable.tag_orange);
         }
 
         TextView tv_name, tv_category, tv_people, tv_oprice, tv_nprice;
@@ -74,6 +78,10 @@ public class gatch_upload2 extends Activity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog2);
 
+        RadioButton radio1, radio2;
+        radio1 = findViewById(R.id.gatch_radio1);
+        radio2 = findViewById(R.id.gatch_radio2);
+        radio1.setChecked(true);
 
 
         Button upload = (Button) findViewById(R.id.upload_gatch);
@@ -91,6 +99,8 @@ public class gatch_upload2 extends Activity {
         dialog.show();
         TextView noBtn = dialog.findViewById(R.id.dialog_cancel_btn);
         TextView okBtn = dialog.findViewById(R.id.dialog_ok_btn);
+        TextView main = dialog.findViewById(R.id.dialog_text);
+        main.setText("가치 등록을 완료하시겠습니까?");
         noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +119,7 @@ public class gatch_upload2 extends Activity {
     private void registerGatchToServer(){
 
         GatchRegisterData data = new GatchRegisterData(0,true,"z",1000,3,
-                "z",false,1,"ab.jpg",false);
+                "z",false,1,"",false);
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .connectTimeout(2, TimeUnit.MINUTES)

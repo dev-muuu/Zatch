@@ -9,7 +9,7 @@
         android:id="@+id/makeMeetingFragment"
         android:name="com.example.zatch.navigation.chat.MakeMeetingFragment"
         android:label="MakeMeetingFragment"
-        tools:layout="@layout/fragment_make_meeting">
+        tools:layout="@layout/botto_sheet_fragment_make_meeting">
         <action
             android:id="@+id/action_makeMeetingFragment_to_addressSearchFragment"
             app:destination="@id/addressSearchFragment" />
@@ -18,7 +18,7 @@
         android:id="@+id/addressSearchFragment"
         android:name="com.example.zatch.navigation.chat.AddressSearchFragment"
         android:label="AddressSearchFragment"
-        tools:layout="@layout/fragment_find_place_search">
+        tools:layout="@layout/bottom_sheet_fragment_find_place_search">
         <action
             android:id="@+id/action_addressSearchFragment_to_addressResultFragment"
             app:destination="@id/addressResultFragment"
@@ -29,7 +29,7 @@
         android:id="@+id/addressResultFragment"
         android:name="com.example.zatch.navigation.chat.AddressResultFragment"
         android:label="AddressResultFragment"
-        tools:layout="@layout/fragment_find_place_result"/>
+        tools:layout="@layout/bottom_sheet_fragment_find_place_result"/>
     <fragment
         android:id="@+id/makeMeetingEditFragment"
         android:name="com.example.zatch.navigation.chat.MakeMeetingEditFragment"

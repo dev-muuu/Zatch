@@ -22,5 +22,20 @@
         <action
             android:id="@+id/action_depositBankCategoryFragment_to_depositInputInfoBottomSheet"
             app:destination="@id/depositInputInfoBottomSheet" />
+        <action
+            android:id="@+id/action_depositBankCategoryFragment_to_depositEtcBankFragment"
+            app:destination="@id/depositEtcBankFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/depositEtcBankFragment"
+        android:name="com.example.zatch.navigation.chat.DepositEtcBankFragment"
+        android:label="DepositEtcBankFragment"
+        tools:layout="@layout/bottom_sheet_fragment_etc_bank">
+        <action
+            android:id="@+id/action_depositEtcBankFragment_to_depositBankCategoryFragment"
+            app:destination="@id/depositBankCategoryFragment" />
+        <action
+            android:id="@+id/action_depositEtcBankFragment_to_depositInputInfoBottomSheet"
+            app:destination="@id/depositInputInfoBottomSheet" />
     </fragment>
 </navigation>

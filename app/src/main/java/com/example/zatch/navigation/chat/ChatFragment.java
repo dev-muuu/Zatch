@@ -1,5 +1,6 @@
 package com.example.zatch.navigation.chat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
 import com.example.zatch.databinding.FragmentChatBinding;
+import com.example.zatch.navigation.main.NotificationActivity;
 
 public class ChatFragment extends Fragment{
 
@@ -40,6 +42,11 @@ public class ChatFragment extends Fragment{
 
         binding.gatchChatTab.setOnClickListener(v->{
             navigateChatList(ServiceType.Gatch);
+        });
+
+        binding.notificationButton.setOnClickListener(v->{
+            Intent intent = new Intent(getContext(),NotificationActivity.class);
+            startActivity(intent);
         });
     }
 

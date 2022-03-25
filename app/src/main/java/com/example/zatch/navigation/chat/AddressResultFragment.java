@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.zatch.R;
 import com.example.zatch.ReturnPx;
 import com.example.zatch.ServiceType;
-import com.example.zatch.databinding.FragmentFindPlaceResultBinding;
+import com.example.zatch.databinding.BottomSheetFragmentFindPlaceResultBinding;
 import com.example.zatch.databinding.ItemFindPlaceResultBinding;
 import com.example.zatch.navigation.chat.data.SearchPlaceData;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -32,7 +32,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddressResultFragment extends Fragment {
 
-    public FragmentFindPlaceResultBinding binding;
+    public BottomSheetFragmentFindPlaceResultBinding binding;
     private List<SearchPlaceData> placeList;
     private String searchPlace;
     private int height;
@@ -59,7 +59,7 @@ public class AddressResultFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentFindPlaceResultBinding.inflate(inflater,container,false);
+        binding = BottomSheetFragmentFindPlaceResultBinding.inflate(inflater,container,false);
         type = ((MakeMeetingBottomSheet) getParentFragment().getParentFragment()).getType();
         return binding.getRoot();
     }
@@ -113,11 +113,10 @@ public class AddressResultFragment extends Fragment {
                     binding.placeCheckFinishButton.setY(buttonNewTop);
                 }
             }
-
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
             }
+
         });
 
         if(type == ServiceType.Gatch)
@@ -187,7 +186,6 @@ public class AddressResultFragment extends Fragment {
                         binding.placeCheckFinishButton.setY(buttonNewTop);
                     //item 선택하는 경우 짜기
                     if(selectItemPosition != NULL) {
-//                        binding.placeCheckFinishButton.setY(buttonNewTop);
                         if (selectItemPosition != getAdapterPosition()) {
                             view.setBackgroundColor(getResources().getColor(R.color.black_5));
                             selectItemPosition = getAdapterPosition();

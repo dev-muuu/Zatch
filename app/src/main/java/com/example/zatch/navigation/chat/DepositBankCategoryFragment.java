@@ -35,9 +35,14 @@ public class DepositBankCategoryFragment extends Fragment {
             TextView bankName = bankItem.findViewById(R.id.bankNameText);
             bankName.setText(bank);
             bankItem.setOnClickListener(v->{
-                Bundle bankData = new Bundle();
-                bankData.putString("bankName",bank);
-                Navigation.findNavController(getView()).navigate(R.id.action_depositBankCategoryFragment_to_depositInputInfoBottomSheet,bankData);
+                //기타가 아닌 은행 선택하는 경우
+                if(!bank.equals("기타")) {
+                    Bundle bankData = new Bundle();
+                    bankData.putString("bankName", bank);
+                    Navigation.findNavController(getView()).navigate(R.id.action_depositBankCategoryFragment_to_depositInputInfoBottomSheet, bankData);
+                }else{  //기타 선택한 경우, 은행 입력창 이동
+                    Navigation.findNavController(getView()).navigate(R.id.action_depositBankCategoryFragment_to_depositEtcBankFragment);
+                }
             });
             binding.bankCategoryFlex.addView(bankItem);
         }

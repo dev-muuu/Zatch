@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.zatch.R;
+import com.example.zatch.navigation.main.NotificationActivity;
 import com.example.zatch.zatch_register.ZatchRegisterActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -41,6 +42,11 @@ public class MyZatchFragment extends Fragment {
                 Intent intent = new Intent(getContext(),gatch_upload.class);
                 startActivity(intent);
             }
+        });
+
+        view.findViewById(R.id.alarm).setOnClickListener(v->{
+            Intent intent = new Intent(getContext(), NotificationActivity.class);
+            startActivity(intent);
         });
 
 

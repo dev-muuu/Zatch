@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,9 +12,11 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -29,6 +32,7 @@ import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.R;
 import com.example.zatch.ServiceType;
 import com.example.zatch.databinding.ActivityChattingRoomBinding;
+import com.example.zatch.databinding.DialogGalleryAccessRefuseBinding;
 import com.example.zatch.databinding.DrawerLayoutChattingRoomBinding;
 import com.example.zatch.databinding.LayoutChattingRoomMoreLayoutBottomBinding;
 import com.example.zatch.databinding.LayoutChattingRoomTopBarBinding;
@@ -58,6 +62,7 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
 
     private boolean tutorialRegister = false; //잠시 true로 변경시켜놓음
     private boolean isMeetingMade = false;
+    private Context context = ChattingRoomActivity.this;
     private MeetingData meetingData;
     private ServiceType serviceType;
 
@@ -119,7 +124,7 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
         List<Boolean> memberList = new ArrayList<Boolean>(){};
         memberList.add(true);
         memberList.add(false);
-        drawerBinding.memberRecyclerview.setLayoutManager(new LinearLayoutManager(ChattingRoomActivity.this));
+        drawerBinding.memberRecyclerview.setLayoutManager(new LinearLayoutManager(context));
         drawerBinding.memberRecyclerview.setAdapter(new ChattingMemberListAdapter(serviceType,memberList,drawerBinding.drawerService,getSupportFragmentManager(),this));
 
         //clicklistener 구현 메서드
@@ -197,8 +202,9 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
     private void initServiceType(){
             // top bar
             topBarBinding.townText.setTextColor(getColor(R.color.zatch_deepyellow));
+            topBarBinding.isReservationMade.setBackground(getDrawable(R.drawable.text_background_deep_yellow_radius_10));
             //zatchInfoLayout
-//            binding.zatchInfoLayout.getRoot().setVisibility(View.GONE);
+            binding.zatchInfoLayout.getRoot().setVisibility(View.GONE);
             //input chatting layout
             binding.chattingMoreEtcButton.setBackground(getDrawable(R.drawable.selector_chat_show_etc_layout_yellow));
             binding.sendChatButton.setBackground(getDrawable(R.drawable.selector_chat_send_yellow));
@@ -217,7 +223,7 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
             openGallery();
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)) {
             //이미 권한 거부된 상태일 때 사용
-//            sentDialog("위치 권한을 허용하셔야 동네 인증이 가능합니다.");
+            sendDialogForGalleryAccess();
         } else {
             //새로 권한 요청시 실행. 이후 callback 결과 실행됨
             requestPermissionLauncher.launch(
@@ -229,8 +235,8 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted)
                     openGallery();
-//                else
-//                    sentDialog("위치 권한을 허용하셔야 동네 인증이 가능합니다.");   //새로 권한 요청했는데 거부 -> sentDialog 실행됨
+                else
+                    sendDialogForGalleryAccess();   //새로 권한 요청했는데 거부 -> sentDialog 실행됨
             });
 
     private void openGallery() {
@@ -259,6 +265,23 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
                     break;
             }
         }
+    }
+
+    private void sendDialogForGalleryAccess(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_gallery_access_refuse,null);
+        builder.setView(view);
+        DialogGalleryAccessRefuseBinding binding = DialogGalleryAccessRefuseBinding.bind(view);
+        AlertDialog dialog = builder.create();
+        binding.cancel.setOnClickListener(v->{
+            dialog.dismiss();
+        });
+        binding.goSetting.setOnClickListener(v -> {
+            dialog.dismiss();
+            Intent intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS);
+            startActivity(intent);
+        });
+        dialog.show();
     }
 
     /*
