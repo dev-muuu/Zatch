@@ -19,10 +19,6 @@ public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdap
     private String[] localDataSet;
     private Context context;
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ConstraintLayout swipeView, infoView;
@@ -50,21 +46,14 @@ public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdap
         }
     }
 
-    /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     *                by RecyclerView.
-     */
     public ZatchChatListAdapter(String[] dataSet, Context context) {
         this.localDataSet = dataSet;
         this.context = context;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
+
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_zatch_chat, viewGroup, false);
 
@@ -87,12 +76,8 @@ public class ZatchChatListAdapter extends RecyclerView.Adapter<ZatchChatListAdap
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
-//        viewHolder.getTextView().setText(localDataSet[position]);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return localDataSet.length;

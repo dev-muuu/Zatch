@@ -3,7 +3,9 @@ package com.example.zatch.navigation.my_zatch;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -28,12 +30,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 import com.example.zatch.navigation.my_zatch.data.GatchRegisterData;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class gatch_upload extends Activity {
@@ -43,9 +47,7 @@ public class gatch_upload extends Activity {
     RecyclerView recyclerView;
     MultiImageAdapter miadapter;
     TextView picNum;
-    ArrayList<gatchDataItem> arrayList = new ArrayList<>();
-//    ArrayList<Boolean> certifiedList = new ArrayList<>();
-    boolean[] certifiedList = new boolean[10];
+    ArrayList<Boolean> certifiedList = new ArrayList<>();
     ArrayList<Uri> uriList = new ArrayList<>(); //이미지 uri를 담을 arrayList 객체
     int count;
     Dialog dialog;
@@ -185,8 +187,6 @@ public class gatch_upload extends Activity {
         TextView okBtn = dialog.findViewById(R.id.dialog_ok_btn);
         TextView tv = dialog.findViewById(R.id.dialog_text);
 
-//        final int infoArr[] = new int[3];
-
         //다음 단계로 진행
         Button next = (Button) findViewById(R.id.progress_btn);
         next.setOnClickListener(new View.OnClickListener() {
@@ -201,9 +201,6 @@ public class gatch_upload extends Activity {
                     showDialog();
                     tv.setText("인원 수를 설정해 주세요.");
                 } else {
-//                    infoArr[0] = Integer.parseInt(price.getText().toString()); //원가
-//                    infoArr[1] = Integer.parseInt(pnum.getText().toString()); //인원수
-//                    infoArr[2] = Integer.parseInt(ppp.getText().toString()); //인당 금액
                     sendDataToNextPage();
                 }
             }
@@ -213,14 +210,21 @@ public class gatch_upload extends Activity {
 
     private void sendDataToNextPage() {
 
+        boolean[] certifiedArray = new boolean[certifiedList.size()];
+
+        int index = 0;
+        for(Boolean data : certifiedList){
+            certifiedArray[index++] = data;
+        }
+
         GatchRegisterData registerData = new GatchRegisterData();
         registerData.setCategoryIdx(spinner.getSelectedItemPosition());
         registerData.setPurchaseCheck(pstate);
         registerData.setProductName(name.getText().toString());
         registerData.setPrice(price.getText().toString());
         registerData.setNumber(pnum.getText().toString());
-        registerData.setPhotos(uriList);
-        registerData.setCertified(certifiedList);
+        registerData.setUriData(uriList);
+        registerData.setCertified(certifiedArray);
 
         Intent intent = new Intent(getApplicationContext(), gatch_upload2.class);
         intent.putExtra("classData",registerData);
@@ -234,64 +238,20 @@ public class gatch_upload extends Activity {
 
         if (data == null) {   // 어떤 이미지도 선택하지 않은 경우
             Toast.makeText(getApplicationContext(), "이미지를 선택하지 않았습니다.", Toast.LENGTH_LONG).show();
-        } else {   // 이미지를 하나라도 선택한 경우
-//            if (data.getClipData() == null) {     // 이미지를 하나만 선택한 경우
-//                Log.e("single choice: ", String.valueOf(data.getData()));
-//                Uri imageUri = data.getData();
-//                uriList.add(imageUri);
-//                gatchDataItem item = new gatchDataItem();
-//                item.setImage_uri(imageUri);
-//                arrayList.add(item);
-//
-//                miadapter = new MultiImageAdapter(arrayList, getApplicationContext());
-//                recyclerView.setAdapter(miadapter);
-//                recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-//                count = miadapter.getItemCount();
-//            } else {      // 이미지를 여러장 선택한 경우
-                ClipData clipData = data.getClipData();
-                Log.e("clipData", String.valueOf(clipData.getItemCount()));
+        }else {   // 이미지를 하나라도 선택한 경우
+            ClipData clipData = data.getClipData();
+            Log.e("clipData", String.valueOf(clipData.getItemCount()));
 
-//                if(clipData.getItemCount() > 10){   // 선택한 이미지가 11장 이상인 경우
-//                    Toast.makeText(getApplicationContext(), "사진은 10장까지 선택 가능합니다.", Toast.LENGTH_LONG).show();
-//                }
-//                else{   // 선택한 이미지가 1장 이상 10장 이하인 경우
-                Log.e(TAG, "multiple choice");
-                Uri imageUri = data.getData();
-                uriList.add(imageUri);
-                try {
-                    certifiedList[miadapter.getItemCount()] = false;
-                }catch(NullPointerException e){
-                    certifiedList[0] = false;
-            }
+            Log.e(TAG, "multiple choice");
+//            Uri imageUri = data.getData();
+            uriList.add(data.getData());
+            certifiedList.add(false);
 
-
-//                gatchDataItem item = new gatchDataItem();
-//                item.setImage_uri(data.getData());
-//                arrayList.add(item);
-
-
-
-//                for (int i = 0; i < clipData.getItemCount(); i++) {
-//                    Uri imageUri = clipData.getItemAt(i).getUri();  // 선택한 이미지들의 uri를 가져온다.
-//                    try {
-//                        uriList.add(imageUri);  //uri를 list에 담는다.
-//                        gatchDataItem item = new gatchDataItem();
-//                        item.setImage_uri(imageUri);
-//                        arrayList.add(item);
-//
-//                    } catch (Exception e) {
-//                        Log.e(TAG, "File select error", e);
-//                    }
-//                    }
-
-//                    miadapter = new MultiImageAdapter(arrayList, getApplicationContext());
             miadapter = new MultiImageAdapter(uriList,certifiedList, getApplicationContext());
-                    recyclerView.setAdapter(miadapter);   // 리사이클러뷰에 어댑터 세팅
-                    recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));     // 리사이클러뷰 수평 스크롤 적용
-                    count = miadapter.getItemCount();
-                }
-//            }
-
+            recyclerView.setAdapter(miadapter);   // 리사이클러뷰에 어댑터 세팅
+            recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));     // 리사이클러뷰 수평 스크롤 적용
+            count = miadapter.getItemCount();
+        }
 
         //이미지 개수 세기
 
@@ -306,6 +266,7 @@ public class gatch_upload extends Activity {
 
 
     }
+
 
     public void showDialog() {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

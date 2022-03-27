@@ -99,7 +99,7 @@
             android:layout_marginLeft="8dp"/>
         <!--펑타이머 자리-->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/image_area"
+            android:id="@+id/gatchImageRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="84dp"
             android:orientation="horizontal"
@@ -112,7 +112,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/price_info_area"
-            app:layout_constraintTop_toBottomOf="@id/image_area"
+            app:layout_constraintTop_toBottomOf="@id/gatchImageRecyclerView"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginTop="16dp">
             <TextView

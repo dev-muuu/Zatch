@@ -4,48 +4,52 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
+
+import okhttp3.MultipartBody;
+import retrofit2.http.Part;
 
 public class GatchRegisterData implements Parcelable {
 
     //    @SerializedName("categoryIdx")
-    private int categoryIdx;
     //    @SerializedName("purchaseCheck")
-    private boolean purchaseCheck;
     //    @SerializedName("productName")
-    private String productName;
     //    @SerializedName("price")
-    private int price;
     //    @SerializedName("number")
-    private int number;
     //    @SerializedName("addInfo")
-    private String addInfo;
     //    @SerializedName("deadlineCheck")
-    private boolean deadlineCheck;
     //    @SerializedName("userIdx")
-    private int userIdx;
     //    @SerializedName("photos")
-    private ArrayList<Uri> photos;
     //    @SerializedName("certified")
+    @SerializedName("categoryIdx")
+    private int categoryIdx;
+    @SerializedName("purchaseCheck")
+    private boolean purchaseCheck;
+    @SerializedName("productName")
+    private String productName;
+    @SerializedName("price")
+    private int price;
+    @SerializedName("number")
+    private int number;
+    @SerializedName("addInfo")
+    private String addInfo;
+    @SerializedName("deadlineCheck")
+    private boolean deadlineCheck;
+    @SerializedName("userIdx")
+    private int userIdx;
+    @SerializedName("photos")
+    private ArrayList<MultipartBody.Part> photos;
+    @SerializedName("certified")
     private boolean[] certified;
+
+    private ArrayList<Uri> uriData;
+
 
     public GatchRegisterData(){
 
     }
-
-//    public GatchRegisterData(int categoryIdx, boolean purchaseCheck, String productName, int price, int number
-//            , String addInfo, boolean deadlineCheck, int userIdx, ArrayList<Uri> photos, ArrayList<Boolean> certified) {
-//        this.categoryIdx = categoryIdx;
-//        this.purchaseCheck = purchaseCheck;
-//        this.productName = productName;
-//        this.price = price;
-//        this.number = number;
-//        this.addInfo = addInfo;
-//        this.deadlineCheck = deadlineCheck;
-//        this.userIdx = userIdx;
-//        this.photos = photos;
-//        this.certified = certified;
-//    }
 
 
     protected GatchRegisterData(Parcel in) {
@@ -57,7 +61,7 @@ public class GatchRegisterData implements Parcelable {
         addInfo = in.readString();
         deadlineCheck = in.readByte() != 0;
         userIdx = in.readInt();
-        photos = in.createTypedArrayList(Uri.CREATOR);
+        uriData = in.createTypedArrayList(Uri.CREATOR);
         certified = in.createBooleanArray();
     }
 
@@ -71,7 +75,7 @@ public class GatchRegisterData implements Parcelable {
         dest.writeString(addInfo);
         dest.writeByte((byte) (deadlineCheck ? 1 : 0));
         dest.writeInt(userIdx);
-        dest.writeTypedList(photos);
+        dest.writeTypedList(uriData);
         dest.writeBooleanArray(certified);
     }
 
@@ -128,7 +132,7 @@ public class GatchRegisterData implements Parcelable {
         return userIdx;
     }
 
-    public ArrayList<Uri> getPhotos() {
+    public ArrayList<MultipartBody.Part> getPhotos() {
         return photos;
     }
 
@@ -176,12 +180,24 @@ public class GatchRegisterData implements Parcelable {
         this.userIdx = userIdx;
     }
 
-    public void setPhotos(ArrayList<Uri> photos) {
+    public void setPhotos(ArrayList<MultipartBody.Part> photos) {
         this.photos = photos;
     }
 
     public void setCertified(boolean[] certified) {
         this.certified = certified;
+    }
+
+    public ArrayList<Uri> getUriData() {
+        return uriData;
+    }
+
+    public void setUriData(ArrayList<Uri> uriData) {
+        this.uriData = uriData;
+    }
+
+    public boolean[] getCertified() {
+        return certified;
     }
 
     @Override

@@ -4,13 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="84dp"
-        android:layout_height="84dp"
-        android:background="@color/black_5"/>
 
     <ImageView
-        android:id="@+id/imageView20"
+        android:id="@+id/gatchImage"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:background="@color/black_5" />
+
+    <ImageView
+        android:id="@+id/imageCertifiedCheck"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginTop="4dp"

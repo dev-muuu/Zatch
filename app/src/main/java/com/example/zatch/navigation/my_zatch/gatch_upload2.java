@@ -3,10 +3,12 @@ package com.example.zatch.navigation.my_zatch;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -16,14 +18,22 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.loader.content.CursorLoader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 import com.example.zatch.navigation.my_zatch.data.GatchRegisterData;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +44,7 @@ public class gatch_upload2 extends Activity {
     Dialog dialog;
     ArrayList<gatchDataItem> arrayList;
     GatchRegisterData registerData;
+    ArrayList<MultipartBody.Part> fileData;
     EditText et_add;
     RadioButton radio1, radio2;
 
@@ -46,16 +57,6 @@ public class gatch_upload2 extends Activity {
 
         Intent intent= getIntent();
         registerData = intent.getParcelableExtra("classData");
-
-        for(Uri i : registerData.getPhotos()){
-            System.out.println(i);
-        }
-
-        //문제다... 정적으로 10개까지 선언해서 false도 계속 출력됨..
-        for(boolean i : registerData.isCertified()){
-            System.out.println("here");
-            System.out.println(i);
-        }
 
         TextView state_tag = (TextView) findViewById(R.id.purchase_state_tag);
         if (!registerData.isPurchaseCheck()) {
@@ -100,6 +101,11 @@ public class gatch_upload2 extends Activity {
             }
         });
 
+
+        //image recyclerview
+        RecyclerView recyclerView = findViewById(R.id.gatchImageRecyclerView);
+//        recyclerView.setAdapter(new GatchImageAdapter(,gatch_upload2.this));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
     }
 
     public void showDialog() {
@@ -120,16 +126,32 @@ public class gatch_upload2 extends Activity {
             public void onClick(View view) {
                 //등록 완료
                 registerGatchToServer();
+                dialog.dismiss();
             }
         });
     }
 
     private void registerGatchToServer(){
 
-        registerData.setDeadlineCheck(radio1.isChecked());
-        registerData.setAddInfo(et_add.getText().toString());
-//        registerData.setPhotos();
-//        registerData.setCertified();
+        makeImageSendType();
+
+        HashMap<String,RequestBody> mapData = new HashMap<>();
+        mapData.put("categoryIdx",RequestBody.create(MediaType.parse("text/plain"), String.valueOf(registerData.getCategoryIdx())));
+        mapData.put("purchaseCheck",RequestBody.create(MediaType.parse("text/plain"), String.valueOf(registerData.isPurchaseCheck())));
+        mapData.put("productName",RequestBody.create(MediaType.parse("text/plain"), registerData.getProductName()));
+        mapData.put("price",RequestBody.create(MediaType.parse("text/plain"), registerData.getPrice()));
+        mapData.put("number",RequestBody.create(MediaType.parse("text/plain"), registerData.getNumber()));
+        mapData.put("addInfo",RequestBody.create(MediaType.parse("text/plain"), et_add.getText().toString()));
+        mapData.put("deadlineCheck",RequestBody.create(MediaType.parse("text/plain"), String.valueOf(radio1.isChecked())));
+        mapData.put("userIdx",RequestBody.create(MediaType.parse("text/plain"),"apple"));
+        mapData.put("certified",RequestBody.create(MediaType.parse("text/plain"), String.valueOf(registerData.getCertified())));
+
+
+
+
+
+
+
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .connectTimeout(2, TimeUnit.MINUTES)
@@ -142,13 +164,20 @@ public class gatch_upload2 extends Activity {
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
         ServerApi api = builder.build().create(ServerApi.class);
-        Call<GatchRegisterData> call = api.gatchPost(registerData);
+        Call<GatchRegisterData> call = api.gatchPost(mapData, fileData);
 
         call.enqueue(new Callback<GatchRegisterData>() {
             @Override
             public void onResponse(Call<GatchRegisterData> call, Response<GatchRegisterData> response) {
-                GatchRegisterData data = response.body();
-                System.out.println(data.toString());
+
+                System.out.println(response.errorBody());
+                System.out.println(response.raw().message());
+
+                System.out.println(response.isSuccessful());
+                System.out.println(response.toString());
+//                System.out.println(response.body().getPrice());
+//                GatchRegisterData data = response.body();
+//                System.out.println(data.toString());
             }
 
             @Override
@@ -160,4 +189,31 @@ public class gatch_upload2 extends Activity {
             }
         });
     }
+
+    private void makeImageSendType(){
+        fileData = new ArrayList<>();
+        for(Uri uri : registerData.getUriData()) {
+            File image = new File(getRealPathFromUri(uri));
+            RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), image);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("image", image.getName(), requestBody);
+            System.out.println(body);
+            fileData.add(body);
+        }
+        registerData.setPhotos(fileData);
+    }
+
+    private String getRealPathFromUri(Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        CursorLoader loader = new CursorLoader(getBaseContext(), contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+
+        return result;
+    }
+
+
+
 }

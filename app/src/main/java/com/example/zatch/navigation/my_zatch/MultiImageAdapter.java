@@ -17,13 +17,14 @@ import com.bumptech.glide.Glide;
 import com.example.zatch.R;
 import com.example.zatch.navigation.my_zatch.gatchDataItem;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.ViewHolder>{
     private ArrayList<gatchDataItem> mData;
     private ArrayList<Uri> uriData;
-//    private ArrayList<Boolean> certifiedData;
-    private boolean[] certifiedData;
+    private ArrayList<Boolean> certifiedData;
+//    private boolean[] certifiedData;
     private Context mContext;
 
     public void clearAdapter(){
@@ -32,7 +33,7 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
     }
 
     // 생성자에서 데이터 리스트 객체, Context를 전달받음.
-    MultiImageAdapter(ArrayList<Uri> uriData, boolean[] certifiedData, Context context) {
+    MultiImageAdapter(ArrayList<Uri> uriData, ArrayList<Boolean> certifiedData, Context context) {
         this.uriData = uriData;
         this.certifiedData = certifiedData;
         mContext = context;
@@ -78,12 +79,12 @@ public class MultiImageAdapter extends RecyclerView.Adapter<MultiImageAdapter.Vi
 //        final gatchDataItem item = mData.get(position);
 //        Uri image_uri = item.getImage_uri();
         holder.star.setOnCheckedChangeListener(null);
-        holder.star.setChecked(certifiedData[position]);
+        holder.star.setChecked(certifiedData.get(position));
         holder.star.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 //                item.setCheckbox(b);
-                certifiedData[position] = b;
+                certifiedData.set(position,b);
             }
         });
         Glide.with(mContext)
