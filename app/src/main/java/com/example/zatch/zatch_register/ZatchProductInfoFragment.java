@@ -302,7 +302,7 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
 
         ImageView img = new ImageView(getContext());
         img.setId(imageAddList.size());
-        img.setScaleType(ImageView.ScaleType.FIT_XY);
+        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
         // dp = (int) (84*density + 0.5f);
         int margin_84 = (int)returnPx.returnPx(84);

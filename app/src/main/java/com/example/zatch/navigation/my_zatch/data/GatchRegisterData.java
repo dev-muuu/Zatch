@@ -13,16 +13,6 @@ import retrofit2.http.Part;
 
 public class GatchRegisterData implements Parcelable {
 
-    //    @SerializedName("categoryIdx")
-    //    @SerializedName("purchaseCheck")
-    //    @SerializedName("productName")
-    //    @SerializedName("price")
-    //    @SerializedName("number")
-    //    @SerializedName("addInfo")
-    //    @SerializedName("deadlineCheck")
-    //    @SerializedName("userIdx")
-    //    @SerializedName("photos")
-    //    @SerializedName("certified")
     @SerializedName("categoryIdx")
     private int categoryIdx;
     @SerializedName("purchaseCheck")
@@ -46,11 +36,22 @@ public class GatchRegisterData implements Parcelable {
 
     private ArrayList<Uri> uriData;
 
-
-    public GatchRegisterData(){
-
+    public GatchRegisterData() {
     }
 
+    public GatchRegisterData(int categoryIdx, boolean purchaseCheck, String productName, int price, int number, String addInfo,
+                             boolean deadlineCheck, int userIdx, ArrayList<MultipartBody.Part> photos, boolean[] certified) {
+        this.categoryIdx = categoryIdx;
+        this.purchaseCheck = purchaseCheck;
+        this.productName = productName;
+        this.price = price;
+        this.number = number;
+        this.addInfo = addInfo;
+        this.deadlineCheck = deadlineCheck;
+        this.userIdx = userIdx;
+        this.photos = photos;
+        this.certified = certified;
+    }
 
     protected GatchRegisterData(Parcel in) {
         categoryIdx = in.readInt();

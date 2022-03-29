@@ -9,11 +9,12 @@ import java.io.Serializable;
 public class gatchDataItem implements Parcelable {
 
     private Uri image_uri;
-    private boolean checkbox;
+    private boolean checkbox = false;
 
-    public gatchDataItem(){
-
+    public gatchDataItem(Uri image){
+        this.image_uri = image;
     }
+
 
     protected gatchDataItem(Parcel in) {
         image_uri = in.readParcelable(Uri.class.getClassLoader());

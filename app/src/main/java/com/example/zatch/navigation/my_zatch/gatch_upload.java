@@ -47,8 +47,7 @@ public class gatch_upload extends Activity {
     RecyclerView recyclerView;
     MultiImageAdapter miadapter;
     TextView picNum;
-    ArrayList<Boolean> certifiedList = new ArrayList<>();
-    ArrayList<Uri> uriList = new ArrayList<>(); //이미지 uri를 담을 arrayList 객체
+    ArrayList<gatchDataItem> imageSet= new ArrayList<>();
     int count;
     Dialog dialog;
     Spinner spinner;
@@ -77,8 +76,6 @@ public class gatch_upload extends Activity {
             public void onClick(View view) {
                 Intent imgup = new Intent(Intent.ACTION_PICK);
                 imgup.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                //다중선택 가능 코드
-//                imgup.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 startActivityForResult(imgup, 101);
             }
         });
@@ -210,24 +207,18 @@ public class gatch_upload extends Activity {
 
     private void sendDataToNextPage() {
 
-        boolean[] certifiedArray = new boolean[certifiedList.size()];
-
-        int index = 0;
-        for(Boolean data : certifiedList){
-            certifiedArray[index++] = data;
-        }
-
         GatchRegisterData registerData = new GatchRegisterData();
         registerData.setCategoryIdx(spinner.getSelectedItemPosition());
         registerData.setPurchaseCheck(pstate);
         registerData.setProductName(name.getText().toString());
         registerData.setPrice(price.getText().toString());
         registerData.setNumber(pnum.getText().toString());
-        registerData.setUriData(uriList);
-        registerData.setCertified(certifiedArray);
 
         Intent intent = new Intent(getApplicationContext(), gatch_upload2.class);
         intent.putExtra("classData",registerData);
+        intent.putParcelableArrayListExtra("imageData",imageSet);
+        Log.e("1","1");
+        System.out.println(imageSet);
         startActivity(intent);
     }
 
@@ -242,12 +233,9 @@ public class gatch_upload extends Activity {
             ClipData clipData = data.getClipData();
             Log.e("clipData", String.valueOf(clipData.getItemCount()));
 
-            Log.e(TAG, "multiple choice");
-//            Uri imageUri = data.getData();
-            uriList.add(data.getData());
-            certifiedList.add(false);
+            imageSet.add(new gatchDataItem(data.getData()));
 
-            miadapter = new MultiImageAdapter(uriList,certifiedList, getApplicationContext());
+            miadapter = new MultiImageAdapter(imageSet, gatch_upload.this);
             recyclerView.setAdapter(miadapter);   // 리사이클러뷰에 어댑터 세팅
             recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));     // 리사이클러뷰 수평 스크롤 적용
             count = miadapter.getItemCount();

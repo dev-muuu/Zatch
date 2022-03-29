@@ -39,12 +39,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Multipart;
 
 public class gatch_upload2 extends Activity {
     Dialog dialog;
-    ArrayList<gatchDataItem> arrayList;
     GatchRegisterData registerData;
     ArrayList<MultipartBody.Part> fileData;
+    private ArrayList<gatchDataItem> imageData;
     EditText et_add;
     RadioButton radio1, radio2;
 
@@ -57,6 +58,10 @@ public class gatch_upload2 extends Activity {
 
         Intent intent= getIntent();
         registerData = intent.getParcelableExtra("classData");
+        imageData = intent.getParcelableArrayListExtra("imageData");
+        Log.e("2","2");
+        System.out.println(imageData);
+
 
         TextView state_tag = (TextView) findViewById(R.id.purchase_state_tag);
         if (!registerData.isPurchaseCheck()) {
@@ -104,8 +109,8 @@ public class gatch_upload2 extends Activity {
 
         //image recyclerview
         RecyclerView recyclerView = findViewById(R.id.gatchImageRecyclerView);
-//        recyclerView.setAdapter(new GatchImageAdapter(,gatch_upload2.this));
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext()));
+        recyclerView.setAdapter(new GatchImageAdapter(imageData, gatch_upload2.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext(),RecyclerView.HORIZONTAL,false));
     }
 
     public void showDialog() {
@@ -134,50 +139,45 @@ public class gatch_upload2 extends Activity {
     private void registerGatchToServer(){
 
         makeImageSendType();
-
         HashMap<String,RequestBody> mapData = new HashMap<>();
         mapData.put("categoryIdx",RequestBody.create(MediaType.parse("text/plain"), String.valueOf(registerData.getCategoryIdx())));
-        mapData.put("purchaseCheck",RequestBody.create(MediaType.parse("text/plain"), String.valueOf(registerData.isPurchaseCheck())));
+        mapData.put("purchaseCheck",RequestBody.create(MediaType.parse("text/plain"),String.valueOf(registerData.isPurchaseCheck())));
         mapData.put("productName",RequestBody.create(MediaType.parse("text/plain"), registerData.getProductName()));
         mapData.put("price",RequestBody.create(MediaType.parse("text/plain"), registerData.getPrice()));
-        mapData.put("number",RequestBody.create(MediaType.parse("text/plain"), registerData.getNumber()));
+        mapData.put("number",RequestBody.create(MediaType.parse("text/plain"), "3"));
         mapData.put("addInfo",RequestBody.create(MediaType.parse("text/plain"), et_add.getText().toString()));
-        mapData.put("deadlineCheck",RequestBody.create(MediaType.parse("text/plain"), String.valueOf(radio1.isChecked())));
+        mapData.put("deadlineCheck",RequestBody.create(MediaType.parse("text/plain"),String.valueOf(registerData.isDeadlineCheck())));
         mapData.put("userIdx",RequestBody.create(MediaType.parse("text/plain"),"apple"));
-        mapData.put("certified",RequestBody.create(MediaType.parse("text/plain"), String.valueOf(registerData.getCertified())));
 
+        ArrayList<MultipartBody.Part> certified = new ArrayList<>();
+        for(boolean value: registerData.getCertified()){
+            certified.add(MultipartBody.Part.createFormData("certified",String.valueOf(value)));
+        }
 
+        System.out.println(mapData);
+        System.out.println("prepare end");
 
-
-
-
-
-
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .connectTimeout(2, TimeUnit.MINUTES)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .build();
+//
+//        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+//                .connectTimeout(2, TimeUnit.MINUTES)
+//                .readTimeout(30, TimeUnit.SECONDS)
+//                .writeTimeout(30, TimeUnit.SECONDS)
+//                .build();
 
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.baseUrl(BASE_URL)
-                .client(okHttpClient)
+//                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create());
         ServerApi api = builder.build().create(ServerApi.class);
-        Call<GatchRegisterData> call = api.gatchPost(mapData, fileData);
-
+        Call<GatchRegisterData> call = api.gatchPost(mapData, fileData, certified);
+        System.out.println("send");
         call.enqueue(new Callback<GatchRegisterData>() {
             @Override
             public void onResponse(Call<GatchRegisterData> call, Response<GatchRegisterData> response) {
 
-                System.out.println(response.errorBody());
-                System.out.println(response.raw().message());
-
-                System.out.println(response.isSuccessful());
-                System.out.println(response.toString());
-//                System.out.println(response.body().getPrice());
-//                GatchRegisterData data = response.body();
-//                System.out.println(data.toString());
+                Log.e("response","response");
+                System.out.println(response.message());
+                System.out.println(response.body());
             }
 
             @Override
@@ -192,14 +192,13 @@ public class gatch_upload2 extends Activity {
 
     private void makeImageSendType(){
         fileData = new ArrayList<>();
-        for(Uri uri : registerData.getUriData()) {
-            File image = new File(getRealPathFromUri(uri));
+        for(gatchDataItem item : imageData) {
+
+            File image = new File(getRealPathFromUri(item.getImage_uri()));
             RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), image);
             MultipartBody.Part body = MultipartBody.Part.createFormData("image", image.getName(), requestBody);
-            System.out.println(body);
             fileData.add(body);
         }
-        registerData.setPhotos(fileData);
     }
 
     private String getRealPathFromUri(Uri contentUri) {
@@ -210,7 +209,6 @@ public class gatch_upload2 extends Activity {
         cursor.moveToFirst();
         String result = cursor.getString(column_index);
         cursor.close();
-
         return result;
     }
 

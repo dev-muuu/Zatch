@@ -131,7 +131,7 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
             newParamSetting();
         binding.bellButton.setVisibility(View.GONE);
         binding.searchButton.setVisibility(View.INVISIBLE);
-        inputMethodManager.showSoftInput( binding.searchGatchFieldText,InputMethodManager.SHOW_FORCED);
+        inputMethodManager.showSoftInput(binding.searchGatchFieldText,InputMethodManager.SHOW_FORCED);
     }
 
     void isSearchFieldContainContent(){

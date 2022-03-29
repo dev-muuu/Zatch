@@ -357,7 +357,7 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
 
     @Override
     public void finishBottomSheet(MeetingData meetingData) {
-        topBarBinding.isReservationMade.setText("예약완료");
+        topBarBinding.isReservationMade.setVisibility(View.VISIBLE);
         this.isMeetingMade = true;
         this.meetingData = meetingData;
     }

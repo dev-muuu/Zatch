@@ -38,16 +38,29 @@ public class DepositEtcBankFragment extends Fragment {
         binding.etcBankFiled.setOnEditorActionListener((v, actionId, event) -> {
             switch (actionId) {
                 case IME_ACTION_SEARCH:
-                    Bundle bundle = new Bundle();
-                    bundle.putString("bankName",binding.etcBankFiled.getText().toString());
-                    Navigation.findNavController(getView()).navigate(R.id.action_depositEtcBankFragment_to_depositInputInfoBottomSheet,bundle);
+                    if(!binding.etcBankFiled.getText().toString().equals("")) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("bankName", binding.etcBankFiled.getText().toString());
+                        inputManger.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        Navigation.findNavController(getView()).navigate(R.id.action_depositEtcBankFragment_to_depositInputInfoBottomSheet, bundle);
+                    }
                     return true;
             }
             return false;
         });
 
-        binding.backButton.setOnClickListener(v->
-                Navigation.findNavController(getView()).navigate(R.id.action_depositEtcBankFragment_to_depositBankCategoryFragment));
+        binding.backButton.setOnClickListener(v->{
+            Navigation.findNavController(getView()).navigate(R.id.action_depositEtcBankFragment_to_depositBankCategoryFragment);
+            inputManger.hideSoftInputFromWindow(view.getWindowToken(),0);
+        });
         
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.etcBankFiled.requestFocus();
+        inputManger.toggleSoftInput(InputMethodManager.SHOW_FORCED,InputMethodManager.HIDE_IMPLICIT_ONLY);
+
     }
 }
