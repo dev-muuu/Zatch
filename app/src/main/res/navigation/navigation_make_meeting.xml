@@ -14,6 +14,7 @@
             android:id="@+id/action_makeMeetingFragment_to_addressSearchFragment"
             app:destination="@id/addressSearchFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/addressSearchFragment"
         android:name="com.example.zatch.navigation.chat.AddressSearchFragment"
@@ -29,7 +30,13 @@
         android:id="@+id/addressResultFragment"
         android:name="com.example.zatch.navigation.chat.AddressResultFragment"
         android:label="AddressResultFragment"
-        tools:layout="@layout/bottom_sheet_fragment_find_place_result"/>
+        tools:layout="@layout/bottom_sheet_fragment_find_place_result">
+        <action
+            android:id="@+id/action_addressResultFragment_self"
+            app:destination="@id/addressResultFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/addressResultFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/makeMeetingEditFragment"
         android:name="com.example.zatch.navigation.chat.MakeMeetingEditFragment"

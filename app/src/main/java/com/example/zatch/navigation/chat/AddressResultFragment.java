@@ -1,11 +1,13 @@
 package com.example.zatch.navigation.chat;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,6 +32,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
+
 public class AddressResultFragment extends Fragment {
 
     public BottomSheetFragmentFindPlaceResultBinding binding;
@@ -41,6 +45,7 @@ public class AddressResultFragment extends Fragment {
     private ServiceType type;
     public boolean doFirstDrag = false;
     int navigationHeight;
+    private InputMethodManager inputManager;
 
     //item 선택 위한 변수
     public static final int NULL = -1;
@@ -77,16 +82,26 @@ public class AddressResultFragment extends Fragment {
             Navigation.findNavController(getView()).popBackStack();
         });
 
+        inputManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        binding.searchTextField.setOnEditorActionListener((v, actionId, event) -> {
+            if(actionId == IME_ACTION_SEARCH){
+                String newPlace = binding.searchTextField.getText().toString();
+                if(!newPlace.equals(searchPlace)) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("searchPlace", newPlace);
+                    Navigation.findNavController(view).navigate(R.id.action_addressResultFragment_self, bundle);
+                }
+            }
+            return true;
+        });
+
         //recyclerview height잡기
         ReturnPx pxClass = new ReturnPx(getActivity());
         height = pxClass.returnDisplayHeight();
-        System.out.println(height);
         navigationHeight = pxClass.getNavigationBarHeight();
         int statusHeight = pxClass.getStatusBarHeight();
-        System.out.println(navigationHeight);
 
         int buttonHeight = (int)pxClass.returnPx(72);
-
 
         View behaviourView = ((MakeMeetingBottomSheet) getParentFragment().getParentFragment()).sendBehaviourView();
         float viewHeight = behaviourView.getY() + behaviourView.getHeight();
@@ -180,7 +195,6 @@ public class AddressResultFragment extends Fragment {
                 this.view = view;
                 this.adapterBinding = ItemFindPlaceResultBinding.bind(view);
                 view.setOnClickListener(v->{
-
                     //처음 검색결과 보였을 때, 완료 버튼 높이 설정 코
                     if(!doFirstDrag)
                         binding.placeCheckFinishButton.setY(buttonNewTop);

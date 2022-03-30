@@ -28,7 +28,7 @@
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="636aa7f1b6a52dd8c64ef4de78b5f849"/>
 
 <!--        임시 main-->
-        <activity android:name=".navigation.my_zatch.gatch_upload">
+        <activity android:name=".navigation.chat.ChattingRoomActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -56,7 +56,7 @@
         <activity android:name=".navigation.my_zatch.my_gatch_detail"/>
         <activity android:name=".navigation.my_zatch.my_zatch_detail"/>
         <activity android:name=".search.SearchActivity" />
-        <activity android:name=".navigation.chat.ChattingRoomActivity" />
+<!--        <activity android:name=".navigation.chat.ChattingRoomActivity" />-->
         <activity android:name=".navigation.main.NotificationActivity" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
