@@ -150,8 +150,9 @@ public class gatch_upload2 extends Activity {
         mapData.put("userIdx",RequestBody.create(MediaType.parse("text/plain"),"apple"));
 
         ArrayList<MultipartBody.Part> certified = new ArrayList<>();
-        for(boolean value: registerData.getCertified()){
-            certified.add(MultipartBody.Part.createFormData("certified",String.valueOf(value)));
+        for(gatchDataItem item: imageData){
+//            Boolean data = item.isSelected();
+            certified.add(MultipartBody.Part.createFormData("certified",String.valueOf(item.isSelected())));
         }
 
         System.out.println(mapData);

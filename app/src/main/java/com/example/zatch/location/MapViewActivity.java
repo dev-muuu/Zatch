@@ -7,9 +7,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -20,6 +20,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.zatch.R;
+import com.example.zatch.databinding.ActivityMapviewBinding;
+import com.example.zatch.navigation.chat.AddressResultFragment;
+import com.example.zatch.navigation.chat.KakaoApiService;
+import com.example.zatch.navigation.chat.data.SearchPlaceData;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,7 +33,15 @@ import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.StringTokenizer;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MapViewActivity extends AppCompatActivity implements MapReverseGeoCoder.ReverseGeoCodingResultListener
         , MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener {
@@ -37,37 +49,101 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
     AlertDialog.Builder builder;
     AlertDialog dialog;
     MapView mapView;
-    ViewGroup mapViewContainer;
-    View view;
     MapPOIItem poiItem;
     MapReverseGeoCoder.ReverseGeoCodingResultListener reverseListener;
     MapPoint currentPoint;
     MapReverseGeoCoder wantReverse, myReverse;
     String[] wantAddressArray;
     private FusedLocationProviderClient fusedLocationClient;
+    private CallMapViewEnum serviceType;
+
+    private ActivityMapviewBinding binding;
+
+    static final String BASE_URL = "https://dapi.kakao.com/";
+    static final String API_KEY = "KakaoAK de8b17f677631d70f9545c4b19608dcf";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mapview);
 
-        getSupportActionBar().hide();
+        binding = ActivityMapviewBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        serviceType = (CallMapViewEnum) getIntent().getSerializableExtra("serviceType");
+
+        initByServiceType();
 
         //권한 체크
         permissionCheck();
 
         reverseListener = this;
-        mapView.setMapViewEventListener(this);
-        mapView.setPOIItemEventListener(this);
 
-        findViewById(R.id.registerTownButton).setOnClickListener(onClickListener);
-        findViewById(R.id.mapBackButton).setOnClickListener(onClickListener);
+        binding.mapButton.setOnClickListener(v->{
+
+            if(serviceType == CallMapViewEnum.MakeMeeting){
+                searchBuildingByMapPoint();
+            }else {
+                //내 동네 설정
+                //for 좌표->주소 변환, 호출 method
+                try {
+                    wantAddressArray = null;
+                    wantReverse = new MapReverseGeoCoder("636aa7f1b6a52dd8c64ef4de78b5f849"
+                            , poiItem.getMapPoint(), reverseListener, MapViewActivity.this);
+                    wantReverse.startFindingAddress();
+                } catch (NullPointerException e) {
+                    System.out.println("error");
+                }
+            }
+        });
+
+        binding.mapBackButton.setOnClickListener(v-> finish());
 
     }
 
+    public class ResultSearchBuilding {
+        List<KakaoRoadAddressData> documents;
+    }
+
+    private void searchBuildingByMapPoint() {
+
+        MapPoint.GeoCoordinate point = poiItem.getMapPoint().getMapPointGeoCoord();
+
+        Retrofit.Builder builder = new Retrofit.Builder();
+        builder.baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create());
+        KakaoApiService api = builder.build().create(KakaoApiService.class);
+        Call<ResultSearchBuilding> call = api.getBuildingName(API_KEY, String.valueOf(point.longitude),String.valueOf(point.latitude));
+
+        call.enqueue(new Callback<ResultSearchBuilding>() {
+            @Override
+            public void onResponse(Call<ResultSearchBuilding> call, Response<ResultSearchBuilding> response) {
+                try {
+                    String buildingName = response.body().documents.get(0).getRoad_address().getBuilding_name();
+                    showTownSetDialog(String.format("'%s'",buildingName));
+                }catch (NullPointerException e){
+                    Log.e("null","null");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResultSearchBuilding> call, Throwable t) {
+                Log.w("통신실패", "Raw: ${response.raw()}");
+            }
+        });
+    }
+
+    private void initByServiceType(){
+        if(serviceType.equals(CallMapViewEnum.TownSetting)){
+
+        }else{  //MakeMeeting type인 경
+            binding.mapButton.setText("약속 장소 설정하기");
+        }
+    }
     //kako map 좌표 -> 주소 변환 메서드
     @Override
     public void onReverseGeoCoderFoundAddress(MapReverseGeoCoder mapReverseGeoCoder, String s) {
+        Log.e("tap","tap");
+        System.out.println(s);
         String[] address = new String[10];
         StringTokenizer tokenizer = new StringTokenizer(s, " ");
         for (int i = 0; tokenizer.hasMoreTokens(); i++)
@@ -89,11 +165,14 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
 
     }
 
-    void showTownSetDialog(String town) {
+    void showTownSetDialog(String result) {
         builder = new AlertDialog.Builder(MapViewActivity.this);
-        view = LayoutInflater.from(MapViewActivity.this).inflate(R.layout.dialog_town_check, null);
+        View view = LayoutInflater.from(MapViewActivity.this).inflate(R.layout.dialog_town_check, null);
         TextView townText = view.findViewById(R.id.townCheckText);
-        townText.setText("우리 동네가 " + town + " 맞나요?");
+        if(serviceType == CallMapViewEnum.TownSetting)
+            townText.setText("우리 동네가 " + result + " 맞나요?");
+        else
+            townText.setText("약속 장소가 " + result + " 인가요?");
         view.findViewById(R.id.townReSettingButton).setOnClickListener(onClickListener);
         view.findViewById(R.id.townSettingButton).setOnClickListener(onClickListener);
         builder.setView(view);
@@ -128,21 +207,6 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.registerTownButton:
-                    //내 동네 설정
-                    //for 좌표->주소 변환, 호출 method
-                    try {
-                        wantAddressArray = null;
-                        wantReverse = new MapReverseGeoCoder("636aa7f1b6a52dd8c64ef4de78b5f849"
-                                , poiItem.getMapPoint(), reverseListener, MapViewActivity.this);
-                        wantReverse.startFindingAddress();
-                    } catch (NullPointerException e) {
-                        System.out.println("error");
-                    }
-                    break;
-                case R.id.mapBackButton:
-                    finish();
-                    break;
                 case R.id.townReSettingButton:
                     dialog.dismiss();
                     break;
@@ -161,8 +225,11 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
     void addMapView() {
         mapView = new MapView(this);
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
-        mapViewContainer = (ViewGroup) findViewById(R.id.mapView);
-        mapViewContainer.addView(mapView);
+
+        binding.mapView.addView(mapView);
+
+        mapView.setMapViewEventListener(this);
+        mapView.setPOIItemEventListener(this);
 
         //for current map point
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -186,7 +253,7 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
 
     void sentDialog(String message){
         builder = new AlertDialog.Builder(MapViewActivity.this);
-        view = LayoutInflater.from(getBaseContext()).inflate(R.layout.dialog_message,null);
+        View view = LayoutInflater.from(getBaseContext()).inflate(R.layout.dialog_message,null);
         TextView messageView = view.findViewById(R.id.dialogInfoMessageText);
         messageView.setText(message);
         if(message.equals("현 위치와 입력하신 동네가 다릅니다.")) {

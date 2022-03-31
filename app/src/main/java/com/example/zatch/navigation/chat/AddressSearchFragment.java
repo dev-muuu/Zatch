@@ -1,6 +1,7 @@
 package com.example.zatch.navigation.chat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.navigation.Navigation;
 
 import com.example.zatch.R;
 import com.example.zatch.databinding.BottomSheetFragmentFindPlaceSearchBinding;
+import com.example.zatch.location.CallMapViewEnum;
+import com.example.zatch.location.MapViewActivity;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
@@ -43,6 +46,12 @@ public class AddressSearchFragment extends Fragment {
                     return true;
             }
             return false;
+        });
+
+        binding.setByMyPlaceButton.setOnClickListener(v->{
+            Intent intent = new Intent(getContext(), MapViewActivity.class);
+            intent.putExtra("serviceType",CallMapViewEnum.MakeMeeting);
+            startActivity(intent);
         });
 
         inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
