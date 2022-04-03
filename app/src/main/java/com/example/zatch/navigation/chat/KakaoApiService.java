@@ -1,12 +1,8 @@
 package com.example.zatch.navigation.chat;
 
-import com.example.zatch.location.KakaoRoadAddressData;
 import com.example.zatch.location.MapViewActivity;
 
-import java.util.HashMap;
-
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Query;

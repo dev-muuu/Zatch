@@ -1,6 +1,7 @@
 package com.example.zatch.navigation.chat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,6 +26,8 @@ import com.example.zatch.ReturnPx;
 import com.example.zatch.ServiceType;
 import com.example.zatch.databinding.BottomSheetFragmentFindPlaceResultBinding;
 import com.example.zatch.databinding.ItemFindPlaceResultBinding;
+import com.example.zatch.location.CallMapViewEnum;
+import com.example.zatch.location.MapViewActivity;
 import com.example.zatch.navigation.chat.data.SearchPlaceData;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
@@ -75,11 +82,13 @@ public class AddressResultFragment extends Fragment {
         binding.searchTextField.setText(searchPlace);
         binding.addressRecyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.placeCheckFinishButton.setOnClickListener(v->{
-            Navigation.findNavController(getView())
-                    .getBackStackEntry(R.id.makeMeetingFragment)
-                    .getSavedStateHandle()
-                    .set("result",placeList.get(selectItemPosition).getPlaceName());
-            Navigation.findNavController(getView()).popBackStack();
+            sendResultToMakeMeetingFragment(placeList.get(selectItemPosition).getPlaceName());
+        });
+
+        binding.setByMyPlaceButton.setOnClickListener(v->{
+            Intent intent = new Intent(getContext(), MapViewActivity.class);
+            intent.putExtra("serviceType", CallMapViewEnum.MakeMeeting);
+            mGetContent.launch(intent);
         });
 
         inputManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -137,6 +146,24 @@ public class AddressResultFragment extends Fragment {
         if(type == ServiceType.Gatch)
             initColorByType();
 
+    }
+
+    ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    // Handle the returned Uri
+                    String placeResult = result.getData().getStringExtra("placeResult");
+                    sendResultToMakeMeetingFragment(placeResult);
+                }
+            });
+
+    private void sendResultToMakeMeetingFragment(String result){
+        Navigation.findNavController(getView())
+                .getBackStackEntry(R.id.makeMeetingFragment)
+                .getSavedStateHandle()
+                .set("result",result);
+        Navigation.findNavController(getView()).popBackStack();
     }
 
     private void initColorByType(){

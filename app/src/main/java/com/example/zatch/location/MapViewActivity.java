@@ -2,6 +2,7 @@ package com.example.zatch.location;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,9 +22,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.zatch.R;
 import com.example.zatch.databinding.ActivityMapviewBinding;
-import com.example.zatch.navigation.chat.AddressResultFragment;
 import com.example.zatch.navigation.chat.KakaoApiService;
-import com.example.zatch.navigation.chat.data.SearchPlaceData;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,7 +32,6 @@ import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapReverseGeoCoder;
 import net.daum.mf.map.api.MapView;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -118,8 +116,19 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
             @Override
             public void onResponse(Call<ResultSearchBuilding> call, Response<ResultSearchBuilding> response) {
                 try {
-                    String buildingName = response.body().documents.get(0).getRoad_address().getBuilding_name();
-                    showTownSetDialog(String.format("'%s'",buildingName));
+                    Log.e("result","result");
+                    RoadAddress data = response.body().documents.get(0).getRoad_address();
+                    String place;
+                    //건물명 못받아올 경우, 도로명 주소로 대신 dialog 띄우기
+                    if(data.getBuilding_name().length() == 0) {
+                        place = String.format("%s %s", data.getRoad_name(), data.getMain_building_no());
+                        //sub 건물번호 있을 경우, place 뒤에 '-'와 함께 붙이기
+                        if(data.getSub_building_no().length() != 0)
+                            place += String.format("-%s",data.getSub_building_no());
+                    }else   //건물명 받아올 수 있는 경우, 건물명 그대로 dialog 띄우기
+                        place = data.getBuilding_name();
+
+                    showTownSetDialog(place);
                 }catch (NullPointerException e){
                     Log.e("null","null");
                 }
@@ -136,14 +145,13 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
         if(serviceType.equals(CallMapViewEnum.TownSetting)){
 
         }else{  //MakeMeeting type인 경
-            binding.mapButton.setText("약속 장소 설정하기");
+            binding.mapButton.setText("약속 잡기");
         }
     }
     //kako map 좌표 -> 주소 변환 메서드
     @Override
     public void onReverseGeoCoderFoundAddress(MapReverseGeoCoder mapReverseGeoCoder, String s) {
-        Log.e("tap","tap");
-        System.out.println(s);
+
         String[] address = new String[10];
         StringTokenizer tokenizer = new StringTokenizer(s, " ");
         for (int i = 0; tokenizer.hasMoreTokens(); i++)
@@ -166,15 +174,29 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
     }
 
     void showTownSetDialog(String result) {
+        final String forFinish = result;
         builder = new AlertDialog.Builder(MapViewActivity.this);
         View view = LayoutInflater.from(MapViewActivity.this).inflate(R.layout.dialog_town_check, null);
         TextView townText = view.findViewById(R.id.townCheckText);
         if(serviceType == CallMapViewEnum.TownSetting)
             townText.setText("우리 동네가 " + result + " 맞나요?");
-        else
-            townText.setText("약속 장소가 " + result + " 인가요?");
-        view.findViewById(R.id.townReSettingButton).setOnClickListener(onClickListener);
-        view.findViewById(R.id.townSettingButton).setOnClickListener(onClickListener);
+        else {
+            if(result.length() > 10)    //건물명/도로명 주소의 글자 수 너무 긴 경우, \n 통해 다음 줄로 표
+                result = "\n" + result;
+            townText.setText(String.format("약속 장소가 '%s' 인가요?",result));
+        }
+        view.findViewById(R.id.mapResettingButton).setOnClickListener(v->{
+            dialog.dismiss();
+        });
+        view.findViewById(R.id.mapSettingButton).setOnClickListener(v->{
+            dialog.dismiss();
+            if(serviceType == CallMapViewEnum.MakeMeeting){
+                Intent intent = new Intent();
+                intent.putExtra("placeResult", forFinish);
+                setResult(RESULT_OK,intent);
+                finish();
+            }
+        });
         builder.setView(view);
         dialog = builder.create();
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -203,20 +225,6 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
         return null;
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.townReSettingButton:
-                    dialog.dismiss();
-                    break;
-                case R.id.townSettingButton:
-                    dialog.dismiss();
-                    break;
-            }
-        }
-    };
-
     @Override
     public void onReverseGeoCoderFailedToFindAddress(MapReverseGeoCoder mapReverseGeoCoder) {
 
@@ -224,6 +232,7 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
 
     void addMapView() {
         mapView = new MapView(this);
+        //by tacking mode on, 현 위로 지도 중심 옮기기
         mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
 
         binding.mapView.addView(mapView);

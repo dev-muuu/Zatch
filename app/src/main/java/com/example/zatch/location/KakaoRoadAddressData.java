@@ -1,7 +1,5 @@
 package com.example.zatch.location;
 
-import java.util.List;
-
 public class KakaoRoadAddressData {
 
     private RoadAddress road_address;
