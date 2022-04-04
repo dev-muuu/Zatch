@@ -34,9 +34,7 @@ public class MakeMeetingFragment extends Fragment implements TimePickerDialog.Ti
     private Bundle bundle = new Bundle();
     private ServiceType type;
     private MakeMeetingBottomSheet bottomSheet;
-
     private BottoSheetFragmentMakeMeetingBinding binding;
-
 
     @Nullable
     @Override

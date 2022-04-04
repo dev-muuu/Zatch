@@ -47,6 +47,7 @@
         <activity android:name=".MainActivity" />
 <!--        <activity android:name=".location.StartLocationActivity" />-->
         <activity android:name=".location.SetLocationActivity" />
+        <activity android:name=".ImageSelectActivity" />
         <activity android:name=".location.MapViewActivity"/>
         <activity android:name=".MyZatchActivity" />
         <activity android:name=".zatch_register.ZatchRegisterActivity" />

@@ -56,7 +56,6 @@ public class AddressSearchFragment extends Fragment {
         binding.setByMyPlaceButton.setOnClickListener(v->{
             Intent intent = new Intent(getContext(), MapViewActivity.class);
             intent.putExtra("serviceType",CallMapViewEnum.MakeMeeting);
-
             mGetContent.launch(intent);
         });
 
@@ -73,8 +72,6 @@ public class AddressSearchFragment extends Fragment {
         }
     }
 
-    // GetContent creates an ActivityResultLauncher<String> to allow you to pass
-    // in the mime type you'd like to allow the user to select
     ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override

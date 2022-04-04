@@ -20,13 +20,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.zatch.ImageSelectActivity;
 import com.example.zatch.PNDialogMessage;
 import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.R;
@@ -214,7 +218,7 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
     }
 
     /*
-     * 갤러리, 카메라 접근 관련 코드
+     * 갤러리, 카메라 관련 코드
      */
     private void permissionCheck() {
         if (ContextCompat.checkSelfPermission(getApplicationContext(),
@@ -261,11 +265,22 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
                 case RequestCodeGallery:
                     //서버 연결시, uploadImage()통해 image파일 서버에 전달 필요.
                     Uri imageUri = data.getData();
-                    sendImageMessage(imageUri);
+                    Intent intent = new Intent(ChattingRoomActivity.this, ImageSelectActivity.class);
+                    intent.putExtra("imageUri",imageUri);
+                    mGetContent.launch(intent);
                     break;
             }
         }
     }
+
+    ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == RESULT_OK)
+                        sendImageMessage(result.getData().getParcelableExtra("imageResult"));
+                }
+    });
 
     private void sendDialogForGalleryAccess(){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
