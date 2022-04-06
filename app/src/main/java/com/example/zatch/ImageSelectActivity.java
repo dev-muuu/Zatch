@@ -33,7 +33,9 @@ public class ImageSelectActivity extends AppCompatActivity {
         });
 
         binding.backButtonToGallery.setOnClickListener(v->{
-
+            //for gallery show again
+            setResult(RESULT_CANCELED,new Intent());
+            finish();
         });
     }
 }

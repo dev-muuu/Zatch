@@ -20,14 +20,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.zatch.ImageSelectActivity;
@@ -243,7 +240,7 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
                     sendDialogForGalleryAccess();   //새로 권한 요청했는데 거부 -> sentDialog 실행됨
             });
 
-    private void openGallery() {
+    public void openGallery() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_PICK);
         intent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
@@ -274,13 +271,13 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
     }
 
     ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == RESULT_OK)
-                        sendImageMessage(result.getData().getParcelableExtra("imageResult"));
+            result -> {
+                if(result.getResultCode() == RESULT_OK)
+                    sendImageMessage(result.getData().getParcelableExtra("imageResult"));
+                else if(result.getResultCode() == RESULT_CANCELED){
+                    openGallery();
                 }
-    });
+            });
 
     private void sendDialogForGalleryAccess(){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

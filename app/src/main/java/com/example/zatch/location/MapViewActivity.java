@@ -181,9 +181,10 @@ public class MapViewActivity extends AppCompatActivity implements MapReverseGeoC
         if(serviceType == CallMapViewEnum.TownSetting)
             townText.setText("우리 동네가 " + result + " 맞나요?");
         else {
+            result = String.format("'%s'",result);
             if(result.length() > 10)    //건물명/도로명 주소의 글자 수 너무 긴 경우, \n 통해 다음 줄로 표
                 result = "\n" + result;
-            townText.setText(String.format("약속 장소가 '%s' 인가요?",result));
+            townText.setText(String.format("약속 장소가 %s 인가요?",result));
         }
         view.findViewById(R.id.mapResettingButton).setOnClickListener(v->{
             dialog.dismiss();
