@@ -277,7 +277,7 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
                 else if(result.getResultCode() == RESULT_CANCELED){
                     openGallery();
                 }
-            });
+    });
 
     private void sendDialogForGalleryAccess(){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);

@@ -21,6 +21,8 @@ import android.widget.LinearLayout;;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -30,22 +32,28 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.zatch.ImageSelectActivity;
+import com.example.zatch.PNDialogMessage;
+import com.example.zatch.PositiveNegativeDialog;
 import com.example.zatch.R;
 import com.example.zatch.ReturnPx;
+import com.example.zatch.ServiceType;
 import com.example.zatch.databinding.FragmentZatchRegisterProductInfoBinding;
+import com.example.zatch.navigation.chat.ChattingRoomActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 public class ZatchProductInfoFragment extends Fragment implements DatePickerFragment.DatePickerDialogListener {
 
-    AlertDialog.Builder builder;
-    AlertDialog dialog;
+    //TODO: 코드 전체적으로 수정.. 맘에 안들어기; 이미지 관련해서 recyclerview로 변경하고, 유효성 검사도 bool값 사용하는 걸로 바꿔보기
+
     String messageText[];
-    private ReturnPx returnPx = new ReturnPx(getActivity());
+    private ReturnPx returnPx;
 
     private FragmentZatchRegisterProductInfoBinding binding;
 
@@ -65,6 +73,8 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         binding.moreInfoInputLayout.setVisibility(View.INVISIBLE);
+
+        returnPx = new ReturnPx(getActivity());
 
         ArrayAdapter<CharSequence> spinnerAdapter
                 = ArrayAdapter.createFromResource(getContext(), R.array.gatch_category, R.layout.item_spinner_category);
@@ -127,17 +137,21 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
     private void setOnClickListener(){
 
         binding.imageAddButton.setOnClickListener(v->{
-            builder = new AlertDialog.Builder(getContext());
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_camera_gallery,null);
+            builder.setView(view);
+            AlertDialog dialog = builder.create();
             view.findViewById(R.id.galleryButtonText).setOnClickListener(a->{
-                if(galleryPermissionCheck())
+                if(galleryPermissionCheck()) {
                     clickImageAddButton("gallery");
+                    dialog.dismiss();
+
+                }
             });
             view.findViewById(R.id.cameraButtonText).setOnClickListener(a->{
                 clickImageAddButton("camera");
+                dialog.dismiss();
             });
-            builder.setView(view);
-            dialog = builder.create();
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
         });
@@ -183,10 +197,7 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
                 Toast.makeText(getContext(), "권한허용을 거부하셨습니다.이미지를 불러오지 못함.", Toast.LENGTH_SHORT).show();
             }
 
-    }
-
-
-
+        }
 
     }
 
@@ -205,6 +216,8 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
         return false;
     }
 
+    //TODO: 굳이 하나의 함수에서 gallery, camera 둘다 처리할 필요가 없는 듯 하다.. 객체 동일 검사도 의미없고 -> 없애고 함수 따로 구현하는 걸로 수정, 추가로 gallery access 방식도 바꾸기
+
     void clickImageAddButton(String type){
         if(type.equals("gallery")) {
             Intent intent = new Intent();
@@ -217,9 +230,16 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
 //            }
         }
-
-
     }
+
+    ActivityResultLauncher<Intent> mGetContent = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == RESULT_OK)
+                    imageAddToStack(result.getData().getParcelableExtra("imageResult"));
+                else if(result.getResultCode() == RESULT_CANCELED){
+                    clickImageAddButton("gallery");
+                }
+            });
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -235,7 +255,10 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
                     break;
 
                 case GALLERY_ACCESS:
-                    imageAddToStack(data.getData());
+                    Uri imageUri = data.getData();
+                    Intent intent = new Intent(getContext(), ImageSelectActivity.class);
+                    intent.putExtra("imageUri",imageUri);
+                    mGetContent.launch(intent);
                     break;
             }
 
@@ -245,7 +268,6 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
     List<Uri> imageAddList = new ArrayList(10);
 
     void imageAddToStack(Uri uri){
-        dialog.dismiss();
 
         ImageView img = new ImageView(getContext());
         img.setId(imageAddList.size());
@@ -262,9 +284,8 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.zatchImageStack.removeView(img);
                 try {
-                    imageAddList.remove(imageAddList.indexOf(uri));
+                    imageDeleteDialogShow(uri, img);
                 } catch (IndexOutOfBoundsException e) {
                     imageAddList.clear();
                 }
@@ -281,6 +302,20 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
 
         if (imageAddList.size() == 10)
             binding.imageAddButton.setEnabled(false);
+    }
+
+    private void imageDeleteDialogShow(Uri uri, ImageView img){
+        PositiveNegativeDialog builder = new PositiveNegativeDialog(getContext(), ServiceType.Zatch,PNDialogMessage.ImageDelete);
+        AlertDialog dialog = builder.createDialog();
+        builder.getNegative().setOnClickListener(v->{
+            dialog.dismiss();
+        });
+        builder.getPositive().setOnClickListener(v->{
+            binding.zatchImageStack.removeView(img);
+            imageAddList.remove(imageAddList.indexOf(uri));
+            dialog.dismiss();
+        });
+        dialog.show();
     }
 
     void moveViewPagerFragment(){
@@ -303,12 +338,12 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
         //alert dialog 조건별 코드
         if(messageNumber != -1){
 //            builder = new AlertDialog.Builder(getContext(),R.style.CustomAlertDialog);
-            builder = new AlertDialog.Builder(getContext());
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_message_center,null);
             TextView informText = view.findViewById(R.id.dialogMessageText);
             informText.setText(messageText[messageNumber]);
             builder.setView(view);
-            dialog = builder.create();
+            AlertDialog dialog = builder.create();
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             Button ok = view.findViewById(R.id.messageOkButton);

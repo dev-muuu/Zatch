@@ -8,7 +8,8 @@ public enum PNDialogMessage {
             "채팅방을 나가면 채팅 내역은 복구되지 않습니다.", "네, 확인했습니다."),
     MakeMeeting("약속을 등록하시겠습니까?", "확인"),
     Block("님을 차단하시겠습니까?\n더 이상의 대화가 불가합니다.","네, 차단합니다."),
-    Register("등록을 완료하시겠습니까?","등록 완료");
+    Register("등록을 완료하시겠습니까?","등록 완료"),
+    ImageDelete("해당 이미지를 삭제하시겠습니까?","삭제");
 
 
     private final String message;
