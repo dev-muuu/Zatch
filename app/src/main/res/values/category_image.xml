@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="category_image">
+        <item>@drawable/category_asset_1</item>
+        <item>@drawable/category_asset_2</item>
+        <item>@drawable/category_asset_3</item>
+        <item>@drawable/category_asset_4</item>
+        <item>@drawable/category_asset_5</item>
+        <item>@drawable/category_asset_6</item>
+        <item>@drawable/category_asset_7</item>
+        <item>@drawable/category_asset_8</item>
+        <item>@drawable/category_asset_9</item>
+        <item>@drawable/category_asset_10</item>
+        <item>@drawable/category_asset_11</item>
+        <item>@drawable/category_asset_12</item>
+        <item>@drawable/category_asset_13</item>
+        <item>@drawable/category_asset_14</item>
+        <item>@drawable/category_asset_15</item>
+        <item>@drawable/category_asset_16</item>
+    </array>
+</resources>

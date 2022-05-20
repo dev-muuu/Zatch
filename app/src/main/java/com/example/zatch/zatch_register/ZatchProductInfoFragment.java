@@ -50,7 +50,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ZatchProductInfoFragment extends Fragment implements DatePickerFragment.DatePickerDialogListener {
 
-    //TODO: 코드 전체적으로 수정.. 맘에 안들어기; 이미지 관련해서 recyclerview로 변경하고, 유효성 검사도 bool값 사용하는 걸로 바꿔보기
+    //TODO: 코드 전체적으로 수정.. 맘에 안들어; 이미지 관련해서 recyclerview로 변경하고, 유효성 검사도 bool값 사용하는 걸로 바꿔보기
 
     String messageText[];
     private ReturnPx returnPx;
@@ -64,7 +64,6 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         binding = FragmentZatchRegisterProductInfoBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
@@ -193,7 +192,6 @@ public class ZatchProductInfoFragment extends Fragment implements DatePickerFrag
 
                 clickImageAddButton("gallery");
             }  else {
-
                 Toast.makeText(getContext(), "권한허용을 거부하셨습니다.이미지를 불러오지 못함.", Toast.LENGTH_SHORT).show();
             }
 

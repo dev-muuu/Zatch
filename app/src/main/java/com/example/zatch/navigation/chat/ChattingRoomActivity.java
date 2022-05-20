@@ -44,6 +44,8 @@ import com.example.zatch.navigation.chat.data.GatchDepositData;
 import com.example.zatch.navigation.chat.data.MeetingData;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -328,7 +330,7 @@ public class ChattingRoomActivity extends AppCompatActivity implements MakeMeeti
         dialog.show();
     }
 
-    private void positiveActionByType(PNDialogMessage type, AlertDialog dialog){
+    private void positiveActionByType(@NotNull PNDialogMessage type, AlertDialog dialog){
         switch (type){
             case Exit:
                 dialog.dismiss();

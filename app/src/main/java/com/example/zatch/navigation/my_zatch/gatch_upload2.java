@@ -42,6 +42,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Multipart;
 
 public class gatch_upload2 extends Activity {
+
     Dialog dialog;
     GatchRegisterData registerData;
     ArrayList<MultipartBody.Part> fileData;
@@ -194,7 +195,6 @@ public class gatch_upload2 extends Activity {
     private void makeImageSendType(){
         fileData = new ArrayList<>();
         for(gatchDataItem item : imageData) {
-
             File image = new File(getRealPathFromUri(item.getImage_uri()));
             RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), image);
             MultipartBody.Part body = MultipartBody.Part.createFormData("image", image.getName(), requestBody);

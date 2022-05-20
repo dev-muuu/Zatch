@@ -1,9 +1,13 @@
 package com.example.zatch.bottomsheet;
 
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,12 +43,17 @@ public class CategoryBottomSheet extends BottomSheetDialogFragment {
 
         view = inflater.inflate(R.layout.bottom_sheet_category_chosse,container);
 
+        TypedArray imageArray = getResources().obtainTypedArray(R.array.category_image);
+
         FlexboxLayout flexboxLayout = view.findViewById(R.id.categoryFlex);
+        int index = 0;
         for (String eachCheckBox : categoryList) {
             View each = inflater.inflate(R.layout.item_search_category_select, container, false);
             TextView category = each.findViewById(R.id.categoryItemText);
+            ImageView image = each.findViewById(R.id.categoryItemImage);
             each.setClickable(true);
             category.setText(eachCheckBox);
+            image.setImageDrawable(imageArray.getDrawable(index));
             each.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -53,6 +62,7 @@ public class CategoryBottomSheet extends BottomSheetDialogFragment {
                 }
             });
             flexboxLayout.addView(each);
+            index++;
         }
 
         return view;

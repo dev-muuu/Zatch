@@ -9,7 +9,6 @@
         android:id="@+id/categoryItemImage"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:background="#D5D5D5"
         app:layout_constraintEnd_toEndOf="@+id/categoryItemText"
         app:layout_constraintStart_toStartOf="@+id/categoryItemText" />
 

@@ -76,7 +76,7 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
         params.leftMargin = (int) new ReturnPx(8,getActivity()).returnPx();
 
         ContextThemeWrapper wrapper = new ContextThemeWrapper(getContext(), R.style.SearchCategoryCheckBox);
-        for(String category: getResources().getStringArray(R.array.gatch_search_category)){
+        for(String category: getResources().getStringArray(R.array.gatch_category)){
             CheckBox each = new CheckBox(wrapper,null,0);
             //array 첫번째 데이터로 select되도록 초기설정
             if(category.equals(getResources().getStringArray(R.array.gatch_search_category)[0])) {

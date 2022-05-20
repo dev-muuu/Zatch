@@ -14,6 +14,7 @@ import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 
 public interface ServerApi {
+
     @Multipart
     @POST("value")
     Call<GatchRegisterData> gatchPost(

@@ -42,19 +42,16 @@ public class SearchFirstFragment extends Fragment {
             CheckBox each = new CheckBox(wrapper,null,0);
             each.setClickable(true);
             each.setText(eachCheckBox);
-            each.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked) {
-                        if(nowSelect != null)
-                            nowSelect.toggle();
-                        zatchNameField.setText(eachCheckBox);
-                        nowSelect = buttonView;
-                    }
-                    else {
-                        zatchNameField.setText("");
-                        nowSelect = null;
-                    }
+            each.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if(isChecked) {
+                    if(nowSelect != null)
+                        nowSelect.toggle();
+                    zatchNameField.setText(eachCheckBox);
+                    nowSelect = buttonView;
+                }
+                else {
+                    zatchNameField.setText("");
+                    nowSelect = null;
                 }
             });
             flexboxLayout.addView(each);
