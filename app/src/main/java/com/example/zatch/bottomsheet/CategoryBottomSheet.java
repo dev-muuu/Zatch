@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.example.zatch.R;
+import com.example.zatch.ServiceType;
 import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -21,6 +22,7 @@ public class CategoryBottomSheet extends BottomSheetDialogFragment {
     View view;
     String whichCategory;
     String[] categoryList;
+    Context context;
 
     CategoryBottomSheet.CategoryBottomSheetListener dialogListener;
 
@@ -32,8 +34,9 @@ public class CategoryBottomSheet extends BottomSheetDialogFragment {
         this.dialogListener = dialogListener;
     }
 
-    public CategoryBottomSheet(String[] categoryList, String which) {
-        this.categoryList = categoryList;
+    public CategoryBottomSheet(ServiceType type, String which, Context context) {
+        categoryList = type.equals(ServiceType.Zatch) ?
+                context.getResources().getStringArray(R.array.zatch_category) : context.getResources().getStringArray(R.array.gatch_category);
         this.whichCategory = which;
     }
 

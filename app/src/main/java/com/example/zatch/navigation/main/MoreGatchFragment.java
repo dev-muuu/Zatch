@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
 import com.example.zatch.ReturnPx;
+import com.example.zatch.ServiceType;
 import com.example.zatch.bottomsheet.MyTownBottomSheet;
 import com.example.zatch.bottomsheet.CategoryBottomSheet;
 import com.example.zatch.databinding.FragmentMoreGatchBinding;
@@ -76,7 +77,7 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
         params.leftMargin = (int) new ReturnPx(8,getActivity()).returnPx();
 
         ContextThemeWrapper wrapper = new ContextThemeWrapper(getContext(), R.style.SearchCategoryCheckBox);
-        for(String category: getResources().getStringArray(R.array.gatch_category)){
+        for(String category: getResources().getStringArray(R.array.gatch_search_category)){
             CheckBox each = new CheckBox(wrapper,null,0);
             //array 첫번째 데이터로 select되도록 초기설정
             if(category.equals(getResources().getStringArray(R.array.gatch_search_category)[0])) {
@@ -110,7 +111,7 @@ public class MoreGatchFragment extends Fragment implements MyTownBottomSheet.MyT
     void categoryBottomSheet(){
         //임시 data
         String data = "음식";
-        CategoryBottomSheet bottomSheet = new CategoryBottomSheet(getResources().getStringArray(R.array.gatch_category),data);
+        CategoryBottomSheet bottomSheet = new CategoryBottomSheet(ServiceType.Gatch,data, getContext());
         bottomSheet.setDialogListener(this);
         BottomSheetDialogFragment dialog = bottomSheet;
         dialog.show(getParentFragmentManager(),null);

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.zatch.R;
+import com.example.zatch.ServiceType;
 import com.example.zatch.bottomsheet.CategoryBottomSheet;
 import com.example.zatch.bottomsheet.TownAreaBottomSheet;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -208,7 +209,7 @@ public class SearchListUpFragment extends Fragment
             bottomSheet = townFilter;
         }
         else{
-            CategoryBottomSheet category = new CategoryBottomSheet(getResources().getStringArray(R.array.zatch_category),which);
+            CategoryBottomSheet category = new CategoryBottomSheet(ServiceType.Zatch,which, getContext());
             category.setDialogListener(this);
             bottomSheet = category;
         }
