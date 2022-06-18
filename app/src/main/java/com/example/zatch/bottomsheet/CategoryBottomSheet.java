@@ -2,7 +2,6 @@ package com.example.zatch.bottomsheet;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,8 @@ public class CategoryBottomSheet extends BottomSheetDialogFragment {
     View view;
     String whichCategory;
     String[] categoryList;
-    Context context;
+    Context mContext;
+    ServiceType type;
 
     CategoryBottomSheet.CategoryBottomSheetListener dialogListener;
 
@@ -34,10 +34,12 @@ public class CategoryBottomSheet extends BottomSheetDialogFragment {
         this.dialogListener = dialogListener;
     }
 
-    public CategoryBottomSheet(ServiceType type, String which, Context context) {
+    public CategoryBottomSheet(ServiceType type, String which, Context mContext) {
+        this.type = type;
         categoryList = type.equals(ServiceType.Zatch) ?
-                context.getResources().getStringArray(R.array.zatch_category) : context.getResources().getStringArray(R.array.gatch_category);
+                mContext.getResources().getStringArray(R.array.zatch_category) : mContext.getResources().getStringArray(R.array.gatch_category);
         this.whichCategory = which;
+        this.mContext = mContext;
     }
 
     @Nullable
@@ -56,6 +58,8 @@ public class CategoryBottomSheet extends BottomSheetDialogFragment {
             ImageView image = each.findViewById(R.id.categoryItemImage);
             each.setClickable(true);
             category.setText(eachCheckBox);
+            if(index == 1 && type == ServiceType.Zatch)
+                index++;
             image.setImageDrawable(imageArray.getDrawable(index));
             each.setOnClickListener(new View.OnClickListener() {
                 @Override
