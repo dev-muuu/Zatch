@@ -137,6 +137,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/zatchRegisterBanner"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_marginStart="3dp"
