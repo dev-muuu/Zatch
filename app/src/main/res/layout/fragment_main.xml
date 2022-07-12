@@ -136,29 +136,17 @@
                     app:layout_constraintTop_toBottomOf="@id/textView14" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/zatchRegisterBanner"
-                android:layout_width="match_parent"
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
                 android:layout_height="150dp"
-                android:layout_marginTop="32dp"
-                android:background="@color/purple_40"
-                app:layout_constraintTop_toBottomOf="@id/k3">
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="60dp"
-                    android:fontFamily="@font/pretendard_extrabold"
-                    android:text="재치등록, 어렵지 않아요! \n지금 바로 등록해볼까요?"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="3dp"
+                android:scaleType="fitXY"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/k3"
+                app:srcCompat="@drawable/main_banner" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/k3"

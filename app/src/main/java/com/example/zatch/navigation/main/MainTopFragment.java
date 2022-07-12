@@ -68,6 +68,7 @@ public class MainTopFragment extends Fragment implements MyTownBottomSheet.MyTow
         });
 
         binding.searchButton.setOnClickListener(v->{
+            System.out.println("?");
             isGatchFragmentCalled();
         });
 

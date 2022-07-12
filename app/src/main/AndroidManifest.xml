@@ -45,19 +45,18 @@
 <!--        </activity>-->
 
 <!--        <activity android:name=".MainActivity" />-->
-<!--        <activity android:name=".location.StartLocationActivity" />-->
+        <activity android:name=".location.StartLocationActivity" />
         <activity android:name=".location.SetLocationActivity" />
         <activity android:name=".ImageSelectActivity" />
         <activity android:name=".location.MapViewActivity"/>
         <activity android:name=".MyZatchActivity" />
-<!--        <activity android:name=".zatch_register.ZatchRegisterActivity" />-->
-<!--        <activity android:name=".MainActivity" />-->
-<!--        <activity android:name=".navigation.my_zatch.gatch_upload"/>-->
+        <activity android:name=".zatch_register.ZatchRegisterActivity" />
+        <activity android:name=".navigation.my_zatch.gatch_upload"/>
         <activity android:name=".navigation.my_zatch.gatch_upload2"/>
         <activity android:name=".navigation.my_zatch.my_gatch_detail"/>
         <activity android:name=".navigation.my_zatch.my_zatch_detail"/>
         <activity android:name=".search.SearchActivity" />
-<!--        <activity android:name=".navigation.chat.ChattingRoomActivity" />-->
+        <activity android:name=".navigation.chat.ChattingRoomActivity" />
         <activity android:name=".navigation.main.NotificationActivity" />
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
